@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageAdministration.EF", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageAdministration.Domain", "GarageAdministration.Domain\GarageAdministration.Domain.csproj", "{6D5D2AA8-1EDE-4E5C-B754-9596495A059B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageApplication.WPF", "GarageApplication.WPF\GarageApplication.WPF.csproj", "{E506AD6A-A4C7-4F90-83C0-6819C22A3C29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageAdministration.WPF", "GarageAdministration.WPF\GarageAdministration.WPF.csproj", "{E506AD6A-A4C7-4F90-83C0-6819C22A3C29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

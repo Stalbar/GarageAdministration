@@ -9,10 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Commands" />
-      <Folder Include="Commons" />
-      <Folder Include="ViewModels" />
-      <Folder Include="Views\Components" />
+      <Folder Include="Commons\Components\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -24,7 +21,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="Views\MainWindow.xaml">
+      <ProjectReference Include="..\GarageAdministration.Domain\GarageAdministration.Domain.csproj" />
+      <ProjectReference Include="..\GarageAdministration.EF\GarageAdministration.EF.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Views\MainWindow\MainWindow.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
