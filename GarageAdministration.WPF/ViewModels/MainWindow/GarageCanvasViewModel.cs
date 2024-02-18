@@ -7,13 +7,7 @@ public class GarageCanvasViewModel: ViewModelBase
 {
     private readonly List<Garage> _garages = new List<Garage>()
     {
-        new Garage(new Position(150, 20)),
-        new Garage(new Position(100, 50)),
-        new Garage(new Position(70, 80)),
-        new Garage(new Position(50, 20)),
-        new Garage(new Position(89, 52)),
-        new Garage(new Position(43, 150)),
-        new Garage(new Position(200, 110)),
+        new Garage(1, new Position(1, 150, 20)),
     };
 
     public IEnumerable<Garage> Garages => _garages;

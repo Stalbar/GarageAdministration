@@ -2,10 +2,12 @@
 
 public class Garage
 {
+    public int Id { get; }
     public Position Position { get; }
     
-    public Garage(Position position)
+    public Garage(int id, Position position)
     {
+        Id = id;
         Position = position;
     }
 }
