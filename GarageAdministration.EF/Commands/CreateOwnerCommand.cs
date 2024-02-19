@@ -4,24 +4,25 @@ using GarageAdministration.EF.DTOs;
 
 namespace GarageAdministration.EF.Commands;
 
-public class CreateGarageCommand: ICreateCommand<Garage>
+public class CreateOwnerCommand: ICreateCommand<Owner>
 {
     private readonly GarageAdministrationDbContextFactory _contextFactory;
 
-    public CreateGarageCommand(GarageAdministrationDbContextFactory contextFactory)
+    public CreateOwnerCommand(GarageAdministrationDbContextFactory contextFactory)
     {
         _contextFactory = contextFactory;
     }
     
-    public async Task Execute(Garage entity)
+    public async Task Execute(Owner entity)
     {
         await using var context = _contextFactory.Create();
-        GarageDto garageDto = new GarageDto()
+        OwnerDto ownerDto = new OwnerDto()
         {
-            PositionId = entity.Id,
-            OwnerId = entity.Id
+            Name = entity.Name,
+            Surname = entity.Surname,
+            Patronymic = entity.Patronymic
         };
-        context.Garages.Add(garageDto);
+        context.Owners.Add(ownerDto);
         await context.SaveChangesAsync();
     }
 }
