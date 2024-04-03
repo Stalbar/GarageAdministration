@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Commands\" />
       <Folder Include="Commons\Components\" />
     </ItemGroup>
 
@@ -27,6 +28,16 @@
 
     <ItemGroup>
       <Page Update="Views\MainWindow\MainWindow.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="GarageCanvas.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="GarageCanvasItem.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
