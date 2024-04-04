@@ -12,7 +12,6 @@ public class OwnersListViewModel: ViewModelBase
 {
     private readonly OwnersStore _ownersStore;
     private readonly ObservableCollection<OwnersListItemViewModel> _ownersListItemViewModels;
-    private readonly ICommand LoadOwnersCommand;
 
     public IEnumerable<OwnersListItemViewModel> OwnersListItemViewModels => _ownersListItemViewModels;
 
@@ -24,8 +23,7 @@ public class OwnersListViewModel: ViewModelBase
         _ownersStore.OwnerDeleted += OwnersStore_OwnerDeleted;
         _ownersStore.OwnerUpdated += OwnersStore_OwnerUpdated;
         _ownersStore.OwnersLoaded += OwnersStore_OwnersLoaded;
-        LoadOwnersCommand = new LoadOwnersCommand(ownersStore);
-        LoadOwnersCommand.Execute(null);
+        new LoadOwnersCommand(ownersStore).Execute(null);
     }
 
     private void OwnersStore_OwnersLoaded()

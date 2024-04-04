@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Assets\" />
       <Folder Include="Commons\Components\" />
     </ItemGroup>
 
@@ -45,6 +46,13 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.2.24128.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Assets\Images\edit.png" />
+      <Resource Include="Assets\Images\edit.png" />
+      <None Remove="Assets\Images\delete.png" />
+      <Resource Include="Assets\Images\delete.png" />
     </ItemGroup>
 
 </Project>

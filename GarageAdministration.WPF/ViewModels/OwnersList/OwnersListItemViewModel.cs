@@ -7,6 +7,7 @@ namespace GarageAdministration.WPF.ViewModels.OwnersList;
 public class OwnersListItemViewModel: ViewModelBase
 {
     public Owner Owner { get; private set; }
+    public string FullName => Owner.Name + " " + Owner.Surname + " " + Owner.Patronymic;
 
     public OwnersListItemViewModel(Owner owner)
     {
@@ -17,6 +18,6 @@ public class OwnersListItemViewModel: ViewModelBase
     {
         Owner = owner;
         
-        OnPropertyChanged(nameof(Owner));
+        OnPropertyChanged(nameof(FullName));
     }
 }
