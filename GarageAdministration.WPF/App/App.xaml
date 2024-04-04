@@ -5,7 +5,9 @@
              xmlns:home="clr-namespace:GarageAdministration.WPF.ViewModels.Home"
              xmlns:homeView="clr-namespace:GarageAdministration.WPF.Views.Home"
              xmlns:createOwner="clr-namespace:GarageAdministration.WPF.ViewModels.CreateOwner"
-             xmlns:createOwnerView="clr-namespace:GarageAdministration.WPF.Views.CreateOwner">
+             xmlns:createOwnerView="clr-namespace:GarageAdministration.WPF.Views.CreateOwner"
+             xmlns:ownersList="clr-namespace:GarageAdministration.WPF.ViewModels.OwnersList"
+             xmlns:ownersListView="clr-namespace:GarageAdministration.WPF.Views.OwnersList">
     <Application.Resources>
          
         <DataTemplate DataType="{x:Type TypeName=home:HomeViewModel}">
@@ -14,6 +16,10 @@
         
         <DataTemplate DataType="{x:Type TypeName=createOwner:CreateOwnerViewModel}">
             <createOwnerView:CreateOwnerView/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type TypeName=ownersList:OwnersListViewModel}">
+            <ownersListView:OwnersListView/>
         </DataTemplate>
         
     </Application.Resources>

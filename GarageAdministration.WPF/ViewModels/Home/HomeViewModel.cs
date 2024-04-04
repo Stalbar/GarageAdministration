@@ -21,11 +21,11 @@ public class HomeViewModel: ViewModelBase
     
     public string RandomText => "hello";
 
-    public ICommand NavigateToCreateOwnerViewCommand { get; }
+    public ICommand NavigateToOwnersListCommand { get; }
     
     public HomeViewModel(INavigationService navigation)
     {
         Navigation = navigation;
-        NavigateToCreateOwnerViewCommand = new NavigateToCreateOwnerViewCommand(Navigation);
+        NavigateToOwnersListCommand = new NavigateToOwnersListCommand(Navigation);
     }
 }

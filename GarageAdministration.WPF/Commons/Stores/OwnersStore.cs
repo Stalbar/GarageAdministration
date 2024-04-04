@@ -1,5 +1,6 @@
 ﻿using GarageAdministration.Domain.Commands;
 using GarageAdministration.Domain.Models;
+using GarageAdministration.Domain.Queries;
 
 namespace GarageAdministration.WPF.Commons.Stores;
 
@@ -9,20 +10,23 @@ public class OwnersStore
     private readonly ICreateCommand<Owner> _createCommand;
     private readonly IUpdateCommand<Owner> _updateCommand;
     private readonly IDeleteCommand _deleteCommand;
+    private readonly IGetAllQuery<Owner> _getAllOwnersQuery;
 
     public IEnumerable<Owner> Owners => _owners;
 
     public event Action<Owner>? OwnerAdded; 
     public event Action<Owner>? OwnerUpdated;
     public event Action<int>? OwnerDeleted;
+    public event Action OwnersLoaded;
 
     public OwnersStore(ICreateCommand<Owner> createCommand, IUpdateCommand<Owner> updateCommand,
-        IDeleteCommand deleteCommand)
+        IDeleteCommand deleteCommand, IGetAllQuery<Owner> getAllOwnersQuery)
     {
         _owners = new();
         _createCommand = createCommand;
         _updateCommand = updateCommand;
         _deleteCommand = deleteCommand;
+        _getAllOwnersQuery = getAllOwnersQuery;
     }
 
     public async Task Add(Owner owner)
@@ -48,5 +52,15 @@ public class OwnersStore
         await _deleteCommand.Execute(id);
         _owners.RemoveAll(o => o.Id == id);
         OwnerDeleted?.Invoke(id);
+    }
+
+    public async Task Load()
+    {
+        var owners = await _getAllOwnersQuery.Execute();
+        
+        _owners.Clear();
+        _owners.AddRange(owners);
+        
+        OwnersLoaded?.Invoke();
     }
 }
