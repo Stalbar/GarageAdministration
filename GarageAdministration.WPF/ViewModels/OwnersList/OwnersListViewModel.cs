@@ -5,6 +5,7 @@ using GarageAdministration.Domain.Models;
 using GarageAdministration.WPF.Commands;
 using GarageAdministration.WPF.Commons;
 using GarageAdministration.WPF.Commons.Stores;
+using GarageAdministration.WPF.Services.Abstractions;
 
 namespace GarageAdministration.WPF.ViewModels.OwnersList;
 
@@ -12,12 +13,27 @@ public class OwnersListViewModel: ViewModelBase
 {
     private readonly OwnersStore _ownersStore;
     private readonly ObservableCollection<OwnersListItemViewModel> _ownersListItemViewModels;
+    private INavigationService _navigation;
 
-    public IEnumerable<OwnersListItemViewModel> OwnersListItemViewModels => _ownersListItemViewModels;
-
-    public OwnersListViewModel(OwnersStore ownersStore)
+    public INavigationService Navigation
     {
+        get => _navigation;
+        set
+        {
+            _navigation = value;
+            OnPropertyChanged(nameof(Navigation));
+        }
+    }
+    public IEnumerable<OwnersListItemViewModel> OwnersListItemViewModels => _ownersListItemViewModels;
+    
+    public ICommand NavigateToCreateOwnerViewCommand { get; }
+
+    public OwnersListViewModel(OwnersStore ownersStore, INavigationService navigation)
+    {
+        
         _ownersStore = ownersStore;
+        Navigation = navigation;
+        NavigateToCreateOwnerViewCommand = new NavigateToCreateOwnerViewCommand(Navigation);
         _ownersListItemViewModels = new ObservableCollection<OwnersListItemViewModel>();
         _ownersStore.OwnerAdded += OwnersStore_OwnerAdded;
         _ownersStore.OwnerDeleted += OwnersStore_OwnerDeleted;

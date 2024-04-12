@@ -53,6 +53,8 @@
       <Resource Include="Assets\Images\edit.png" />
       <None Remove="Assets\Images\delete.png" />
       <Resource Include="Assets\Images\delete.png" />
+      <None Remove="Assets\Images\search.png" />
+      <Resource Include="Assets\Images\search.png" />
     </ItemGroup>
 
 </Project>
