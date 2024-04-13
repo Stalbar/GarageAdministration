@@ -6,6 +6,7 @@ using GarageAdministration.EF.Commands;
 using GarageAdministration.EF.Queries;
 using GarageAdministration.WPF.Commons;
 using GarageAdministration.WPF.Commons.Stores;
+using GarageAdministration.WPF.Commons.ViewModels;
 using GarageAdministration.WPF.Services.Abstractions;
 using GarageAdministration.WPF.ViewModels.CreateOwner;
 using GarageAdministration.WPF.ViewModels.Home;

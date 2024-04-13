@@ -18,7 +18,7 @@ public class CreateOwnerCommand: AsyncCommandBase
 
     protected override async Task ExecuteAsync(object? parameter)
     {
-        var form = _createOwnerViewModel.CreateOwnerFormViewModel;
+        var form = _createOwnerViewModel.OwnerFormViewModel;
         var name = form.Name;
         var surname = form.Surname;
         var patronymic = form.Patronymic;

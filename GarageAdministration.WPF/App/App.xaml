@@ -7,7 +7,9 @@
              xmlns:createOwner="clr-namespace:GarageAdministration.WPF.ViewModels.CreateOwner"
              xmlns:createOwnerView="clr-namespace:GarageAdministration.WPF.Views.CreateOwner"
              xmlns:ownersList="clr-namespace:GarageAdministration.WPF.ViewModels.OwnersList"
-             xmlns:ownersListView="clr-namespace:GarageAdministration.WPF.Views.OwnersList">
+             xmlns:ownersListView="clr-namespace:GarageAdministration.WPF.Views.OwnersList"
+             xmlns:editOwner="clr-namespace:GarageAdministration.WPF.ViewModels.EditOwner"
+             xmlns:editOwnerView="clr-namespace:GarageAdministration.WPF.Views.EditOwner">
     <Application.Resources>
          
         <DataTemplate DataType="{x:Type TypeName=home:HomeViewModel}">
@@ -22,5 +24,8 @@
             <ownersListView:OwnersListView/>
         </DataTemplate>
         
+        <DataTemplate DataType="{x:Type TypeName=editOwner:EditOwnerViewModel}">
+            <editOwnerView:EditOwnerView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

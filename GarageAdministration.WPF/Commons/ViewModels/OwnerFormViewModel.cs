@@ -1,10 +1,11 @@
 ﻿using System.Windows.Input;
 using GarageAdministration.WPF.Commons;
+using GarageAdministration.WPF.Commons.ViewModels;
 using GarageAdministration.WPF.Services.Abstractions;
 
 namespace GarageAdministration.WPF.ViewModels.CreateOwner;
 
-public class CreateOwnerFormViewModel: ViewModelBase
+public class OwnerFormViewModel: ViewModelBase
 {
     private INavigationService _navigation;
     private string _name;
@@ -54,7 +55,7 @@ public class CreateOwnerFormViewModel: ViewModelBase
     public ICommand SubmitCommand { get; }
     public ICommand CancelCommand { get; }
     
-    public CreateOwnerFormViewModel(INavigationService navigation, ICommand submitCommand, ICommand cancelCommand)
+    public OwnerFormViewModel(INavigationService navigation, ICommand submitCommand, ICommand cancelCommand)
     {
         Navigation = navigation;
         SubmitCommand = submitCommand;

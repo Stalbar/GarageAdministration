@@ -1,4 +1,5 @@
 ﻿using GarageAdministration.WPF.Commons;
+using GarageAdministration.WPF.Commons.ViewModels;
 using GarageAdministration.WPF.Services.Abstractions;
 
 public class NavigationService : ViewModelBase, INavigationService
@@ -24,6 +25,11 @@ public class NavigationService : ViewModelBase, INavigationService
     public void NavigateTo<TViewModel>() where TViewModel : ViewModelBase
     {
         ViewModelBase viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
+        CurrentView = viewModel;
+    }
+
+    public void NavigateTo(ViewModelBase viewModel)
+    {
         CurrentView = viewModel;
     }
 }

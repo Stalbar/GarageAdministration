@@ -23,11 +23,13 @@
                 Content="{StaticResource EditIcon}"
                 Width="20"
                 Height="20"
-                Margin="0 0 5 0"/>
+                Margin="0 0 5 0"
+                Command="{Binding EditCommand}"/>
         <Button Grid.Column="2"
                 Content="{StaticResource DeleteIcon}"
                 Width="20"
-                Height="20"/>
+                Height="20"
+                Command="{Binding DeleteCommand}"/>
     </Grid>
         
 </UserControl>

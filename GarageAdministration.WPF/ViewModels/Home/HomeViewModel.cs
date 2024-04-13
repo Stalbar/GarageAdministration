@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using GarageAdministration.WPF.Commands;
 using GarageAdministration.WPF.Commons;
+using GarageAdministration.WPF.Commons.ViewModels;
 using GarageAdministration.WPF.Services.Abstractions;
 
 namespace GarageAdministration.WPF.ViewModels.Home;

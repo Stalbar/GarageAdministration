@@ -1,23 +1,46 @@
-﻿using GarageAdministration.Domain.Models;
+﻿using System.Windows.Input;
+using GarageAdministration.Domain.Models;
+using GarageAdministration.WPF.Commands;
 using GarageAdministration.WPF.Commons;
 using GarageAdministration.WPF.Commons.Stores;
+using GarageAdministration.WPF.Commons.ViewModels;
+using GarageAdministration.WPF.Services.Abstractions;
 
 namespace GarageAdministration.WPF.ViewModels.OwnersList;
 
 public class OwnersListItemViewModel: ViewModelBase
 {
+    private readonly OwnersStore _ownersStore;
+    private INavigationService _navigation;
+    
+    public INavigationService Navigation
+    {
+        get => _navigation;
+        set
+        {
+            _navigation = value;
+            OnPropertyChanged(nameof(Navigation));
+        }
+    }
+    
     public Owner Owner { get; private set; }
     public string FullName => Owner.Name + " " + Owner.Surname + " " + Owner.Patronymic;
 
-    public OwnersListItemViewModel(Owner owner)
+    public ICommand EditCommand { get; }
+    public ICommand DeleteCommand { get; }
+    
+    public OwnersListItemViewModel(Owner owner, OwnersStore ownersStore, INavigationService navigationService)
     {
         Owner = owner;
+        _ownersStore = ownersStore;
+        _navigation = navigationService;
+        EditCommand = new NavigateToEditOwnerViewCommand(_ownersStore, this, _navigation);
+        DeleteCommand = new DeleteOwnerCommand(this, ownersStore);
     }
 
     public void Update(Owner owner)
     {
         Owner = owner;
-        
         OnPropertyChanged(nameof(FullName));
     }
 }

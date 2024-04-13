@@ -10,7 +10,6 @@
 
     <ItemGroup>
       <Folder Include="Assets\" />
-      <Folder Include="Commons\Components\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -41,6 +40,14 @@
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Commons\Components\OwnerFormView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\EditOwner\EditOwnerView.xaml">
+        <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>
 

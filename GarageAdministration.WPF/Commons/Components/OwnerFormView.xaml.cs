@@ -2,9 +2,9 @@
 
 namespace GarageAdministration.WPF.Views.CreateOwner;
 
-public partial class CreateOwnerFormView : UserControl
+public partial class OwnerFormView : UserControl
 {
-    public CreateOwnerFormView()
+    public OwnerFormView()
     {
         InitializeComponent();
     }
