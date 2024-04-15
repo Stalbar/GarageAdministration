@@ -63,10 +63,7 @@ public class OwnersListViewModel: ViewModelBase
     {
         var ownerViewModel = _ownersListItemViewModels.FirstOrDefault(o => o.Owner.Id == owner.Id);
 
-        if (ownerViewModel != null)
-        {
-            ownerViewModel.Update(owner);
-        }
+        ownerViewModel?.Update(owner);
     }
 
     private void OwnersStore_OwnerDeleted(int id)

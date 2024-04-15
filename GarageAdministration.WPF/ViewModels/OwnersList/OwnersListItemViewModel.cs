@@ -10,7 +10,6 @@ namespace GarageAdministration.WPF.ViewModels.OwnersList;
 
 public class OwnersListItemViewModel: ViewModelBase
 {
-    private readonly OwnersStore _ownersStore;
     private INavigationService _navigation;
     
     public INavigationService Navigation
@@ -32,9 +31,8 @@ public class OwnersListItemViewModel: ViewModelBase
     public OwnersListItemViewModel(Owner owner, OwnersStore ownersStore, INavigationService navigationService)
     {
         Owner = owner;
-        _ownersStore = ownersStore;
         _navigation = navigationService;
-        EditCommand = new NavigateToEditOwnerViewCommand(_ownersStore, this, _navigation);
+        EditCommand = new NavigateToEditOwnerViewCommand(ownersStore, this, _navigation);
         DeleteCommand = new DeleteOwnerCommand(this, ownersStore);
     }
 

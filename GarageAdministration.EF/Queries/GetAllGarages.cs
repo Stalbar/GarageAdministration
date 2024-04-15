@@ -17,14 +17,14 @@ public class GetAllGarages : IGetAllQuery<Garage>
     {
         await using var context = _contextFactory.Create();
         var garages = await context.Garages
-            .Include(g => g.Position)
+            .Include(g => g.MapInfo)
             .Include(g => g.Owner)
             .ToListAsync();
         return garages.Select(g =>
             new Garage(
                 g.Id,
-                new Position(g.Position!.Id, g.Position.XPosition, g.Position.YPosition),
-                new Owner(g.Owner!.Id, g.Owner.Name, g.Owner.Surname, g.Owner.Patronymic)
+                new Owner(g.Owner!.Id, g.Owner.Name, g.Owner.Surname, g.Owner.Patronymic),
+                new GarageMapInfo(g.MapInfo!.Id, g.MapInfo.Top, g.MapInfo.Left, g.MapInfo.Width, g.MapInfo.Height)
             )
         );
     }

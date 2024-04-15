@@ -3,17 +3,17 @@ using GarageAdministration.WPF.Commons.Stores;
 
 namespace GarageAdministration.WPF.Commands;
 
-public class LoadOwnersCommand: AsyncCommandBase
+public class LoadGaragesCommand: AsyncCommandBase
 {
-    private readonly OwnersStore _ownersStore;
+    private readonly GaragesStore _garagesStore;
 
-    public LoadOwnersCommand(OwnersStore ownersStore)
+    public LoadGaragesCommand(GaragesStore garagesStore)
     {
-        _ownersStore = ownersStore;
+        _garagesStore = garagesStore;
     }
 
     protected override async Task ExecuteAsync(object? parameter)
     {
-        await _ownersStore.Load();
+        await _garagesStore.Load();
     }
 }

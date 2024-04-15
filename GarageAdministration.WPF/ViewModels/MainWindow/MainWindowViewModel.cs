@@ -1,4 +1,6 @@
-﻿using GarageAdministration.WPF.Commons;
+﻿using System.Windows.Input;
+using GarageAdministration.WPF.Commands;
+using GarageAdministration.WPF.Commons;
 using GarageAdministration.WPF.Commons.ViewModels;
 using GarageAdministration.WPF.Services.Abstractions;
 
@@ -18,8 +20,12 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
     
+    public ICommand NavigateToOwnersListCommand { get; }
+    public ICommand NavigateToGarageMapViewCommand { get; }
     public MainWindowViewModel(INavigationService navService)
     {
         Navigation = navService;
+        NavigateToOwnersListCommand = new NavigateToOwnersListCommand(Navigation);
+        NavigateToGarageMapViewCommand = new NavigateToGarageMapViewCommand(Navigation);
     }
 }

@@ -4,13 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GarageAdministration.WPF"
-        xmlns:components="clr-namespace:GarageAdministration.WPF.Views.MainWindow.Components"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-        
-        <ContentControl Content="{Binding Navigation.CurrentView}"
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Button Content="Owners" 
+                    Command="{Binding NavigateToOwnersListCommand}"/>
+            <Button Content="Garages"
+                    Command="{Binding NavigateToGarageMapViewCommand}"/>
+        </StackPanel>
+        <ContentControl Grid.Column="1" Content="{Binding Navigation.CurrentView}"
                         Margin="10">
-                
+
         </ContentControl>
-        
+    </Grid>
 </Window>

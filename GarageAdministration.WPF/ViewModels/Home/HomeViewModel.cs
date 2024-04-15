@@ -19,14 +19,14 @@ public class HomeViewModel: ViewModelBase
             OnPropertyChanged(nameof(Navigation));
         }
     }
-    
-    public string RandomText => "hello";
 
     public ICommand NavigateToOwnersListCommand { get; }
+    public ICommand NavigateToGarageMapViewCommand { get; }
     
     public HomeViewModel(INavigationService navigation)
     {
         Navigation = navigation;
         NavigateToOwnersListCommand = new NavigateToOwnersListCommand(Navigation);
+        NavigateToGarageMapViewCommand = new NavigateToGarageMapViewCommand(Navigation);
     }
 }

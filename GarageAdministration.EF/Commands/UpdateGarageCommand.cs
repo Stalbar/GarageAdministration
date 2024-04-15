@@ -16,7 +16,7 @@ public class UpdateGarageCommand: IUpdateCommand<Garage>
     {
         await using var context = _contextFactory.Create();
         var garageDto = context.Garages.FirstOrDefault(g => g.Id == entity.Id)!;
-        garageDto.PositionId = entity.Position.Id;
+        garageDto.MapInfoId = entity.MapInfo.Id;
         await context.SaveChangesAsync();
     }
 }

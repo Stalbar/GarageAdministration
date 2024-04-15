@@ -24,7 +24,7 @@ public partial class App : Application
     
     public App()
     {
-        string connectionString = "Data Source=db.db;";
+        const string connectionString = "Data Source=db.db;";
         _garageAdministrationDbContextFactory = new(new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
         _serviceProvider = new InjectionContainer().GetServiceProvider();
     }
@@ -35,8 +35,7 @@ public partial class App : Application
         {
             context.Database.Migrate();
         }
-
-        _serviceProvider.GetRequiredService<INavigationService>().NavigateTo<HomeViewModel>();
+        
         var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
         mainWindow.Show();
         base.OnStartup(e);

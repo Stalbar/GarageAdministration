@@ -3,13 +3,13 @@
 public class Garage
 {
     public int Id { get; }
-    public Position Position { get; }
+    public GarageMapInfo MapInfo { get; }
     public Owner Owner { get; }
     
-    public Garage(int id, Position position, Owner owner)
+    public Garage(int id, Owner owner, GarageMapInfo mapInfo)
     {
         Id = id;
-        Position = position;
         Owner = owner;
+        MapInfo = mapInfo;
     }
 }

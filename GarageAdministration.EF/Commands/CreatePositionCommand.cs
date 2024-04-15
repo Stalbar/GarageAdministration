@@ -4,7 +4,7 @@ using GarageAdministration.EF.DTOs;
 
 namespace GarageAdministration.EF.Commands;
 
-public class CreatePositionCommand: ICreateCommand<Position>
+public class CreatePositionCommand: ICreateCommand<GarageMapInfo>
 {
     private readonly GarageAdministrationDbContextFactory _contextFactory;
 
@@ -13,16 +13,18 @@ public class CreatePositionCommand: ICreateCommand<Position>
         _contextFactory = contextFactory;
     }
     
-    public async Task Execute(Position entity)
+    public async Task Execute(GarageMapInfo entity)
     {
         await using var context = _contextFactory.Create();
-        PositionDto positionDto = new PositionDto()
+        var garageMapInfoDto = new GarageMapInfoDto()
         {
-            XPosition = entity.XPosition,
-            YPosition = entity.YPosition
+            Top = entity.Top,
+            Left = entity.Left,
+            Width = entity.Width,
+            Height = entity.Height
         };
 
-        context.Positions.Add(positionDto);
+        context.MapInfos.Add(garageMapInfoDto);
         await context.SaveChangesAsync();
     }
 }
