@@ -9,7 +9,6 @@ using GarageAdministration.WPF.Commons.ViewModels;
 using GarageAdministration.WPF.Services.Abstractions;
 using GarageAdministration.WPF.ViewModels.CreateOwner;
 using GarageAdministration.WPF.ViewModels.GarageMap;
-using GarageAdministration.WPF.ViewModels.Home;
 using GarageAdministration.WPF.ViewModels.MainWindow;
 using GarageAdministration.WPF.ViewModels.OwnersList;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +28,6 @@ public class InjectionContainer
         });
 
         services.AddSingleton<MainWindowViewModel>();
-        services.AddSingleton<HomeViewModel>();
         services.AddSingleton<CreateOwnerViewModel>();
         services.AddSingleton<OwnersListViewModel>();
         services.AddSingleton<GarageMapViewModel>();

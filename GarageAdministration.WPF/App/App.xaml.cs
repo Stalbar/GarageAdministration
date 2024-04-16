@@ -1,14 +1,6 @@
 ﻿using System.Windows;
-using GarageAdministration.Domain.Commands;
-using GarageAdministration.Domain.Models;
-using GarageAdministration.Domain.Queries;
 using GarageAdministration.EF;
-using GarageAdministration.EF.Commands;
-using GarageAdministration.EF.Queries;
-using GarageAdministration.WPF.Services.Abstractions;
 using GarageAdministration.WPF.Services.Implementations;
-using GarageAdministration.WPF.ViewModels.Home;
-using GarageAdministration.WPF.ViewModels.MainWindow;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

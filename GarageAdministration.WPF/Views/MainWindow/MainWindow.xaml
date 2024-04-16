@@ -4,22 +4,131 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GarageAdministration.WPF"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            <Button Content="Owners" 
-                    Command="{Binding NavigateToOwnersListCommand}"/>
-            <Button Content="Garages"
-                    Command="{Binding NavigateToGarageMapViewCommand}"/>
-        </StackPanel>
-        <ContentControl Grid.Column="1" Content="{Binding Navigation.CurrentView}"
-                        Margin="10">
+        Title="MainWindow" Height="450" Width="800"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True">
 
-        </ContentControl>
-    </Grid>
+    <Window.Resources>
+        <ResourceDictionary
+            Source="/Styles/UIColors.xaml" />
+    </Window.Resources>
+
+    <Border CornerRadius="10"
+            BorderThickness="1">
+
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0, 0"
+                                 EndPoint="1,1">
+                <GradientStop Color="{StaticResource WinBorderColor1}" Offset="0" />
+                <GradientStop Color="{StaticResource WinBorderColor2}" Offset="0.5" />
+                <GradientStop Color="{StaticResource WinBorderColor3}" Offset="1" />
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    CornerRadius="10, 0, 0, 10">
+
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0"
+                                         EndPoint="1,1">
+                        <GradientStop Color="{StaticResource SecondaryBackColor1}"
+                                      Offset="0" />
+                        <GradientStop Color="{StaticResource SecondaryBackColor2}"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <StackPanel>
+
+
+                    <RadioButton Style="{StaticResource MenuButton}"
+                                 Tag="{StaticResource Color1}"
+                                 Command="{Binding NavigateToOwnersListCommand}">
+                        <TextBlock Text="Owners"
+                                   Style="{StaticResource MenuButtonText}"/> 
+                    </RadioButton>
+                    
+                    <RadioButton Style="{StaticResource MenuButton}"
+                                 Tag="{StaticResource Color2}"
+                                 Command="{Binding NavigateToGarageMapViewCommand}">
+                        <TextBlock Text="Garages"
+                                   Style="{StaticResource MenuButtonText}"/> 
+                    </RadioButton>
+                    
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1"
+                    CornerRadius="0, 10, 10, 0">
+
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="1,1"
+                                         EndPoint="0,0">
+                        <GradientStop Color="{StaticResource PrimaryBackColor1}"
+                                      Offset="0" />
+                        <GradientStop Color="{StaticResource PrimaryBackColor2}"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Grid>
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel x:Name="PanelControlBar"
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="PanelControlBar_OnMouseLeftButtonDown"
+                                MouseEnter="PanelControlBar_OnMouseEnter">
+                        
+                        <Button x:Name="ButtonClose"
+                                Style="{StaticResource ControlButton}"
+                                Tag="{StaticResource Color4}"
+                                Click="ButtonClose_OnClick">
+                            <fa:IconImage Icon="Xmark"
+                                          Style="{StaticResource ControlButtonIcon}"/>
+                        </Button>
+                        
+                        <Button x:Name="ButtonMaximize"
+                                Style="{StaticResource ControlButton}"
+                                Tag="{StaticResource Color6}"
+                                Click="ButtonMaximize_OnClick">
+                            <fa:IconImage Icon="Square"
+                                          Style="{StaticResource ControlButtonIcon}"></fa:IconImage>
+                        </Button>
+                        
+                        <Button x:Name="ButtonMinimize"
+                                Style="{StaticResource ControlButton}"
+                                Tag="{StaticResource Color8}"
+                                Click="ButtonMinimize_OnClick">
+                            <fa:IconImage Icon="WindowMinimize" 
+                                          Style="{StaticResource ControlButtonIcon}"
+                                          Width="12"/>
+                        </Button>
+                        
+                    </StackPanel>
+                    
+                    <ContentControl Grid.Row="2" Content="{Binding Navigation.CurrentView}">
+
+                    </ContentControl>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
 </Window>

@@ -1,9 +1,6 @@
 ﻿<Application x:Class="GarageAdministration.WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:GarageAdministration.WPF"
-             xmlns:home="clr-namespace:GarageAdministration.WPF.ViewModels.Home"
-             xmlns:homeView="clr-namespace:GarageAdministration.WPF.Views.Home"
              xmlns:createOwner="clr-namespace:GarageAdministration.WPF.ViewModels.CreateOwner"
              xmlns:createOwnerView="clr-namespace:GarageAdministration.WPF.Views.CreateOwner"
              xmlns:ownersList="clr-namespace:GarageAdministration.WPF.ViewModels.OwnersList"
@@ -13,26 +10,29 @@
              xmlns:garageMap="clr-namespace:GarageAdministration.WPF.ViewModels.GarageMap"
              xmlns:garageMapView="clr-namespace:GarageAdministration.WPF.Views.GarageMap">
     <Application.Resources>
-         
-        <DataTemplate DataType="{x:Type TypeName=home:HomeViewModel}">
-             <homeView:HomeView/>
-         </DataTemplate>
-        
-        <DataTemplate DataType="{x:Type TypeName=createOwner:CreateOwnerViewModel}">
-            <createOwnerView:CreateOwnerView/>
-        </DataTemplate>
-        
-        <DataTemplate DataType="{x:Type TypeName=ownersList:OwnersListViewModel}">
-            <ownersListView:OwnersListView/>
-        </DataTemplate>
-        
-        <DataTemplate DataType="{x:Type TypeName=editOwner:EditOwnerViewModel}">
-            <editOwnerView:EditOwnerView/>
-        </DataTemplate>
-        
-        <DataTemplate DataType="{x:Type TypeName=garageMap:GarageMapViewModel}">
-            <garageMapView:GarageMapView/>
-        </DataTemplate>
-        
+        <ResourceDictionary>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/UIColors.xaml" />
+                <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <DataTemplate DataType="{x:Type TypeName=createOwner:CreateOwnerViewModel}">
+                <createOwnerView:CreateOwnerView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=ownersList:OwnersListViewModel}">
+                <ownersListView:OwnersListView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=editOwner:EditOwnerViewModel}">
+                <editOwnerView:EditOwnerView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=garageMap:GarageMapViewModel}">
+                <garageMapView:GarageMapView />
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
+
 </Application>

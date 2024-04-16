@@ -42,6 +42,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="FontAwesome.Sharp" Version="6.1.1" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.2.24128.5" />
       <PackageReference Include="RichCanvas" Version="2.4.2" />
     </ItemGroup>
