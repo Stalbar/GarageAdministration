@@ -4,38 +4,43 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GarageAdministration.WPF.Views.OwnersList"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
-        <BitmapImage x:Key="SearchIcon" 
-                     UriSource="/Assets/Images/search.png"/>
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" 
-                   Source="{StaticResource SearchIcon}"
-                   Width="15"
-                   Height="15"
-                   Stretch="UniformToFill"/>
-            <TextBox Grid.Column="1" 
-                     Margin="0 0 0 10">
-            </TextBox>
+            <StackPanel Grid.Column="0"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                <fa:IconImage Icon="Search"
+                              Height="20"
+                              Width="20"
+                              Foreground="{StaticResource PlainTextColor3}"/>
+                <TextBox Style="{StaticResource SearchTextBox}"
+                         Height="24"
+                         Width="300"
+                         Margin="5,5,0,0"/>
+            </StackPanel>
+            <Button Grid.Column="1"
+                    Style="{StaticResource RegularButton}"
+                    Command="{Binding NavigateToCreateOwnerViewCommand}"
+                    Content="Добавить владельца"/>
+            
         </Grid>
         <Button Grid.Row="1"
                 Margin="0 0 0 10"
                 Content="Add owner"
                 Command="{Binding NavigateToCreateOwnerViewCommand}">
         </Button>
-        <Border Grid.Row="2" BorderThickness="1"
+        <Border Grid.Row="1" BorderThickness="1"
                 CornerRadius="5"
                 SnapsToDevicePixels="True"
                 BorderBrush="Gray">
