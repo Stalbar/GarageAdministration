@@ -8,7 +8,9 @@
              xmlns:editOwner="clr-namespace:GarageAdministration.WPF.ViewModels.EditOwner"
              xmlns:editOwnerView="clr-namespace:GarageAdministration.WPF.Views.EditOwner"
              xmlns:garageMap="clr-namespace:GarageAdministration.WPF.ViewModels.GarageMap"
-             xmlns:garageMapView="clr-namespace:GarageAdministration.WPF.Views.GarageMap">
+             xmlns:garageMapView="clr-namespace:GarageAdministration.WPF.Views.GarageMap"
+             xmlns:createGarage="clr-namespace:GarageAdministration.WPF.ViewModels.CreateGarage"
+             xmlns:createGarageView="clr-namespace:GarageAdministration.WPF.Views.CreateGarage">
     <Application.Resources>
         <ResourceDictionary>
             
@@ -16,6 +18,7 @@
                 <ResourceDictionary Source="/Styles/UIColors.xaml" />
                 <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/ContextMenuStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <DataTemplate DataType="{x:Type TypeName=createOwner:CreateOwnerViewModel}">
@@ -33,6 +36,11 @@
             <DataTemplate DataType="{x:Type TypeName=garageMap:GarageMapViewModel}">
                 <garageMapView:GarageMapView />
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type TypeName=createGarage:CreateGarageViewModel}">
+                <createGarageView:CreateGarageView/>
+            </DataTemplate>
+            
         </ResourceDictionary>
     </Application.Resources>
 

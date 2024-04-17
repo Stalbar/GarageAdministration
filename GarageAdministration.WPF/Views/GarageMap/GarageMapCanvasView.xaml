@@ -13,8 +13,7 @@
                                      ItemsSource="{Binding GarageMapCanvasItemViewModels}">
             <richCanvas:RichItemsControl.Resources>
                 <DataTemplate DataType="{x:Type garageMap:GarageMapCanvasItemViewModel}">
-                    <Rectangle Fill="Red">
-                    </Rectangle>
+                    <local:GarageMapCanvasItemView/>
                 </DataTemplate>
             </richCanvas:RichItemsControl.Resources>
             
@@ -28,6 +27,8 @@
                             Value="{Binding Width}" />
                     <Setter Property="Height"
                             Value="{Binding Height}" />
+                    <Setter Property="IsDraggable"
+                            Value="False"></Setter> 
                 </Style>
             </richCanvas:RichItemsControl.ItemContainerStyle>
         </richCanvas:RichItemsControl>
