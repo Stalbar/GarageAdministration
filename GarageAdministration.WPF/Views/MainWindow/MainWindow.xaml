@@ -73,6 +73,17 @@
                         </StackPanel>
                     </RadioButton>
                     
+                    <RadioButton Style="{StaticResource MenuButton}"
+                                 Tag="{StaticResource Color3}"
+                                 Command="{Binding NavigateToReportListViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Archive"
+                                          Style="{StaticResource MenuButtonIcon}"/>
+                            <TextBlock Text="Отчеты"
+                                       Style="{StaticResource MenuButtonText}"></TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+                    
                 </StackPanel>
             </Border>
 

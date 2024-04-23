@@ -6,6 +6,7 @@ using GarageAdministration.Domain.Models;
 using GarageAdministration.WPF.Commands;
 using GarageAdministration.WPF.Commons.Stores;
 using GarageAdministration.WPF.Commons.ViewModels;
+using GarageAdministration.WPF.Services.Abstractions;
 
 namespace GarageAdministration.WPF.ViewModels.GarageMap;
 
@@ -13,12 +14,14 @@ public class GarageMapCanvasViewModel: ViewModelBase
 {
     private readonly GaragesStore _garagesStore;
     private readonly ObservableCollection<GarageMapCanvasItemViewModel> _garageMapCanvasItemViewModels;
+    private readonly INavigationService _navigation;
 
     public IEnumerable<GarageMapCanvasItemViewModel> GarageMapCanvasItemViewModels => _garageMapCanvasItemViewModels;
 
-    public GarageMapCanvasViewModel(GaragesStore garagesStore)
+    public GarageMapCanvasViewModel(GaragesStore garagesStore, INavigationService navigation)
     {
         _garagesStore = garagesStore;
+        _navigation = navigation;
         _garageMapCanvasItemViewModels = new ObservableCollection<GarageMapCanvasItemViewModel>();
         _garagesStore.GarageAdded += GaragesStore_GarageAdded;
         _garagesStore.GarageDeleted += GaragesStore_GarageDeleted;
@@ -68,6 +71,6 @@ public class GarageMapCanvasViewModel: ViewModelBase
 
     private void AddGarage(Garage garage)
     {
-        _garageMapCanvasItemViewModels.Add(new GarageMapCanvasItemViewModel(garage, _garagesStore));
+        _garageMapCanvasItemViewModels.Add(new GarageMapCanvasItemViewModel(garage, _garagesStore, _navigation));
     }
 }

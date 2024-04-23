@@ -12,7 +12,7 @@ public class CreateOwnerViewModel: ViewModelBase
     public OwnerFormViewModel OwnerFormViewModel { get; }
     public CreateOwnerViewModel(INavigationService navigation, OwnersStore ownersStore)
     {
-        ICommand submitCommand = new CreateOwnerCommand(this, ownersStore);
+        ICommand submitCommand = new CreateOwnerCommand(this, ownersStore, navigation);
         ICommand cancelCommand = new NavigateToOwnersListCommand(navigation);
         OwnerFormViewModel = new OwnerFormViewModel(navigation, submitCommand, cancelCommand);
     }

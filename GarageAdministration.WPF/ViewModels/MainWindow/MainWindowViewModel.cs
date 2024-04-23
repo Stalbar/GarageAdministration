@@ -22,10 +22,12 @@ public class MainWindowViewModel : ViewModelBase
     
     public ICommand NavigateToOwnersListCommand { get; }
     public ICommand NavigateToGarageMapViewCommand { get; }
+    public ICommand NavigateToReportListViewCommand { get; }
     public MainWindowViewModel(INavigationService navService)
     {
         Navigation = navService;
         NavigateToOwnersListCommand = new NavigateToOwnersListCommand(Navigation);
         NavigateToGarageMapViewCommand = new NavigateToGarageMapViewCommand(Navigation);
+        NavigateToReportListViewCommand = new NavigateToReportListViewCommand(Navigation);
     }
 }

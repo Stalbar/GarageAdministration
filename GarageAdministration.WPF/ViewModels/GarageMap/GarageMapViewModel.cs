@@ -15,6 +15,6 @@ public class GarageMapViewModel: ViewModelBase
     public GarageMapViewModel(GaragesStore garagesStore, INavigationService navigation)
     {
         NavigateToCreateGarageViewCommand = new NavigateToCreateGarageViewCommand(navigation);
-        GarageMapCanvasViewModel = new GarageMapCanvasViewModel(garagesStore);
+        GarageMapCanvasViewModel = new GarageMapCanvasViewModel(garagesStore, navigation);
     }
 }

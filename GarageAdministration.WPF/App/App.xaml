@@ -10,7 +10,9 @@
              xmlns:garageMap="clr-namespace:GarageAdministration.WPF.ViewModels.GarageMap"
              xmlns:garageMapView="clr-namespace:GarageAdministration.WPF.Views.GarageMap"
              xmlns:createGarage="clr-namespace:GarageAdministration.WPF.ViewModels.CreateGarage"
-             xmlns:createGarageView="clr-namespace:GarageAdministration.WPF.Views.CreateGarage">
+             xmlns:createGarageView="clr-namespace:GarageAdministration.WPF.Views.CreateGarage"
+             xmlns:reportList="clr-namespace:GarageAdministration.WPF.ViewModels.ReportList"
+             xmlns:reportListView="clr-namespace:GarageAdministration.WPF.Views.ReportList">
     <Application.Resources>
         <ResourceDictionary>
             
@@ -39,6 +41,10 @@
             
             <DataTemplate DataType="{x:Type TypeName=createGarage:CreateGarageViewModel}">
                 <createGarageView:CreateGarageView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type TypeName=reportList:ReportListViewModel}">
+                <reportListView:ReportListView/>
             </DataTemplate>
             
         </ResourceDictionary>

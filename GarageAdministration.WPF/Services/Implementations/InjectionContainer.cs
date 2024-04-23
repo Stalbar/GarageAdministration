@@ -12,6 +12,7 @@ using GarageAdministration.WPF.ViewModels.CreateOwner;
 using GarageAdministration.WPF.ViewModels.GarageMap;
 using GarageAdministration.WPF.ViewModels.MainWindow;
 using GarageAdministration.WPF.ViewModels.OwnersList;
+using GarageAdministration.WPF.ViewModels.ReportList;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -33,6 +34,7 @@ public class InjectionContainer
         services.AddSingleton<OwnersListViewModel>();
         services.AddSingleton<GarageMapViewModel>();
         services.AddSingleton<CreateGarageViewModel>();
+        services.AddSingleton<ReportListViewModel>();
 
         string connectionString = "Data Source=db.db;";
         services.AddSingleton<DbContextOptions>(_ => new DbContextOptionsBuilder().UseSqlite(connectionString).Options);

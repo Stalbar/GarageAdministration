@@ -6,31 +6,40 @@
              xmlns:local="clr-namespace:GarageAdministration.WPF.Views.GarageMap"
              xmlns:richCanvas="clr-namespace:RichCanvas;assembly=RichCanvas"
              xmlns:garageMap="clr-namespace:GarageAdministration.WPF.ViewModels.GarageMap"
+             xmlns:behaviors="clr-namespace:GarageAdministration.WPF.Behaviors"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <richCanvas:RichItemsControl Background="Bisque"
-                                     ItemsSource="{Binding GarageMapCanvasItemViewModels}">
-            <richCanvas:RichItemsControl.Resources>
-                <DataTemplate DataType="{x:Type garageMap:GarageMapCanvasItemViewModel}">
-                    <local:GarageMapCanvasItemView/>
-                </DataTemplate>
-            </richCanvas:RichItemsControl.Resources>
-            
-            <richCanvas:RichItemsControl.ItemContainerStyle>
-                <Style TargetType="richCanvas:RichItemContainer">
-                    <Setter Property="Top"
-                            Value="{Binding Top}" />
-                    <Setter Property="Left"
-                            Value="{Binding Left}" />
-                    <Setter Property="Width"
-                            Value="{Binding Width}" />
-                    <Setter Property="Height"
-                            Value="{Binding Height}" />
-                    <Setter Property="IsDraggable"
-                            Value="False"></Setter> 
-                </Style>
-            </richCanvas:RichItemsControl.ItemContainerStyle>
-        </richCanvas:RichItemsControl>
+        <ScrollViewer x:Name="MainScrollViewer"
+                      CanContentScroll="False"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding GarageMapCanvasItemViewModels}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas Width="3300"
+                                Background="Azure"
+                                Height="3300"
+                                behaviors:ZoomBehavior.IsEnabled="True"
+                                behaviors:ZoomBehavior.ZoomFactor="0.1"
+                                behaviors:ZoomBehavior.ScrollViewer="{Binding ElementName=MainScrollViewer}">
+                        </Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left"
+                                Value="{Binding Left}"/>
+                        <Setter Property="Canvas.Top"
+                                Value="{Binding Top}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:GarageMapCanvasItemView/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

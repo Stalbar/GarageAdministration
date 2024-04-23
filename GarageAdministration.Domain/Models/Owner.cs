@@ -14,4 +14,6 @@ public class Owner
         Surname = surname;
         Patronymic = patronymic;
     }
+    
+    public override string ToString() => Name + " " + Surname + " " + Patronymic;
 }

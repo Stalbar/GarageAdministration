@@ -1,21 +1,21 @@
-﻿<UserControl x:Class="GarageAdministration.WPF.Views.GarageMap.GarageMapView"
+﻿<UserControl x:Class="GarageAdministration.WPF.Views.ReportList.ReportListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:GarageAdministration.WPF.Views.GarageMap"
+             xmlns:local="clr-namespace:GarageAdministration.WPF.Views.ReportList"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0"
                         Orientation="Horizontal"
@@ -23,28 +23,15 @@
                 <fa:IconImage Icon="Search"
                               Height="20"
                               Width="20"
-                              Foreground="{StaticResource PlainTextColor3}" />
+                              Foreground="{StaticResource PlainTextColor3}"/>
                 <TextBox Style="{StaticResource SearchTextBox}"
                          Height="24"
                          Width="300"
-                         Margin="5,5,0,0" />
+                         Margin="5,5,0,0"/>
             </StackPanel>
             <Button Grid.Column="1"
                     Style="{StaticResource RegularButton}"
-                    Command="{Binding NavigateToCreateGarageViewCommand}"
-                    Content="Добавить гараж" />
-        </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <local:GarageMapCanvasView Grid.Column="0"
-                DataContext="{Binding GarageMapCanvasViewModel}" />
-            <StackPanel Grid.Column="1">
-                <Button> asdsa</Button>
-                <Button>asdasd</Button>
-            </StackPanel>
+                    Content="Создать отчет"/>
         </Grid>
     </Grid>
 </UserControl>
