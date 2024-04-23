@@ -46,7 +46,7 @@
                 <Setter Property="Background"
                         Value="{StaticResource PanelActiveColor}" />
                 <Setter Property="Foreground"
-                        Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
+                        Value="#000000" />
                 <Setter Property="BorderBrush"
                         Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
             </Trigger>
@@ -74,7 +74,7 @@
         <Setter Property="FontWeight"
                 Value="Medium" />
         <Setter Property="FontSize"
-                Value="13.5" />
+                Value="14" />
         <Setter Property="VerticalAlignment"
                 Value="Center" />
         <Setter Property="Margin"
@@ -128,7 +128,7 @@
         <Setter Property="Background"
                 Value="{StaticResource ButtonColor1}" />
         <Setter Property="FontSize"
-                Value="12" />
+                Value="14" />
         <Setter Property="FontFamily"
                 Value="Montserrat" />
         <Setter Property="Cursor"
@@ -138,14 +138,14 @@
         <Setter Property="Foreground"
                 Value="White" />
         <Setter Property="VerticalAlignment"
-                Value="Top">
-        </Setter>
+                Value="Top"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Height="30"
                             CornerRadius="15"
-                            Background="{TemplateBinding Background}">
+                            Background="{TemplateBinding Background}"
+                            Padding="5, 2">
                         <ContentPresenter VerticalAlignment="Center"
                                           HorizontalAlignment="Center" />
                     </Border>

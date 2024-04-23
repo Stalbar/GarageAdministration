@@ -3,22 +3,44 @@
     <Style x:Key="SearchTextBox"
            TargetType="TextBox">
         <Setter Property="FontSize"
-                Value="14"/>
+                Value="14" />
         <Setter Property="Background"
-                Value="Transparent"/>
+                Value="Transparent" />
         <Setter Property="FontWeight"
-                Value="Medium"/>
+                Value="Medium" />
         <Setter Property="FontFamily"
-                Value="Montserrat"/>
+                Value="Montserrat" />
         <Setter Property="Foreground"
-                Value="{StaticResource PlainTextColor3}"/>
+                Value="{StaticResource PlainTextColor3}" />
         <Setter Property="CaretBrush"
-                Value="{StaticResource PlainTextColor3}"/>
+                Value="{StaticResource PlainTextColor3}" />
         <Setter Property="BorderBrush"
-                Value="{StaticResource PlainTextColor3}"/>
+                Value="{StaticResource PlainTextColor3}" />
         <Setter Property="BorderThickness"
-                Value="0,0,0,1"/>
+                Value="0,0,0,1" />
         <Setter Property="VerticalContentAlignment"
-                Value="Center"/>
+                Value="Center" />
+    </Style>
+
+    <Style x:Key="FormTextBox"
+           TargetType="TextBox">
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="FontWeight"
+                Value="Medium" />
+        <Setter Property="FontFamily"
+                Value="Montserrat" />
+        <Setter Property="Foreground"
+                Value="{StaticResource PlainTextColor3}" />
+        <Setter Property="CaretBrush"
+                Value="{StaticResource PlainTextColor3}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource PlainTextColor3}" />
+        <Setter Property="BorderThickness"
+                Value="0,0,0,1" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
     </Style>
 </ResourceDictionary>

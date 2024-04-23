@@ -2,15 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <!-- Background colors -->
-    <Color x:Key="PrimaryBackColor1">#0A003A</Color>
-    <Color x:Key="PrimaryBackColor2">#1C0E49</Color>
-    <Color x:Key="SecondaryBackColor1">#24105F</Color>
-    <Color x:Key="SecondaryBackColor2">#210F55</Color>
+    <Color x:Key="PrimaryBackColor1">#F8FAFF</Color>
+    <Color x:Key="PrimaryBackColor2">#F0F4FF</Color>
+    <Color x:Key="PrimaryBackColor3">#FFFFFF</Color>
+    <Color x:Key="SecondaryBackColor1">#F6F8FF</Color>
+    <Color x:Key="SecondaryBackColor2">#F6F8FF</Color>
     
     <!-- Window Border Colors -->
-    <Color x:Key="WinBorderColor1">#6D2FFF</Color>
-    <Color x:Key="WinBorderColor2">#FB539B</Color>
-    <Color x:Key="WinBorderColor3">#836EFB</Color>
+    <Color x:Key="WinBorderColor1">#000000</Color>
+    <Color x:Key="WinBorderColor2">#202020</Color>
+    <Color x:Key="WinBorderColor3">#404040</Color>
     
     <!-- Color Palette -->
     <SolidColorBrush x:Key="Color1" Color="#E285DE"/>
@@ -25,20 +26,20 @@
     <SolidColorBrush x:Key="Color10" Color="#FBA1AA"/>
     
     <!-- Font Colors -->
-    <SolidColorBrush x:Key="TitleColor1" Color="#E0E1F1"/>
-    <SolidColorBrush x:Key="TitleColor2" Color="#D5CFF5"/>
-    <SolidColorBrush x:Key="TitleColor3" Color="#BCBEE0"/>
-    <SolidColorBrush x:Key="PlainTextColor1" Color="#9497CD"/>
-    <SolidColorBrush x:Key="PlainTextColor2" Color="#7C80C2"/>
-    <SolidColorBrush x:Key="PlainTextColor3" Color="#7376BD"/>
+    <SolidColorBrush x:Key="TitleColor1" Color="#000000"/>
+    <SolidColorBrush x:Key="TitleColor2" Color="#222222"/>
+    <SolidColorBrush x:Key="TitleColor3" Color="#444444"/>
+    <SolidColorBrush x:Key="PlainTextColor1" Color="#000000"/>
+    <SolidColorBrush x:Key="PlainTextColor2" Color="#222222"/>
+    <SolidColorBrush x:Key="PlainTextColor3" Color="#444444"/>
     
     <!-- Panel Colors -->
-    <SolidColorBrush x:Key="PanelColor" Color="#200F53"/>
-    <SolidColorBrush x:Key="PanelOverColor" Color="#281269"/>
-    <SolidColorBrush x:Key="PanelActiveColor" Color="#2B1372"/>
+    <SolidColorBrush x:Key="PanelColor" Color="#E1E1E1"/>
+    <SolidColorBrush x:Key="PanelOverColor" Color="#F1F1F1"/>
+    <SolidColorBrush x:Key="PanelActiveColor" Color="#F8FAFF"/>
     
     <!-- Button Colors -->
-    <SolidColorBrush x:Key="ButtonColor1" Color="#773DFF"/>
-    <SolidColorBrush x:Key="MouseOverButtonColor1" Color="#836EFB"/>
+    <SolidColorBrush x:Key="ButtonColor1" Color="#7093EB"/>
+    <SolidColorBrush x:Key="MouseOverButtonColor1" Color="#80A3FB"/>
     
 </ResourceDictionary>

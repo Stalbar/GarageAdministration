@@ -24,10 +24,12 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
-                           Text="Имя"/>
+                           Text="Имя"
+                           Style="{StaticResource RegularTextBlock}"/>
                 <TextBox Grid.Column="1"
                          Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                         Margin="20 0 0 0"/>
+                         Margin="20 0 0 0"
+                         Style="{StaticResource FormTextBox}"/>
             </Grid>
             
             <Grid Grid.Row="1"
@@ -38,10 +40,12 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
-                           Text="Фамилия"/>
+                           Text="Фамилия"
+                           Style="{StaticResource RegularTextBlock}"/>
                 <TextBox Grid.Column="1"
                          Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"
-                         Margin="20 0 0 0"/>
+                         Margin="20 0 0 0"
+                         Style="{StaticResource FormTextBox}"/>
             </Grid>
             
             <Grid Grid.Row="2"
@@ -52,10 +56,12 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
-                           Text="Отчество"/>
+                           Text="Отчество"
+                           Style="{StaticResource RegularTextBlock}"/>
                 <TextBox Grid.Column="1"
                          Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}"
-                         Margin="20 0 0 0"/>
+                         Margin="20 0 0 0"
+                         Style="{StaticResource FormTextBox}"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
@@ -66,9 +72,11 @@
             <WrapPanel Grid.Column="1" Margin="0 20 0 0">
                 <Button Content="Создать"
                         Command="{Binding SubmitCommand}"
-                        Margin="0 0 10 0"/>
+                        Margin="0 0 10 0"
+                        Style="{StaticResource RegularButton}"/>
                 <Button Content="Отмена"
-                        Command="{Binding CancelCommand}"/>
+                        Command="{Binding CancelCommand}"
+                        Style="{StaticResource RegularButton}"/>
             </WrapPanel>
         </Grid>
     </Grid>
