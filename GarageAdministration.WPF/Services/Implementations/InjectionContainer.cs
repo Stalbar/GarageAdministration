@@ -33,7 +33,7 @@ public class InjectionContainer
         services.AddSingleton<CreateOwnerViewModel>();
         services.AddSingleton<OwnersListViewModel>();
         services.AddSingleton<GarageMapViewModel>();
-        services.AddSingleton<CreateGarageViewModel>();
+        services.AddTransient<CreateGarageViewModel>();
         services.AddSingleton<ReportListViewModel>();
 
         string connectionString = "Data Source=db.db;";

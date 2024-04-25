@@ -9,11 +9,15 @@ namespace GarageAdministration.WPF.ViewModels.CreateGarage;
 public class CreateGarageViewModel: ViewModelBase
 {
     public GarageFormViewModel GarageFormViewModel { get; }
+    public CreateGarageMapViewModel CreateGarageMapViewModel { get; }
 
     public CreateGarageViewModel(INavigationService navigation, GaragesStore garagesStore, OwnersStore ownersStore)
     {
         ICommand submitCommand = new CreateGarageCommand(this, garagesStore);
         ICommand cancelCommand = new NavigateToGarageMapViewCommand(navigation);
-        GarageFormViewModel = new GarageFormViewModel(navigation, ownersStore, submitCommand, cancelCommand);
+        ICommand mapUpdateCommand = new UpdateMapFromFormCommand(this);
+        ICommand mapClickCommand = new CreateGarageUpdateMapCommand(garagesStore, this);
+        GarageFormViewModel = new GarageFormViewModel(navigation, ownersStore, submitCommand, cancelCommand, mapUpdateCommand);
+        CreateGarageMapViewModel = new CreateGarageMapViewModel(garagesStore, navigation, mapClickCommand);
     }
 }

@@ -11,6 +11,8 @@ public class GarageFormViewModel: ViewModelBase
     private Owner _selectedOwner;
     private GarageMapInfo _mapInfo;
     private List<Owner> _owners;
+    private double _height;
+    private double _width;
 
     public Owner SelectedOwner
     {
@@ -51,12 +53,39 @@ public class GarageFormViewModel: ViewModelBase
             OnPropertyChanged(nameof(Owners));
         }
     }
+
+    public double Width
+    {
+        get => _width;
+        set
+        {
+            _width = value;
+            OnPropertyChanged(nameof(Width));
+            MapUpdateCommand.Execute(null);
+        }
+    }
+
+    public double Height
+    {
+        get => _height;
+        set
+        {
+            _height = value;
+            OnPropertyChanged(nameof(Height));
+            MapUpdateCommand.Execute(null);
+        }
+    }
     
     public ICommand SubmitCommand { get; }
     public ICommand CancelCommand { get; }
 
-    public GarageFormViewModel(INavigationService navigation, OwnersStore ownersStore, ICommand submitCommand, ICommand cancelCommand)
+    public ICommand MapUpdateCommand { get;  }
+    
+    public GarageFormViewModel(INavigationService navigation, OwnersStore ownersStore, ICommand submitCommand, ICommand cancelCommand, ICommand mapUpdateCommand)
     {
+        MapUpdateCommand = mapUpdateCommand;
+        _width = 10;
+        _height = 10;
         Navigation = navigation;
         SubmitCommand = submitCommand;
         CancelCommand = cancelCommand;

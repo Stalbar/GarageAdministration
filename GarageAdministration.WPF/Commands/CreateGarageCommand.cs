@@ -19,11 +19,7 @@ public class CreateGarageCommand: AsyncCommandBase
 
     protected override async Task ExecuteAsync(object? parameter)
     {
-        var form = _createGarageViewModel.GarageFormViewModel;
-        var owner = form.SelectedOwner;
-        var id = !_garagesStore.Garages.Any() ? 0 : _garagesStore.Garages.Last().Id + 1;
-        var mapInfo = new GarageMapInfo(id, 200, 200, 25, 25);
-        var garage = new Garage(id, owner, mapInfo);
+        var garage = _createGarageViewModel.CreateGarageMapViewModel.CreatedGarage;
         await _garagesStore.Add(garage);
     }
 }

@@ -8,6 +8,13 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <components:GarageFormView DataContext="{Binding GarageFormViewModel}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <local:CreateGarageMapView Grid.Column="0"
+                                   DataContext="{Binding CreateGarageMapViewModel}"/>
+        <components:GarageFormView Grid.Column="1" 
+                                   DataContext="{Binding GarageFormViewModel}"/>
     </Grid>
 </UserControl>

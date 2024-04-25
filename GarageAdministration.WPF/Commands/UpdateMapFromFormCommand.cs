@@ -1,0 +1,24 @@
+﻿using GarageAdministration.Domain.Models;
+using GarageAdministration.WPF.Commons;
+using GarageAdministration.WPF.Commons.ViewModels;
+using GarageAdministration.WPF.ViewModels.CreateGarage;
+
+namespace GarageAdministration.WPF.Commands;
+
+public class UpdateMapFromFormCommand: CommandBase
+{
+    private readonly CreateGarageViewModel _createGarageViewModel;
+    public UpdateMapFromFormCommand(CreateGarageViewModel createGarageViewModel)
+    {
+        _createGarageViewModel = createGarageViewModel;
+    }
+
+    public override void Execute(object? parameter)
+    {
+        var garage = _createGarageViewModel.CreateGarageMapViewModel.CreatedGarage;
+        var width = _createGarageViewModel.GarageFormViewModel.Width;
+        var height = _createGarageViewModel.GarageFormViewModel.Height;
+        var newMapInfo = new GarageMapInfo(garage.MapInfo.Id, garage.MapInfo.Top, garage.MapInfo.Left, width, height);
+        _createGarageViewModel.CreateGarageMapViewModel.CreatedGarage = new Garage(garage.Id, garage.Owner, newMapInfo);
+    }
+}

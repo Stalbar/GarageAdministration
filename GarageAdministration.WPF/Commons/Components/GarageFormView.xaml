@@ -4,44 +4,77 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GarageAdministration.WPF.Commons.Components"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"
               IsSharedSizeScope="True">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"
-                                      SharedSizeGroup="Label"/>
-                    <ColumnDefinition Width="*"/>
+                                      SharedSizeGroup="Label" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
-                           Text="Владелец"/>
+                           Text="Владелец"
+                           Style="{StaticResource RegularTextBlock}" />
                 <ComboBox Grid.Column="1"
                           ItemsSource="{Binding Owners}"
                           SelectedItem="{Binding SelectedOwner}"
-                          Margin="20 0 0 0"/>
+                          Style="{StaticResource RegularCombobox}"
+                          Margin="20 0 0 0" />
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"
+                                      SharedSizeGroup="Label" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           Text="Высота"
+                           Style="{StaticResource RegularTextBlock}" />
+                <xctk:IntegerUpDown Grid.Column="1"
+                                    Value="{Binding Height}"
+                                    Margin="20 0 0 0" />
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"
+                                      SharedSizeGroup="Label" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           Text="Ширина"
+                           Style="{StaticResource RegularTextBlock}" />
+                <xctk:IntegerUpDown Grid.Column="1"
+                                    Value="{Binding Width}"
+                                    Margin="20 0 0 0" />
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <WrapPanel Grid.Column="1"
                        Margin="0 20 0 0 ">
                 <Button Content="Создать"
                         Command="{Binding SubmitCommand}"
-                        Margin="0 0 10 0"/>
+                        Style="{StaticResource RegularButton}"
+                        Margin="0 0 10 0" />
                 <Button Content="Отмена"
-                        Command="{Binding CancelCommand}"/>
+                        Style="{StaticResource RegularButton}"
+                        Command="{Binding CancelCommand}" />
             </WrapPanel>
         </Grid>
     </Grid>
