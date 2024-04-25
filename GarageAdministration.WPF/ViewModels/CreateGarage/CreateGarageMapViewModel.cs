@@ -13,7 +13,6 @@ public class CreateGarageMapViewModel : ViewModelBase
     private readonly GaragesStore _garagesStore;
     private readonly ObservableCollection<CreateGarageMapItemViewModel> _createGarageMapItemViewModels;
     private readonly INavigationService _navigation;
-    private readonly GarageFormViewModel _garageFormViewModel;
     private bool _isGarageCreated;
     private Garage _createdGarage;
 
@@ -32,9 +31,20 @@ public class CreateGarageMapViewModel : ViewModelBase
             }
             else
             {
-                _createGarageMapItemViewModels.RemoveAt(_createGarageMapItemViewModels.Count - 1);
+                var item = _createGarageMapItemViewModels.First(g => g.Garage.Id == _createdGarage.Id);
+                _createGarageMapItemViewModels.Remove(item);
                 AddGarage(_createdGarage, System.Windows.Media.Brushes.Green);
             }
+        }
+    }
+
+    public bool IsGarageCreated
+    {
+        get => _isGarageCreated;
+        set
+        {
+            _isGarageCreated = value;
+            OnPropertyChanged(nameof(IsGarageCreated));
         }
     }
     

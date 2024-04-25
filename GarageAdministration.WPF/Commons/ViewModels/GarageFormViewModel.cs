@@ -70,7 +70,7 @@ public class GarageFormViewModel: ViewModelBase
 
     public ICommand MapUpdateCommand { get;  }
     
-    public GarageFormViewModel(INavigationService navigation, OwnersStore ownersStore, ICommand submitCommand, ICommand cancelCommand, ICommand mapUpdateCommand)
+    public GarageFormViewModel(INavigationService navigation, OwnersStore ownersStore, ICommand submitCommand, ICommand cancelCommand, ICommand mapUpdateCommand, Owner owner)
     {
         MapUpdateCommand = mapUpdateCommand;
         _width = 10;
@@ -79,5 +79,6 @@ public class GarageFormViewModel: ViewModelBase
         SubmitCommand = submitCommand;
         CancelCommand = cancelCommand;
         Owners = ownersStore.Owners;
+        SelectedOwner = owner;
     }
 }

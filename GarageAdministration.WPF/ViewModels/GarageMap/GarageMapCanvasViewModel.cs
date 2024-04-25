@@ -15,13 +15,17 @@ public class GarageMapCanvasViewModel: ViewModelBase
     private readonly GaragesStore _garagesStore;
     private readonly ObservableCollection<GarageMapCanvasItemViewModel> _garageMapCanvasItemViewModels;
     private readonly INavigationService _navigation;
+    private readonly GarageMapInfoStore _garageMapInfoStore;
+    private readonly OwnersStore _ownersStore;
 
     public IEnumerable<GarageMapCanvasItemViewModel> GarageMapCanvasItemViewModels => _garageMapCanvasItemViewModels;
 
-    public GarageMapCanvasViewModel(GaragesStore garagesStore, INavigationService navigation)
+    public GarageMapCanvasViewModel(GaragesStore garagesStore, INavigationService navigation, GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore)
     {
         _garagesStore = garagesStore;
         _navigation = navigation;
+        _garageMapInfoStore = garageMapInfoStore;
+        _ownersStore = ownersStore;
         _garageMapCanvasItemViewModels = new ObservableCollection<GarageMapCanvasItemViewModel>();
         _garagesStore.GarageAdded += GaragesStore_GarageAdded;
         _garagesStore.GarageDeleted += GaragesStore_GarageDeleted;
@@ -71,6 +75,6 @@ public class GarageMapCanvasViewModel: ViewModelBase
 
     private void AddGarage(Garage garage)
     {
-        _garageMapCanvasItemViewModels.Add(new GarageMapCanvasItemViewModel(garage, _garagesStore, _navigation));
+        _garageMapCanvasItemViewModels.Add(new GarageMapCanvasItemViewModel(garage, _garagesStore, _navigation, _garageMapInfoStore, _ownersStore));
     }
 }
