@@ -11,12 +11,12 @@ public class CreateGarageViewModel: ViewModelBase
     public GarageFormViewModel GarageFormViewModel { get; }
     public CreateGarageMapViewModel CreateGarageMapViewModel { get; }
 
-    public CreateGarageViewModel(INavigationService navigation, GaragesStore garagesStore, OwnersStore ownersStore)
+    public CreateGarageViewModel(INavigationService navigation, GaragesStore garagesStore, OwnersStore ownersStore, GarageMapInfoStore garageMapInfoStore)
     {
-        ICommand submitCommand = new CreateGarageCommand(this, garagesStore);
+        ICommand submitCommand = new CreateGarageCommand(this, garagesStore, garageMapInfoStore);
         ICommand cancelCommand = new NavigateToGarageMapViewCommand(navigation);
         ICommand mapUpdateCommand = new UpdateMapFromFormCommand(this);
-        ICommand mapClickCommand = new CreateGarageUpdateMapCommand(garagesStore, this);
+        ICommand mapClickCommand = new CreateGarageUpdateMapCommand(garagesStore, this, garageMapInfoStore);
         GarageFormViewModel = new GarageFormViewModel(navigation, ownersStore, submitCommand, cancelCommand, mapUpdateCommand);
         CreateGarageMapViewModel = new CreateGarageMapViewModel(garagesStore, navigation, mapClickCommand);
     }

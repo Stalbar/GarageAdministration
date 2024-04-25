@@ -9,7 +9,6 @@ public class GarageFormViewModel: ViewModelBase
 {
     private INavigationService _navigation;
     private Owner _selectedOwner;
-    private GarageMapInfo _mapInfo;
     private List<Owner> _owners;
     private double _height;
     private double _width;
@@ -21,16 +20,6 @@ public class GarageFormViewModel: ViewModelBase
         {
             _selectedOwner = value;
             OnPropertyChanged(nameof(SelectedOwner));
-        }
-    }
-
-    public GarageMapInfo MapInfo
-    {
-        get => _mapInfo;
-        set
-        {
-            _mapInfo = value;
-            OnPropertyChanged(nameof(MapInfo));
         }
     }
 

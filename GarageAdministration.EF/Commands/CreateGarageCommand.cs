@@ -18,8 +18,8 @@ public class CreateGarageCommand: ICreateCommand<Garage>
         await using var context = _contextFactory.Create();
         GarageDto garageDto = new GarageDto()
         {
-            MapInfoId = entity.Id,
-            OwnerId = entity.Id
+            MapInfoId = entity.MapInfo.Id,
+            OwnerId = entity.Owner.Id
         };
         context.Garages.Add(garageDto);
         await context.SaveChangesAsync();

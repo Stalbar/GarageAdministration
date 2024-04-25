@@ -39,7 +39,7 @@ public class OwnersListViewModel: ViewModelBase
         _ownersStore.OwnerDeleted += OwnersStore_OwnerDeleted;
         _ownersStore.OwnerUpdated += OwnersStore_OwnerUpdated;
         _ownersStore.OwnersLoaded += OwnersStore_OwnersLoaded;
-        new LoadOwnersCommand(ownersStore).Execute(null);
+        OwnersStore_OwnersLoaded();
     }
 
     public override void Dispose()

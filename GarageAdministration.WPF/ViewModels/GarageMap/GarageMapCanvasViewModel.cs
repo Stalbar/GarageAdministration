@@ -27,7 +27,7 @@ public class GarageMapCanvasViewModel: ViewModelBase
         _garagesStore.GarageDeleted += GaragesStore_GarageDeleted;
         _garagesStore.GarageUpdated += GaragesStore_GarageUpdated;
         _garagesStore.GaragesLoaded += GaragesStore_GaragesLoaded;
-        new LoadGaragesCommand(garagesStore).Execute(null);
+        GaragesStore_GaragesLoaded();
     }
 
     private void GaragesStore_GaragesLoaded()
