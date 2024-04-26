@@ -40,6 +40,11 @@
                                 Value="{Binding Width}" />
                         <Setter Property="Height"
                                 Value="{Binding Height}"/>
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <RotateTransform Angle="{Binding Angle}"/>
+                            </Setter.Value>
+                        </Setter>
                     </Style>
                 </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>

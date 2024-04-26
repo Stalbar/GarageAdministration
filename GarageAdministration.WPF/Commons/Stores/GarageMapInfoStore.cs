@@ -6,36 +6,36 @@ namespace GarageAdministration.WPF.Commons.Stores;
 
 public class GarageMapInfoStore
 {
-    private readonly List<GarageMapInfo> _mapInfos;
-    private readonly ICreateCommand<GarageMapInfo> _createCommand;
-    private readonly IUpdateCommand<GarageMapInfo> _updateCommand;
+    private readonly List<MapInfo> _mapInfos;
+    private readonly ICreateCommand<MapInfo> _createCommand;
+    private readonly IUpdateCommand<MapInfo> _updateCommand;
     private readonly IDeleteCommand _deleteCommand;
-    private readonly IGetAllQuery<GarageMapInfo> _getAllMapInfosQuery;
+    private readonly IGetAllQuery<MapInfo> _getAllMapInfosQuery;
 
-    public IEnumerable<GarageMapInfo> MapInfos => _mapInfos;
+    public IEnumerable<MapInfo> MapInfos => _mapInfos;
 
-    public event Action<GarageMapInfo>? PositionAdded;
-    public event Action<GarageMapInfo>? PositionUpdated;
+    public event Action<MapInfo>? PositionAdded;
+    public event Action<MapInfo>? PositionUpdated;
     public event Action<int>? PositionDeleted;
     public event Action MapInfosLoaded;
     
-    public GarageMapInfoStore(ICreateCommand<GarageMapInfo> createCommand, IUpdateCommand<GarageMapInfo> updateCommand, IDeleteCommand deleteCommand, IGetAllQuery<GarageMapInfo> getAllMapInfosQuery)
+    public GarageMapInfoStore(ICreateCommand<MapInfo> createCommand, IUpdateCommand<MapInfo> updateCommand, IDeleteCommand deleteCommand, IGetAllQuery<MapInfo> getAllMapInfosQuery)
     {
-        _mapInfos = new List<GarageMapInfo>();
+        _mapInfos = new List<MapInfo>();
         _createCommand = createCommand;
         _updateCommand = updateCommand;
         _deleteCommand = deleteCommand;
         _getAllMapInfosQuery = getAllMapInfosQuery;
     }
 
-    public async Task Add(GarageMapInfo position)
+    public async Task Add(MapInfo position)
     {
         await _createCommand.Execute(position);
         _mapInfos.Add(position);
         PositionAdded?.Invoke(position);
     }
 
-    public async Task Update(GarageMapInfo position)
+    public async Task Update(MapInfo position)
     {
         await _updateCommand.Execute(position);
         var index = _mapInfos.FindIndex(p => p.Id == position.Id);

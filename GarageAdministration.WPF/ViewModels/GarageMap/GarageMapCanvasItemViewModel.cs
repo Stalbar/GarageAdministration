@@ -15,6 +15,7 @@ public class GarageMapCanvasItemViewModel : ViewModelBase
     public double Left => Garage.MapInfo.Left;
     public double Width => Garage.MapInfo.Width;
     public double Height => Garage.MapInfo.Height;
+    public double Angle => Garage.MapInfo.Angle;
 
     public ICommand DeleteCommand { get; }
     public ICommand IconCommand { get; }

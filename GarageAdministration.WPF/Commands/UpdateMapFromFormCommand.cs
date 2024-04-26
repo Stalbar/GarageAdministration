@@ -18,7 +18,7 @@ public class UpdateMapFromFormCommand: CommandBase
         var garage = _createGarageViewModel.CreateGarageMapViewModel.CreatedGarage;
         var width = _createGarageViewModel.GarageFormViewModel.Width;
         var height = _createGarageViewModel.GarageFormViewModel.Height;
-        var newMapInfo = new GarageMapInfo(garage.MapInfo.Id, garage.MapInfo.Top, garage.MapInfo.Left, width, height);
+        var newMapInfo = new MapInfo(garage.MapInfo.Id, garage.MapInfo.Top, garage.MapInfo.Left, width, height, 0, 1);
         _createGarageViewModel.CreateGarageMapViewModel.CreatedGarage = new Garage(garage.Id, garage.Owner, newMapInfo);
     }
 }

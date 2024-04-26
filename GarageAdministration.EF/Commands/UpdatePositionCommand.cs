@@ -3,7 +3,7 @@ using GarageAdministration.Domain.Models;
 
 namespace GarageAdministration.EF.Commands;
 
-public class UpdatePositionCommand: IUpdateCommand<GarageMapInfo>
+public class UpdatePositionCommand: IUpdateCommand<MapInfo>
 {
     private readonly GarageAdministrationDbContextFactory _contextFactory;
 
@@ -13,7 +13,7 @@ public class UpdatePositionCommand: IUpdateCommand<GarageMapInfo>
     }
 
 
-    public async Task Execute(GarageMapInfo entity)
+    public async Task Execute(MapInfo entity)
     {
         await using var context = _contextFactory.Create();
         var mapInfoDto = context.MapInfos.FirstOrDefault(p => p.Id == entity.Id)!;

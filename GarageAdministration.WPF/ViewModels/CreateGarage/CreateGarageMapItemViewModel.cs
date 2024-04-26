@@ -12,10 +12,11 @@ public class CreateGarageMapItemViewModel: ViewModelBase
     public double Left => Garage.MapInfo.Left;
     public double Width => Garage.MapInfo.Width;
     public double Height => Garage.MapInfo.Height;
+    public double Angle => Garage.MapInfo.Angle;
 
-    public System.Windows.Media.Brush IconColor { get; set; }
+    public Brush IconColor { get; set; }
     
-    public CreateGarageMapItemViewModel(Garage garage, System.Windows.Media.Brush iconColor)
+    public CreateGarageMapItemViewModel(Garage garage, Brush iconColor)
     {
         IconColor = iconColor;
         Garage = garage;

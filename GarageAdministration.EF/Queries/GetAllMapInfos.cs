@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GarageAdministration.EF.Queries;
 
-public class GetAllMapInfos: IGetAllQuery<GarageMapInfo>
+public class GetAllMapInfos: IGetAllQuery<MapInfo>
 {
     private readonly GarageAdministrationDbContextFactory _contextFactory;
 
@@ -13,10 +13,10 @@ public class GetAllMapInfos: IGetAllQuery<GarageMapInfo>
         _contextFactory = contextFactory;
     }
 
-    public async Task<IEnumerable<GarageMapInfo>> Execute()
+    public async Task<IEnumerable<MapInfo>> Execute()
     {
         await using var context = _contextFactory.Create();
         var mapInfos = await context.MapInfos.ToListAsync();
-        return mapInfos.Select(m => new GarageMapInfo(m.Id, m.Top, m.Left, m.Width, m.Height));
+        return mapInfos.Select(m => new MapInfo(m.Id, m.Top, m.Left, m.Width, m.Height, m.Angle, m.ZIndex));
     }
 }

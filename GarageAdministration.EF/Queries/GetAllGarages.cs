@@ -24,7 +24,7 @@ public class GetAllGarages : IGetAllQuery<Garage>
             new Garage(
                 g.Id,
                 new Owner(g.Owner!.Id, g.Owner.Name, g.Owner.Surname, g.Owner.Patronymic),
-                new GarageMapInfo(g.MapInfo!.Id, g.MapInfo.Top, g.MapInfo.Left, g.MapInfo.Width, g.MapInfo.Height)
+                new MapInfo(g.MapInfo!.Id, g.MapInfo.Top, g.MapInfo.Left, g.MapInfo.Width, g.MapInfo.Height, g.MapInfo.Angle, g.MapInfo.ZIndex)
             )
         );
     }

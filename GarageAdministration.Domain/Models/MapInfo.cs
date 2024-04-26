@@ -1,6 +1,6 @@
 ﻿namespace GarageAdministration.Domain.Models;
 
-public class GarageMapInfo
+public class MapInfo
 {
     public int Id { get; }
     public double Top { get; }
@@ -8,12 +8,17 @@ public class GarageMapInfo
     public double Width { get; }
     public double Height { get; }
     
-    public GarageMapInfo(int id, double top, double left, double width, double height)
+    public double Angle { get; }
+    public double ZIndex { get; }
+    
+    public MapInfo(int id, double top, double left, double width, double height, double angle, double zIndex)
     {
         Id = id;
         Top = top;
         Left = left;
         Width = width;
         Height = height;
+        Angle = angle;
+        ZIndex = zIndex;
     }
 }

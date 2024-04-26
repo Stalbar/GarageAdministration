@@ -32,6 +32,15 @@
                                 Value="{Binding Left}"/>
                         <Setter Property="Canvas.Top"
                                 Value="{Binding Top}"/>
+                        <Setter Property="Width"
+                                Value="{Binding Width}"/>
+                        <Setter Property="Height"
+                                Value="{Binding Height}"/>
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <RotateTransform Angle="{Binding Angle}"/>
+                            </Setter.Value>
+                        </Setter>
                     </Style>
                 </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>

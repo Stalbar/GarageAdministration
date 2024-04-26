@@ -12,7 +12,7 @@
                       Command="{Binding IconCommand}"/>
     </UserControl.InputBindings>
     <fa:IconImage Icon="Warehouse"
-                  Foreground="Red" >
+                  Foreground="Red">
     </fa:IconImage>
 
 </UserControl>
