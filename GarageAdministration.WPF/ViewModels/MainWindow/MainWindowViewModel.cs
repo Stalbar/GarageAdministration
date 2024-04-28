@@ -1,6 +1,5 @@
 ﻿using System.Windows.Input;
 using GarageAdministration.WPF.Commands;
-using GarageAdministration.WPF.Commons;
 using GarageAdministration.WPF.Commons.Stores;
 using GarageAdministration.WPF.Commons.ViewModels;
 using GarageAdministration.WPF.Services.Abstractions;
@@ -24,7 +23,7 @@ public class MainWindowViewModel : ViewModelBase
     public ICommand NavigateToOwnersListCommand { get; }
     public ICommand NavigateToGarageMapViewCommand { get; }
     public ICommand NavigateToReportListViewCommand { get; }
-    public MainWindowViewModel(INavigationService navService, GaragesStore garagesStore, GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore)
+    public MainWindowViewModel(INavigationService navService, GaragesStore garagesStore, GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore)
     {
         Navigation = navService;
         NavigateToOwnersListCommand = new NavigateToOwnersListCommand(Navigation);
@@ -33,5 +32,6 @@ public class MainWindowViewModel : ViewModelBase
         new LoadGaragesCommand(garagesStore).Execute(null);
         new LoadOwnersCommand(ownersStore).Execute(null);
         new LoadMapInfosCommand(garageMapInfoStore).Execute(null);
+        new LoadGarageBlocksCommand(garageBlockStore).Execute(null);
     }
 }

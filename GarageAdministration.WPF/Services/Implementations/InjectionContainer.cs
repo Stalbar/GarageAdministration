@@ -7,6 +7,7 @@ using GarageAdministration.EF.Queries;
 using GarageAdministration.WPF.Commons.Stores;
 using GarageAdministration.WPF.Commons.ViewModels;
 using GarageAdministration.WPF.Services.Abstractions;
+using GarageAdministration.WPF.ViewModels.CreateBlock;
 using GarageAdministration.WPF.ViewModels.CreateGarage;
 using GarageAdministration.WPF.ViewModels.CreateOwner;
 using GarageAdministration.WPF.ViewModels.GarageMap;
@@ -35,6 +36,7 @@ public class InjectionContainer
         services.AddSingleton<GarageMapViewModel>();
         services.AddTransient<CreateGarageViewModel>();
         services.AddSingleton<ReportListViewModel>();
+        services.AddTransient<CreateBlockViewModel>();
 
         string connectionString = "Data Source=db.db;";
         services.AddSingleton<DbContextOptions>(_ => new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
@@ -68,6 +70,16 @@ public class InjectionContainer
             provider.GetRequiredService<IUpdateCommand<MapInfo>>(),
             new DeletePositionCommand(provider.GetRequiredService<GarageAdministrationDbContextFactory>()),
             provider.GetRequiredService<IGetAllQuery<MapInfo>>()
+        ));
+
+        services.AddSingleton<ICreateCommand<GarageBlock>, CreateGarageBlockCommand>();
+        services.AddSingleton<IUpdateCommand<GarageBlock>, UpdateGarageBlockCommand>();
+        services.AddSingleton<IGetAllQuery<GarageBlock>, GetAllGarageBlocks>();
+        services.AddSingleton<GarageBlockStore>(provider => new GarageBlockStore(
+            provider.GetRequiredService<ICreateCommand<GarageBlock>>(),
+            provider.GetRequiredService<IUpdateCommand<GarageBlock>>(),
+            new DeleteGarageCommand(provider.GetRequiredService<GarageAdministrationDbContextFactory>()),
+            provider.GetRequiredService<IGetAllQuery<GarageBlock>>()
         ));
 
         services.AddSingleton<INavigationService, NavigationService>();

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using GarageAdministration.Domain.Models;
+using GarageAdministration.EF.Migrations;
 using GarageAdministration.WPF.Commands;
 using GarageAdministration.WPF.Commons.Stores;
 using GarageAdministration.WPF.Commons.ViewModels;
@@ -13,25 +14,71 @@ namespace GarageAdministration.WPF.ViewModels.GarageMap;
 public class GarageMapCanvasViewModel: ViewModelBase
 {
     private readonly GaragesStore _garagesStore;
+    private readonly GarageBlockStore _garageBlockStore;
     private readonly ObservableCollection<GarageMapCanvasItemViewModel> _garageMapCanvasItemViewModels;
+    private readonly ObservableCollection<GarageMapCanvasBlockItemViewModel> _garageMapCanvasBlockItemViewModels;
     private readonly INavigationService _navigation;
     private readonly GarageMapInfoStore _garageMapInfoStore;
     private readonly OwnersStore _ownersStore;
 
     public IEnumerable<GarageMapCanvasItemViewModel> GarageMapCanvasItemViewModels => _garageMapCanvasItemViewModels;
+    public IEnumerable<GarageMapCanvasBlockItemViewModel> GarageMapCanvasBlockItemViewModels =>
+        _garageMapCanvasBlockItemViewModels;
 
-    public GarageMapCanvasViewModel(GaragesStore garagesStore, INavigationService navigation, GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore)
+    public GarageMapCanvasViewModel(GaragesStore garagesStore, INavigationService navigation, GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore)
     {
+        _garageBlockStore = garageBlockStore;
         _garagesStore = garagesStore;
         _navigation = navigation;
         _garageMapInfoStore = garageMapInfoStore;
         _ownersStore = ownersStore;
+        
         _garageMapCanvasItemViewModels = new ObservableCollection<GarageMapCanvasItemViewModel>();
+        _garageMapCanvasBlockItemViewModels = new ObservableCollection<GarageMapCanvasBlockItemViewModel>();
+        
         _garagesStore.GarageAdded += GaragesStore_GarageAdded;
         _garagesStore.GarageDeleted += GaragesStore_GarageDeleted;
         _garagesStore.GarageUpdated += GaragesStore_GarageUpdated;
         _garagesStore.GaragesLoaded += GaragesStore_GaragesLoaded;
+
+        _garageBlockStore.GarageBlockAdded += GarageBlockStore_GarageBlockAdded;
+        _garageBlockStore.GarageBlockDeleted += GarageBlockStore_GarageBlockDeleted;
+        _garageBlockStore.GarageBlockUpdated += GarageBlockStore_GarageBlockUpdated;
+        _garageBlockStore.GarageBlocksLoaded += GarageBlockStore_GarageBlocksLoaded;
+        
         GaragesStore_GaragesLoaded();
+        GarageBlockStore_GarageBlocksLoaded();
+    }
+
+    private void GarageBlockStore_GarageBlocksLoaded()
+    {
+        _garageMapCanvasBlockItemViewModels.Clear();
+        foreach (var garageBlock in _garageBlockStore.GarageBlocks)
+        {
+            AddGarageBlock(garageBlock);
+        }
+    }
+
+    private void GarageBlockStore_GarageBlockUpdated(GarageBlock garageBlock)
+    {
+        var garageBlockViewModel =
+            _garageMapCanvasBlockItemViewModels.FirstOrDefault(g => g.GarageBlock.Id == garageBlock.Id);
+        
+        garageBlockViewModel?.Update(garageBlock);
+    }
+
+    private void GarageBlockStore_GarageBlockDeleted(int id)
+    {
+        var garageBlockViewModel = _garageMapCanvasBlockItemViewModels.FirstOrDefault(g => g.GarageBlock.Id == id);
+        if (garageBlockViewModel != null)
+        {
+            _garageMapCanvasBlockItemViewModels.Remove(garageBlockViewModel);
+        }
+    }
+
+    private void GarageBlockStore_GarageBlockAdded(GarageBlock garageBlock)
+    {
+        AddGarageBlock(garageBlock);
     }
 
     private void GaragesStore_GaragesLoaded()
@@ -71,10 +118,20 @@ public class GarageMapCanvasViewModel: ViewModelBase
         _garagesStore.GarageDeleted -= GaragesStore_GarageDeleted;
         _garagesStore.GarageUpdated -= GaragesStore_GarageUpdated;
         _garagesStore.GaragesLoaded -= GaragesStore_GaragesLoaded;
+
+        _garageBlockStore.GarageBlockAdded -= GarageBlockStore_GarageBlockAdded;
+        _garageBlockStore.GarageBlockDeleted -= GarageBlockStore_GarageBlockDeleted;
+        _garageBlockStore.GarageBlockUpdated -= GarageBlockStore_GarageBlockUpdated;
+        _garageBlockStore.GarageBlocksLoaded -= GarageBlockStore_GarageBlocksLoaded;
     }
 
     private void AddGarage(Garage garage)
     {
         _garageMapCanvasItemViewModels.Add(new GarageMapCanvasItemViewModel(garage, _garagesStore, _navigation, _garageMapInfoStore, _ownersStore));
+    }
+
+    private void AddGarageBlock(GarageBlock garageBlock)
+    {
+        _garageMapCanvasBlockItemViewModels.Add(new GarageMapCanvasBlockItemViewModel(garageBlock));
     }
 }
