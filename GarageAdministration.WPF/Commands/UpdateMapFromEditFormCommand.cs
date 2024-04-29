@@ -7,7 +7,6 @@ namespace GarageAdministration.WPF.Commands;
 public class UpdateMapFromEditFormCommand : CommandBase
 {
     private readonly EditGarageViewModel _editGarageViewModel;
-    private bool flag = true;
 
     public UpdateMapFromEditFormCommand(EditGarageViewModel editGarageViewModel)
     {

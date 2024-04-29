@@ -1,5 +1,9 @@
-﻿using GarageAdministration.Domain.Models;
+﻿using System.Windows.Input;
+using GarageAdministration.Domain.Models;
+using GarageAdministration.WPF.Commands;
+using GarageAdministration.WPF.Commons.Stores;
 using GarageAdministration.WPF.Commons.ViewModels;
+using GarageAdministration.WPF.Services.Abstractions;
 
 namespace GarageAdministration.WPF.ViewModels.GarageMap;
 
@@ -13,9 +17,14 @@ public class GarageMapCanvasBlockItemViewModel: ViewModelBase
     public double Angle => GarageBlock.MapInfo.Angle;
     public double ZIndex => GarageBlock.MapInfo.ZIndex;
 
-    public GarageMapCanvasBlockItemViewModel(GarageBlock garageBlock)
+    public ICommand IconCommand { get; }
+    public ICommand DeleteCommand { get; }
+    
+    public GarageMapCanvasBlockItemViewModel(GarageBlock garageBlock, GarageBlockStore garageBlockStore, INavigationService navigation, GaragesStore garagesStore, GarageMapInfoStore garageMapInfoStore)
     {
         GarageBlock = garageBlock;
+        DeleteCommand = new DeleteBlockCommand(garageBlockStore, this);
+        IconCommand = new NavigateToEditGarageBlockCommand(navigation, this, garageBlockStore, garagesStore, garageMapInfoStore);
     }
 
     public void Update(GarageBlock garageBlock)

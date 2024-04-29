@@ -2,23 +2,24 @@
 using GarageAdministration.WPF.Commons;
 using GarageAdministration.WPF.Commons.Stores;
 using GarageAdministration.WPF.ViewModels.CreateBlock;
+using GarageAdministration.WPF.ViewModels.GarageMap;
 
 namespace GarageAdministration.WPF.Commands;
 
 public class DeleteBlockCommand: AsyncCommandBase
 {
-    private readonly BlockMapItemViewModel _blockMapItemViewModel;
+    private readonly GarageMapCanvasBlockItemViewModel _garageMapCanvasBlockItemViewModel;
     private readonly GarageBlockStore _garageBlockStore;
 
-    public DeleteBlockCommand(BlockMapItemViewModel blockMapItemViewModel, GarageBlockStore garageBlockStore)
+    public DeleteBlockCommand(GarageBlockStore garageBlockStore, GarageMapCanvasBlockItemViewModel garageMapCanvasBlockItemViewModel)
     {
-        _blockMapItemViewModel = blockMapItemViewModel;
         _garageBlockStore = garageBlockStore;
+        _garageMapCanvasBlockItemViewModel = garageMapCanvasBlockItemViewModel;
     }
 
     protected override async Task ExecuteAsync(object? parameter)
     {
-        GarageBlock garageBlock = _blockMapItemViewModel.GarageBlock;
+        GarageBlock garageBlock = _garageMapCanvasBlockItemViewModel.GarageBlock;
 
         await _garageBlockStore.Delete(garageBlock.Id);
     }

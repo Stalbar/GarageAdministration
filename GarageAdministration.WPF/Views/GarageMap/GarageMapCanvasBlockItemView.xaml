@@ -6,5 +6,9 @@
              xmlns:local="clr-namespace:GarageAdministration.WPF.Views.GarageMap"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Rectangle Fill="Gray"></Rectangle>
+    <UserControl.InputBindings>
+        <MouseBinding Gesture="LeftClick"
+                      Command="{Binding IconCommand}"/>
+    </UserControl.InputBindings>
+    <Rectangle Fill="Gray"/>
 </UserControl>

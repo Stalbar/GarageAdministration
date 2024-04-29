@@ -132,6 +132,6 @@ public class GarageMapCanvasViewModel: ViewModelBase
 
     private void AddGarageBlock(GarageBlock garageBlock)
     {
-        _garageMapCanvasBlockItemViewModels.Add(new GarageMapCanvasBlockItemViewModel(garageBlock));
+        _garageMapCanvasBlockItemViewModels.Add(new GarageMapCanvasBlockItemViewModel(garageBlock, _garageBlockStore, _navigation, _garagesStore, _garageMapInfoStore));
     }
 }
