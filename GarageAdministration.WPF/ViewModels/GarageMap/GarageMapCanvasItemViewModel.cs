@@ -26,7 +26,7 @@ public class GarageMapCanvasItemViewModel : ViewModelBase
         Garage = garage;
         DeleteCommand = new DeleteGarageCommand(this, garagesStore);
         IconCommand =
-            new NavigateToEditGarageViewCommand(navigation, this, garagesStore, ownersStore, garageMapInfoStore, garageBlockStore);
+            new NavigateToEditGarageViewCommand(navigation, this, garagesStore, ownersStore, garageMapInfoStore, garageBlockStore, DeleteCommand);
     }
 
     public void Update(Garage garage)

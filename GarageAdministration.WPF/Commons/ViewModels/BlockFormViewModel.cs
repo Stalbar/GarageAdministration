@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using GarageAdministration.WPF.Services.Abstractions;
 
 namespace GarageAdministration.WPF.Commons.ViewModels;
@@ -52,13 +53,17 @@ public class BlockFormViewModel: ViewModelBase
             MapUpdateCommand?.Execute(null);
         }
     }
+
+    public Visibility CanDelete => DeleteCommand != null ? Visibility.Visible : Visibility.Collapsed;
     
     public ICommand SubmitCommand { get; }
     public ICommand CancelCommand { get; }
+    
+    public ICommand? DeleteCommand { get; }
     public ICommand? MapUpdateCommand { get; }
 
     public BlockFormViewModel(INavigationService navigation, ICommand submitCommand, ICommand cancelCommand,
-        ICommand? mapUpdateCommand = null)
+        ICommand? mapUpdateCommand = null, ICommand? deleteCommand = null)
     {
         MapUpdateCommand = mapUpdateCommand;
         _width = 10;
@@ -66,5 +71,6 @@ public class BlockFormViewModel: ViewModelBase
         Navigation = navigation;
         SubmitCommand = submitCommand;
         CancelCommand = cancelCommand;
+        DeleteCommand = deleteCommand;
     }
 }

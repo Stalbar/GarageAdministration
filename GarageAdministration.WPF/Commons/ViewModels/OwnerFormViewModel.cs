@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using GarageAdministration.WPF.Commons;
 using GarageAdministration.WPF.Commons.ViewModels;
 using GarageAdministration.WPF.Services.Abstractions;
@@ -51,14 +52,19 @@ public class OwnerFormViewModel: ViewModelBase
             OnPropertyChanged(nameof(Patronymic));
         }
     }
+
+    public Visibility CanDelete => DeleteCommand != null ? Visibility.Visible : Visibility.Collapsed;
     
     public ICommand SubmitCommand { get; }
     public ICommand CancelCommand { get; }
     
-    public OwnerFormViewModel(INavigationService navigation, ICommand submitCommand, ICommand cancelCommand)
+    public ICommand? DeleteCommand { get; }
+    
+    public OwnerFormViewModel(INavigationService navigation, ICommand submitCommand, ICommand cancelCommand, ICommand? deleteCommand = null)
     {
         Navigation = navigation;
         SubmitCommand = submitCommand;
         CancelCommand = cancelCommand;
+        DeleteCommand = deleteCommand;
     }
 }

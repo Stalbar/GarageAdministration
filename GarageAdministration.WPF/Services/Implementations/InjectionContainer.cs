@@ -78,7 +78,7 @@ public class InjectionContainer
         services.AddSingleton<GarageBlockStore>(provider => new GarageBlockStore(
             provider.GetRequiredService<ICreateCommand<GarageBlock>>(),
             provider.GetRequiredService<IUpdateCommand<GarageBlock>>(),
-            new DeleteGarageCommand(provider.GetRequiredService<GarageAdministrationDbContextFactory>()),
+            new DeleteGarageBlockCommand(provider.GetRequiredService<GarageAdministrationDbContextFactory>()),
             provider.GetRequiredService<IGetAllQuery<GarageBlock>>()
         ));
 

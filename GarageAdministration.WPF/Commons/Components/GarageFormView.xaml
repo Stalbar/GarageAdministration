@@ -72,6 +72,11 @@
                         Command="{Binding SubmitCommand}"
                         Style="{StaticResource RegularButton}"
                         Margin="0 0 10 0" />
+                <Button Content="Удалить"
+                        Command="{Binding DeleteCommand}"
+                        Visibility="{Binding CanDelete}"
+                        Style="{StaticResource RegularButton}"
+                        Margin="0 0 10 0"/>
                 <Button Content="Отмена"
                         Style="{StaticResource RegularButton}"
                         Command="{Binding CancelCommand}" />

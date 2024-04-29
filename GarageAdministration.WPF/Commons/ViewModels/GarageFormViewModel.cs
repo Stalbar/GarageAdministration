@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using GarageAdministration.Domain.Models;
 using GarageAdministration.WPF.Commons.Stores;
 using GarageAdministration.WPF.Services.Abstractions;
@@ -64,13 +65,16 @@ public class GarageFormViewModel: ViewModelBase
             MapUpdateCommand.Execute(null);
         }
     }
+
+    public Visibility CanDelete => DeleteCommand != null ? Visibility.Visible : Visibility.Collapsed;
     
     public ICommand SubmitCommand { get; }
     public ICommand CancelCommand { get; }
 
+    public ICommand? DeleteCommand { get; }
     public ICommand MapUpdateCommand { get;  }
     
-    public GarageFormViewModel(INavigationService navigation, OwnersStore ownersStore, ICommand submitCommand, ICommand cancelCommand, ICommand mapUpdateCommand, Owner owner)
+    public GarageFormViewModel(INavigationService navigation, OwnersStore ownersStore, ICommand submitCommand, ICommand cancelCommand, ICommand mapUpdateCommand, Owner owner, ICommand? deleteCommand = null)
     {
         MapUpdateCommand = mapUpdateCommand;
         _width = 10;
@@ -80,5 +84,6 @@ public class GarageFormViewModel: ViewModelBase
         CancelCommand = cancelCommand;
         Owners = ownersStore.Owners;
         SelectedOwner = owner;
+        DeleteCommand = deleteCommand;
     }
 }

@@ -15,7 +15,8 @@ public class EditBlockViewModel : ViewModelBase
     public BlockFormViewModel BlockFormViewModel { get; }
 
     public EditBlockViewModel(GarageBlock garageBlock, GarageBlockStore garageBlockStore, GaragesStore garagesStore,
-        GarageMapInfoStore garageMapInfoStore, INavigationService navigation)
+        GarageMapInfoStore garageMapInfoStore, INavigationService navigation, ICommand deleteCommand)
+
     {
         GarageBlockId = garageBlock.Id;
         ICommand mapClickCommand = new EditBlockUpdateMapCommand(this, garageBlockStore);
@@ -28,7 +29,7 @@ public class EditBlockViewModel : ViewModelBase
         ICommand submitCommand = new EditBlockCommand(this, garageBlockStore, garageMapInfoStore);
         ICommand cancelCommand = new NavigateToGarageMapViewCommand(navigation);
         ICommand updateMapFromFormCommand = new UpdateMapFromEditBlockFormCommand(this);
-        BlockFormViewModel = new BlockFormViewModel(navigation, submitCommand, cancelCommand, updateMapFromFormCommand)
+        BlockFormViewModel = new BlockFormViewModel(navigation, submitCommand, cancelCommand, updateMapFromFormCommand, deleteCommand:deleteCommand)
         {
             Width = garageBlock.MapInfo.Width,
             Height = garageBlock.MapInfo.Height,

@@ -39,7 +39,7 @@
     <SolidColorBrush x:Key="PanelActiveColor" Color="#F8FAFF"/>
     
     <!-- Button Colors -->
-    <SolidColorBrush x:Key="ButtonColor1" Color="#7093EB"/>
-    <SolidColorBrush x:Key="MouseOverButtonColor1" Color="#80A3FB"/>
+    <SolidColorBrush x:Key="ButtonColor1" Color="#000000"/>
+    <SolidColorBrush x:Key="MouseOverButtonColor1" Color="#1F1F1F"/>
     
 </ResourceDictionary>
