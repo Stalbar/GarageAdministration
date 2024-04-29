@@ -13,11 +13,11 @@ public class EditGarageViewModel: ViewModelBase
     public int GarageId { get; }
     public CreateGarageMapViewModel CreateGarageMapViewModel { get; }
     public GarageFormViewModel GarageFormViewModel { get; }
-    public EditGarageViewModel(Garage garage, GaragesStore garagesStore, GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, INavigationService navigation)
+    public EditGarageViewModel(Garage garage, GaragesStore garagesStore, GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, INavigationService navigation, GarageBlockStore garageBlockStore)
     {
         GarageId = garage.Id;
         ICommand mapClickCommand = new EditGarageUpdateMapCommand(this, garagesStore, garageMapInfoStore);
-        CreateGarageMapViewModel = new CreateGarageMapViewModel(garagesStore, navigation, mapClickCommand)
+        CreateGarageMapViewModel = new CreateGarageMapViewModel(garagesStore, garageBlockStore, navigation, mapClickCommand)
         {
             IsGarageCreated = true,
             CreatedGarage = garage,

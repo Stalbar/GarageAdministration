@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GarageAdministration.WPF.Views.CreateGarage"
              xmlns:behaviors="clr-namespace:GarageAdministration.WPF.Behaviors"
+             xmlns:createGarage="clr-namespace:GarageAdministration.WPF.ViewModels.CreateGarage"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -12,7 +13,20 @@
                       CanContentScroll="False"
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding CreateGarageMapItemViewModels}">
+            <ItemsControl>
+                <ItemsControl.Resources>
+                    <CollectionViewSource x:Key="GarageCollection"
+                                          Source="{Binding CreateGarageMapItemViewModels}"/>
+                    <CollectionViewSource x:Key="GarageBlockCollection"
+                                          Source="{Binding CreateGarageBlockItemViewModels}"/>
+                    
+                    <DataTemplate DataType="{x:Type createGarage:CreateGarageMapItemViewModel}">
+                        <local:CreateGarageMapItemView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type createGarage:CreateGarageBlockItemViewModel}">
+                        <local:CreateGarageBlockItemView/>
+                    </DataTemplate>
+                </ItemsControl.Resources>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas Width="3300"
@@ -30,6 +44,12 @@
                         </Canvas>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemsSource>
+                    <CompositeCollection>
+                        <CollectionContainer Collection="{Binding Source={StaticResource GarageBlockCollection}}"/>
+                        <CollectionContainer Collection="{Binding Source={StaticResource GarageCollection}}"/>
+                    </CompositeCollection>
+                </ItemsControl.ItemsSource>
                 <ItemsControl.ItemContainerStyle>
                     <Style TargetType="ContentPresenter">
                         <Setter Property="Canvas.Left"
@@ -47,11 +67,6 @@
                         </Setter>
                     </Style>
                 </ItemsControl.ItemContainerStyle>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <local:CreateGarageMapItemView/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
     </Grid>

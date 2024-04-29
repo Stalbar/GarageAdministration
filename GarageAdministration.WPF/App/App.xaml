@@ -27,6 +27,7 @@
                 <ResourceDictionary Source="/Styles/ContextMenuStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/TextBlockStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/IntegerUpDownStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <DataTemplate DataType="{x:Type TypeName=createOwner:CreateOwnerViewModel}">

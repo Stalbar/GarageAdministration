@@ -16,15 +16,17 @@ public class CreatePositionCommand: ICreateCommand<MapInfo>
     public async Task Execute(MapInfo entity)
     {
         await using var context = _contextFactory.Create();
-        var MapInfoDto = new MapInfoDto()
+        var mapInfoDto = new MapInfoDto()
         {
             Top = entity.Top,
             Left = entity.Left,
             Width = entity.Width,
-            Height = entity.Height
+            Height = entity.Height,
+            Angle = entity.Angle,
+            ZIndex = entity.ZIndex,
         };
 
-        context.MapInfos.Add(MapInfoDto);
+        context.MapInfos.Add(mapInfoDto);
         await context.SaveChangesAsync();
     }
 }

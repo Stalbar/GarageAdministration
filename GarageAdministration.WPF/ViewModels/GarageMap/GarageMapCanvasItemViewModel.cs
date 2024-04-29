@@ -21,12 +21,12 @@ public class GarageMapCanvasItemViewModel : ViewModelBase
     public ICommand IconCommand { get; }
 
     public GarageMapCanvasItemViewModel(Garage garage, GaragesStore garagesStore, INavigationService navigation,
-        GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore)
+        GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore)
     {
         Garage = garage;
         DeleteCommand = new DeleteGarageCommand(this, garagesStore);
         IconCommand =
-            new NavigateToEditGarageViewCommand(navigation, this, garagesStore, ownersStore, garageMapInfoStore);
+            new NavigateToEditGarageViewCommand(navigation, this, garagesStore, ownersStore, garageMapInfoStore, garageBlockStore);
     }
 
     public void Update(Garage garage)
@@ -36,5 +36,6 @@ public class GarageMapCanvasItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(Left));
         OnPropertyChanged(nameof(Width));
         OnPropertyChanged(nameof(Height));
+        OnPropertyChanged(nameof(Angle));
     }
 }

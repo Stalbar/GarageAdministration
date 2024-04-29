@@ -30,7 +30,8 @@
                            Style="{StaticResource RegularTextBlock}"/>
                 <xctk:IntegerUpDown Grid.Column="1"
                                Value="{Binding Height}"
-                               Margin="20 0 0 0"/>
+                               Margin="20 0 0 0"
+                               Style="{StaticResource RegularUpDown}"/>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -43,7 +44,8 @@
                            Style="{StaticResource RegularTextBlock}"/>
                 <xctk:IntegerUpDown Grid.Column="1"
                                     Value="{Binding Width}"
-                                    Margin="20 0 0 0"/>
+                                    Margin="20 0 0 0"
+                                    Style="{StaticResource RegularUpDown}"/>
             </Grid>
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -56,7 +58,8 @@
                            Style="{StaticResource RegularTextBlock}"/>
                 <xctk:IntegerUpDown Grid.Column="1"
                                     Value="{Binding Angle}"
-                                    Margin="20 0 0 0"/>
+                                    Margin="20 0 0 0"
+                                    Style="{StaticResource RegularUpDown}"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
