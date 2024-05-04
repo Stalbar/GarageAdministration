@@ -26,7 +26,7 @@ public class EditBlockViewModel : ViewModelBase
                 IsBlockCreated = true,
                 CreatedGarageBlock = garageBlock,
             };
-        ICommand submitCommand = new EditBlockCommand(this, garageBlockStore, garageMapInfoStore);
+        ICommand submitCommand = new EditBlockCommand(this, garageBlockStore, garageMapInfoStore, navigation);
         ICommand cancelCommand = new NavigateToGarageMapViewCommand(navigation);
         ICommand updateMapFromFormCommand = new UpdateMapFromEditBlockFormCommand(this);
         BlockFormViewModel = new BlockFormViewModel(navigation, submitCommand, cancelCommand, updateMapFromFormCommand, deleteCommand:deleteCommand)

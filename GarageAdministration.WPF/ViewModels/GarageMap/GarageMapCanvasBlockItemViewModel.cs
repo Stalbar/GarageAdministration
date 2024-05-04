@@ -23,7 +23,7 @@ public class GarageMapCanvasBlockItemViewModel: ViewModelBase
     public GarageMapCanvasBlockItemViewModel(GarageBlock garageBlock, GarageBlockStore garageBlockStore, INavigationService navigation, GaragesStore garagesStore, GarageMapInfoStore garageMapInfoStore)
     {
         GarageBlock = garageBlock;
-        DeleteCommand = new DeleteBlockCommand(garageBlockStore, this);
+        DeleteCommand = new DeleteBlockCommand(garageBlockStore, this, navigation);
         IconCommand = new NavigateToEditGarageBlockCommand(navigation, this, garageBlockStore, garagesStore, garageMapInfoStore, DeleteCommand);
     }
 

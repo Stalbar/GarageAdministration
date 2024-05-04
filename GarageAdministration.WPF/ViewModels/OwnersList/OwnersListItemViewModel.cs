@@ -33,7 +33,7 @@ public class OwnersListItemViewModel: ViewModelBase
         Owner = owner;
         _navigation = navigationService;
         EditCommand = new NavigateToEditOwnerViewCommand(ownersStore, this, _navigation);
-        DeleteCommand = new DeleteOwnerCommand(this, ownersStore);
+        DeleteCommand = new DeleteOwnerCommand(this, ownersStore, _navigation);
     }
 
     public void Update(Owner owner)

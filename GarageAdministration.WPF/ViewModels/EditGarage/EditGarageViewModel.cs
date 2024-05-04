@@ -22,7 +22,7 @@ public class EditGarageViewModel: ViewModelBase
             IsGarageCreated = true,
             CreatedGarage = garage,
         };
-        ICommand submitCommand = new EditGarageCommand(this, garagesStore, garageMapInfoStore);
+        ICommand submitCommand = new EditGarageCommand(this, garagesStore, garageMapInfoStore, navigation);
         ICommand cancelCommand = new NavigateToGarageMapViewCommand(navigation);
         ICommand updateMapFromFormCommand = new UpdateMapFromEditFormCommand(this);
         GarageFormViewModel = new GarageFormViewModel(navigation, ownersStore, submitCommand, cancelCommand,

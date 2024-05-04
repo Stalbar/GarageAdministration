@@ -20,8 +20,9 @@ public class UpdateMapFromEditFormCommand : CommandBase
             var garage = _editGarageViewModel.CreateGarageMapViewModel.CreatedGarage;
             var width = _editGarageViewModel.GarageFormViewModel.Width;
             var height = _editGarageViewModel.GarageFormViewModel.Height;
+            var angle = _editGarageViewModel.GarageFormViewModel.Angle;
             var newMapInfo =
-                new MapInfo(garage.MapInfo.Id, garage.MapInfo.Top, garage.MapInfo.Left, width, height, 0, 1);
+                new MapInfo(garage.MapInfo.Id, garage.MapInfo.Top, garage.MapInfo.Left, width, height, angle, 1);
             _editGarageViewModel.CreateGarageMapViewModel.CreatedGarage =
                 new Garage(garage.Id, garage.Owner, newMapInfo);
         }

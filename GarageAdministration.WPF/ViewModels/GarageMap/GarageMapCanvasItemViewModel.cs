@@ -17,6 +17,8 @@ public class GarageMapCanvasItemViewModel : ViewModelBase
     public double Height => Garage.MapInfo.Height;
     public double Angle => Garage.MapInfo.Angle;
 
+    public string Owner => "Владелец: " + Garage.Owner;
+    
     public ICommand DeleteCommand { get; }
     public ICommand IconCommand { get; }
 
@@ -24,7 +26,7 @@ public class GarageMapCanvasItemViewModel : ViewModelBase
         GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore)
     {
         Garage = garage;
-        DeleteCommand = new DeleteGarageCommand(this, garagesStore);
+        DeleteCommand = new DeleteGarageCommand(this, garagesStore, navigation);
         IconCommand =
             new NavigateToEditGarageViewCommand(navigation, this, garagesStore, ownersStore, garageMapInfoStore, garageBlockStore, DeleteCommand);
     }
@@ -37,5 +39,6 @@ public class GarageMapCanvasItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(Width));
         OnPropertyChanged(nameof(Height));
         OnPropertyChanged(nameof(Angle));
+        OnPropertyChanged(nameof(Owner));
     }
 }

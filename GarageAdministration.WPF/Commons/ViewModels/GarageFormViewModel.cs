@@ -13,6 +13,7 @@ public class GarageFormViewModel: ViewModelBase
     private List<Owner> _owners;
     private double _height;
     private double _width;
+    private double _angle;
 
     public Owner SelectedOwner
     {
@@ -66,6 +67,17 @@ public class GarageFormViewModel: ViewModelBase
         }
     }
 
+    public double Angle
+    {
+        get => _angle;
+        set
+        {
+            _angle = value;
+            OnPropertyChanged(nameof(Angle));
+            MapUpdateCommand.Execute(null);
+        }
+    }
+
     public Visibility CanDelete => DeleteCommand != null ? Visibility.Visible : Visibility.Collapsed;
     
     public ICommand SubmitCommand { get; }
@@ -83,7 +95,7 @@ public class GarageFormViewModel: ViewModelBase
         SubmitCommand = submitCommand;
         CancelCommand = cancelCommand;
         Owners = ownersStore.Owners;
-        SelectedOwner = owner;
+        SelectedOwner = Owners.First(o => o.Id == owner.Id);
         DeleteCommand = deleteCommand;
     }
 }

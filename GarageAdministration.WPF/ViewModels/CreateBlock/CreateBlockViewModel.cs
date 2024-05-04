@@ -13,7 +13,7 @@ public class CreateBlockViewModel: ViewModelBase
 
     public CreateBlockViewModel(GaragesStore garagesStore, GarageBlockStore garageBlockStore, GarageMapInfoStore garageMapInfoStore, INavigationService navigation)
     {
-        ICommand submitCommand = new CreateBlockCommand(this, garageBlockStore, garageMapInfoStore);
+        ICommand submitCommand = new CreateBlockCommand(this, garageBlockStore, garageMapInfoStore, navigation);
         ICommand cancelCommand = new NavigateToGarageMapViewCommand(navigation);
         ICommand mapUpdateCommand = new GarageBlockUpdateMapFromFormCommand(this);
         ICommand mapClickCommand = new CreateBlockUpdateMapCommand(this, garageBlockStore, garageMapInfoStore);

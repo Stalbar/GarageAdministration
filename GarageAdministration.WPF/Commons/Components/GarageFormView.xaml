@@ -18,6 +18,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -59,6 +60,19 @@
                 <xctk:IntegerUpDown Grid.Column="1"
                                     Value="{Binding Width}"
                                     Margin="20 0 0 0" />
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"
+                                      SharedSizeGroup="Label"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           Text="Угол"
+                           Style="{StaticResource RegularTextBlock}"/>
+                <xctk:IntegerUpDown Grid.Column="1"
+                                    Value="{Binding Angle}"
+                                    Margin="20 0 0 0"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">

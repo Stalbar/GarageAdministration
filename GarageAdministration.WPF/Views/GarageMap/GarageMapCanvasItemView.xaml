@@ -9,10 +9,44 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.InputBindings>
         <MouseBinding Gesture="LeftClick"
-                      Command="{Binding IconCommand}"/>
+                      Command="{Binding IconCommand}" />
     </UserControl.InputBindings>
-    <fa:IconImage Icon="Warehouse"
-                  Foreground="Red">
-    </fa:IconImage>
-
+    <Grid>
+        <fa:IconImage Icon="Warehouse"
+                      Foreground="Red"
+                      x:Name="Icon"
+                      MouseEnter="Icon_OnMouseEnter"
+                      MouseLeave="Icon_OnMouseLeave">
+        </fa:IconImage>
+        <Popup PlacementTarget="{Binding ElementName=Icon}"
+               Placement="Top"
+               StaysOpen="True"
+               x:Name="Popup">
+            <Border CornerRadius="10"
+                    BorderThickness="1">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0, 0"
+                                         EndPoint="1,1">
+                        <GradientStop Color="{StaticResource WinBorderColor1}" Offset="0" />
+                        <GradientStop Color="{StaticResource WinBorderColor2}" Offset="0.5" />
+                        <GradientStop Color="{StaticResource WinBorderColor3}" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <StackPanel>
+                    <StackPanel.Background>
+                        <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="1,1">
+                            <GradientStop Color="{StaticResource SecondaryBackColor1}"
+                                          Offset="0" />
+                            <GradientStop Color="{StaticResource SecondaryBackColor2}"
+                                          Offset="1" />
+                        </LinearGradientBrush>
+                    </StackPanel.Background>
+                    <TextBlock Style="{StaticResource RegularTextBlock}"
+                               Text="{Binding Owner}" 
+                               Margin="5"/>
+                </StackPanel>
+            </Border>
+        </Popup>
+    </Grid>
 </UserControl>
