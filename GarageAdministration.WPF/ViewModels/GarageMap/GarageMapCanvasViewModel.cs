@@ -20,7 +20,10 @@ public class GarageMapCanvasViewModel: ViewModelBase
     private readonly INavigationService _navigation;
     private readonly GarageMapInfoStore _garageMapInfoStore;
     private readonly OwnersStore _ownersStore;
-
+    public string BGImage => "map1.png";
+    public double Width => System.Windows.SystemParameters.PrimaryScreenWidth;
+    public double Height => System.Windows.SystemParameters.PrimaryScreenHeight;
+    
     public IEnumerable<GarageMapCanvasItemViewModel> GarageMapCanvasItemViewModels => _garageMapCanvasItemViewModels;
     public IEnumerable<GarageMapCanvasBlockItemViewModel> GarageMapCanvasBlockItemViewModels =>
         _garageMapCanvasBlockItemViewModels;
