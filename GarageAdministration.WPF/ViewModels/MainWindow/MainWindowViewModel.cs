@@ -23,7 +23,11 @@ public class MainWindowViewModel : ViewModelBase
     public ICommand NavigateToOwnersListCommand { get; }
     public ICommand NavigateToGarageMapViewCommand { get; }
     public ICommand NavigateToReportListViewCommand { get; }
-    public MainWindowViewModel(INavigationService navService, GaragesStore garagesStore, GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore)
+
+    public MainWindowViewModel(INavigationService navService, GaragesStore garagesStore,
+        GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore,
+        MapsStore mapsStore)
+
     {
         Navigation = navService;
         NavigateToOwnersListCommand = new NavigateToOwnersListCommand(Navigation);
@@ -33,5 +37,6 @@ public class MainWindowViewModel : ViewModelBase
         new LoadOwnersCommand(ownersStore).Execute(null);
         new LoadMapInfosCommand(garageMapInfoStore).Execute(null);
         new LoadGarageBlocksCommand(garageBlockStore).Execute(null);
+        new LoadMapsCommand(mapsStore).Execute(null);
     }
 }

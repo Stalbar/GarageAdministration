@@ -4,25 +4,23 @@ using GarageAdministration.EF.DTOs;
 
 namespace GarageAdministration.EF.Commands;
 
-public class CreateGarageCommand: ICreateCommand<Garage>
+public class CreateMapCommand: ICreateCommand<Map>
 {
     private readonly GarageAdministrationDbContextFactory _contextFactory;
 
-    public CreateGarageCommand(GarageAdministrationDbContextFactory contextFactory)
+    public CreateMapCommand(GarageAdministrationDbContextFactory contextFactory)
     {
         _contextFactory = contextFactory;
     }
-    
-    public async Task Execute(Garage entity)
+
+    public async Task Execute(Map entity)
     {
         await using var context = _contextFactory.Create();
-        var garageDto = new GarageDto()
+        var mapDto = new MapDto()
         {
-            MapInfoId = entity.MapInfo.Id,
-            OwnerId = entity.Owner.Id,
-            MapId = entity.Map.Id
+            PathToImage = entity.PathToImage
         };
-        context.Garages.Add(garageDto);
+        context.Maps.Add(mapDto);
         await context.SaveChangesAsync();
     }
 }

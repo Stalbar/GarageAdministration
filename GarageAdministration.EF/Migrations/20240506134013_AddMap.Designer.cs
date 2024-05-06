@@ -2,6 +2,7 @@
 using GarageAdministration.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GarageAdministration.EF.Migrations
 {
     [DbContext(typeof(GarageAdministrationDbContext))]
-    partial class GarageAdministrationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240506134013_AddMap")]
+    partial class AddMap
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.14");
@@ -29,7 +32,7 @@ namespace GarageAdministration.EF.Migrations
 
                     b.HasIndex("MapInfoId");
 
-                    b.ToTable("GarageBlock", (string)null);
+                    b.ToTable("GarageBlock");
                 });
 
             modelBuilder.Entity("GarageAdministration.EF.DTOs.GarageDto", b =>
@@ -55,7 +58,7 @@ namespace GarageAdministration.EF.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Garages", (string)null);
+                    b.ToTable("Garages");
                 });
 
             modelBuilder.Entity("GarageAdministration.EF.DTOs.MapDto", b =>
@@ -70,7 +73,7 @@ namespace GarageAdministration.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Maps", (string)null);
+                    b.ToTable("Maps");
                 });
 
             modelBuilder.Entity("GarageAdministration.EF.DTOs.MapInfoDto", b =>
@@ -99,7 +102,7 @@ namespace GarageAdministration.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MapInfos", (string)null);
+                    b.ToTable("MapInfos");
                 });
 
             modelBuilder.Entity("GarageAdministration.EF.DTOs.OwnerDto", b =>
@@ -122,7 +125,7 @@ namespace GarageAdministration.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Owners", (string)null);
+                    b.ToTable("Owners");
                 });
 
             modelBuilder.Entity("GarageAdministration.EF.DTOs.GarageBlockDTO", b =>

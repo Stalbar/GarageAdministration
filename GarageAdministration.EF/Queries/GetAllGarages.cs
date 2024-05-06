@@ -19,12 +19,14 @@ public class GetAllGarages : IGetAllQuery<Garage>
         var garages = await context.Garages
             .Include(g => g.MapInfo)
             .Include(g => g.Owner)
+            .Include(g => g.Map)
             .ToListAsync();
         return garages.Select(g =>
             new Garage(
                 g.Id,
                 new Owner(g.Owner!.Id, g.Owner.Name, g.Owner.Surname, g.Owner.Patronymic),
-                new MapInfo(g.MapInfo!.Id, g.MapInfo.Top, g.MapInfo.Left, g.MapInfo.Width, g.MapInfo.Height, g.MapInfo.Angle, g.MapInfo.ZIndex)
+                new MapInfo(g.MapInfo!.Id, g.MapInfo.Top, g.MapInfo.Left, g.MapInfo.Width, g.MapInfo.Height, g.MapInfo.Angle, g.MapInfo.ZIndex),
+                new Map(g.Map!.Id, g.Map.PathToImage)
             )
         );
     }

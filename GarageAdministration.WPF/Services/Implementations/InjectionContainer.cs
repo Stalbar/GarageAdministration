@@ -82,6 +82,16 @@ public class InjectionContainer
             provider.GetRequiredService<IGetAllQuery<GarageBlock>>()
         ));
 
+        services.AddSingleton<ICreateCommand<Map>, CreateMapCommand>();
+        services.AddSingleton<IUpdateCommand<Map>, UpdateMapCommand>();
+        services.AddSingleton<IGetAllQuery<Map>, GetAllMaps>();
+        services.AddSingleton<MapsStore>(provider => new MapsStore(
+            provider.GetRequiredService<ICreateCommand<Map>>(),
+            provider.GetRequiredService<IUpdateCommand<Map>>(),
+            new DeleteMapCommand(provider.GetRequiredService<GarageAdministrationDbContextFactory>()),
+            provider.GetRequiredService<IGetAllQuery<Map>>()
+        ));
+
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton<Func<Type, ViewModelBase>>(provider =>
             viewModelType => (ViewModelBase)provider.GetRequiredService(viewModelType));

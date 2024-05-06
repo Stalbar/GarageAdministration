@@ -95,7 +95,7 @@ public class GarageFormViewModel: ViewModelBase
         SubmitCommand = submitCommand;
         CancelCommand = cancelCommand;
         Owners = ownersStore.Owners;
-        SelectedOwner = Owners.First(o => o.Id == owner.Id);
+        SelectedOwner = owner == null ? null : Owners.First(o => o.Id == owner.Id);
         DeleteCommand = deleteCommand;
     }
 }

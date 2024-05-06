@@ -13,10 +13,21 @@
     </UserControl.InputBindings>
     <Grid>
         <fa:IconImage Icon="Warehouse"
-                      Foreground="Red"
                       x:Name="Icon"
                       MouseEnter="Icon_OnMouseEnter"
                       MouseLeave="Icon_OnMouseLeave">
+            <fa:IconImage.Style>
+                <Style TargetType="fa:IconImage">
+                    <Setter Property="Foreground"
+                            Value="Red" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground"
+                                    Value="Yellow" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </fa:IconImage.Style>
         </fa:IconImage>
         <Popup PlacementTarget="{Binding ElementName=Icon}"
                Placement="Top"
@@ -43,8 +54,8 @@
                         </LinearGradientBrush>
                     </StackPanel.Background>
                     <TextBlock Style="{StaticResource RegularTextBlock}"
-                               Text="{Binding Owner}" 
-                               Margin="5"/>
+                               Text="{Binding Owner}"
+                               Margin="5" />
                 </StackPanel>
             </Border>
         </Popup>

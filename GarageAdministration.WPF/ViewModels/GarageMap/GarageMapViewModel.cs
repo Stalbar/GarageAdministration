@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System.IO;
+using System.Windows.Forms;
+using System.Windows.Input;
 using GarageAdministration.WPF.Commands;
 using GarageAdministration.WPF.Commons.Stores;
 using GarageAdministration.WPF.Commons.ViewModels;
