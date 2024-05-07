@@ -16,6 +16,10 @@ public class CreateGarageMapViewModel : ViewModelBase
     private readonly INavigationService _navigation;
     private bool _isGarageCreated;
     private Garage _createdGarage;
+    
+    public string BGImage => "map1.png";
+    public double Width => System.Windows.SystemParameters.PrimaryScreenWidth;
+    public double Height => System.Windows.SystemParameters.PrimaryScreenHeight;
 
     public IEnumerable<CreateGarageMapItemViewModel> CreateGarageMapItemViewModels => _createGarageMapItemViewModels;
 

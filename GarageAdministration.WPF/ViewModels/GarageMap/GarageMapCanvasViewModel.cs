@@ -20,17 +20,19 @@ public class GarageMapCanvasViewModel: ViewModelBase
     private readonly INavigationService _navigation;
     private readonly GarageMapInfoStore _garageMapInfoStore;
     private readonly OwnersStore _ownersStore;
+    private readonly GarageMapSearchTextStore _garageMapSearchTextStore;
     public string BGImage => "map1.png";
     public double Width => System.Windows.SystemParameters.PrimaryScreenWidth;
     public double Height => System.Windows.SystemParameters.PrimaryScreenHeight;
-    
-    public IEnumerable<GarageMapCanvasItemViewModel> GarageMapCanvasItemViewModels => _garageMapCanvasItemViewModels;
+
+    public IEnumerable<GarageMapCanvasItemViewModel> GarageMapCanvasItemViewModels => FilterGarages();
     public IEnumerable<GarageMapCanvasBlockItemViewModel> GarageMapCanvasBlockItemViewModels =>
         _garageMapCanvasBlockItemViewModels;
 
-    public GarageMapCanvasViewModel(GaragesStore garagesStore, INavigationService navigation, GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore)
+    public GarageMapCanvasViewModel(GaragesStore garagesStore, INavigationService navigation, GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore, GarageMapSearchTextStore garageMapSearchTextStore)
     {
         _garageBlockStore = garageBlockStore;
+        _garageMapSearchTextStore = garageMapSearchTextStore;
         _garagesStore = garagesStore;
         _navigation = navigation;
         _garageMapInfoStore = garageMapInfoStore;
@@ -49,8 +51,26 @@ public class GarageMapCanvasViewModel: ViewModelBase
         _garageBlockStore.GarageBlockUpdated += GarageBlockStore_GarageBlockUpdated;
         _garageBlockStore.GarageBlocksLoaded += GarageBlockStore_GarageBlocksLoaded;
         
+        _garageMapSearchTextStore.SearchTextChanged += GarageMapSearchTextStoreOnSearchTextChanged;
+        
         GaragesStore_GaragesLoaded();
         GarageBlockStore_GarageBlocksLoaded();
+    }
+
+    private void GarageMapSearchTextStoreOnSearchTextChanged()
+    {
+        OnPropertyChanged(nameof(GarageMapCanvasItemViewModels));
+    }
+
+    private IEnumerable<GarageMapCanvasItemViewModel> FilterGarages()
+    {
+        var searchText = _garageMapSearchTextStore.SearchText;
+        if (searchText.Equals(""))
+        {
+            return _garageMapCanvasItemViewModels;
+        }
+
+        return _garageMapCanvasItemViewModels.Where(g => g.Owner.ToString().ToLower().Contains(searchText.ToLower()));
     }
 
     private void GarageBlockStore_GarageBlocksLoaded()

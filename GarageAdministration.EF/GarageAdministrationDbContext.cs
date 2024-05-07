@@ -11,7 +11,7 @@ public class GarageAdministrationDbContext: DbContext
     public DbSet<GarageBlockDTO> GarageBlock { get; set; } = null!;
     public DbSet<MapDto> Maps { get; set; } = null!;
     public DbSet<ContributionDto> Contributions { get; set; } = null!;
-
+    public DbSet<ReportDto> Reports { get; set; } = null!;
     public GarageAdministrationDbContext(DbContextOptions options) : base(options)
     {
         

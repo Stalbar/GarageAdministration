@@ -6,8 +6,12 @@
              xmlns:local="clr-namespace:GarageAdministration.WPF.Views.CreateBlock"
              xmlns:createBlock="clr-namespace:GarageAdministration.WPF.ViewModels.CreateBlock"
              xmlns:behaviors="clr-namespace:GarageAdministration.WPF.Behaviors"
+             xmlns:converters="clr-namespace:GarageAdministration.WPF.Commons.Converters"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:StringToImageConverter x:Key="StringToImageConverter"/>
+    </UserControl.Resources>
     <Grid>
         <ScrollViewer x:Name="MainScrollViewer"
                       CanContentScroll="False"
@@ -28,8 +32,8 @@
                 </ItemsControl.Resources>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas Width="3300"
-                                Background="Azure"
+                        <Canvas Width="{Binding Width}"
+                                Height="{Binding Height}"
                                 x:Name="TargetCanvas"
                                 behaviors:ZoomBehavior.IsEnabled="True"
                                 behaviors:ZoomBehavior.ZoomFactor="0.1"
@@ -39,6 +43,9 @@
                                               Command="{Binding MapClickCommand}"
                                               CommandParameter="{Binding ElementName=TargetCanvas}"/>
                             </Canvas.InputBindings>
+                            <Canvas.Background>
+                                <ImageBrush ImageSource="{Binding BGImage, Converter={StaticResource StringToImageConverter}}"></ImageBrush>
+                            </Canvas.Background>
                         </Canvas>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>

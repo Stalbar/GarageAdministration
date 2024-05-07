@@ -102,6 +102,8 @@ public class InjectionContainer
             provider.GetRequiredService<IGetAllQuery<Contribution>>()
         ));
 
+        services.AddSingleton<GarageMapSearchTextStore>();
+        
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton<Func<Type, ViewModelBase>>(provider =>
             viewModelType => (ViewModelBase)provider.GetRequiredService(viewModelType));

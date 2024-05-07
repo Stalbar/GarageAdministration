@@ -26,6 +26,7 @@
                               Width="20"
                               Foreground="{StaticResource PlainTextColor3}" />
                 <TextBox Style="{StaticResource SearchTextBox}"
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                          Height="24"
                          Width="300"
                          Margin="5,5,0,0" />

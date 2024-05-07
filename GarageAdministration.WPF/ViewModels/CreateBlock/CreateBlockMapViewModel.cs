@@ -21,7 +21,10 @@ public class CreateBlockMapViewModel: ViewModelBase
 
     public IEnumerable<GarageMapItemViewModel> GarageMapItemViewModels => _garageMapItemViewModels;
     public IEnumerable<BlockMapItemViewModel> BlockMapItemViewModels => _blockMapItemViewModels;
-
+    public string BGImage => "map1.png";
+    public double Width => System.Windows.SystemParameters.PrimaryScreenWidth;
+    public double Height => System.Windows.SystemParameters.PrimaryScreenHeight;
+    
     public GarageBlock CreatedGarageBlock
     {
         get => _createGarageBlock;
