@@ -10,6 +10,7 @@ public class GarageAdministrationDbContext: DbContext
     public DbSet<OwnerDto> Owners { get; set; } = null!;
     public DbSet<GarageBlockDTO> GarageBlock { get; set; } = null!;
     public DbSet<MapDto> Maps { get; set; } = null!;
+    public DbSet<ContributionDto> Contributions { get; set; } = null!;
 
     public GarageAdministrationDbContext(DbContextOptions options) : base(options)
     {
