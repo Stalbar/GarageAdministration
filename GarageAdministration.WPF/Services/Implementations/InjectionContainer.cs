@@ -38,7 +38,7 @@ public class InjectionContainer
         services.AddSingleton<ReportListViewModel>();
         services.AddTransient<CreateBlockViewModel>();
 
-        string connectionString = "Data Source=db.db;";
+        const string connectionString = "Data Source=db.db;";
         services.AddSingleton<DbContextOptions>(_ => new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
         services.AddSingleton<GarageAdministrationDbContextFactory>();
 

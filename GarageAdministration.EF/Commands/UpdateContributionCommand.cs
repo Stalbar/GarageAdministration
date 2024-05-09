@@ -19,6 +19,8 @@ public class UpdateContributionCommand: IUpdateCommand<Contribution>
         contributionDto.MembershipFee = entity.ElectricityFee;
         contributionDto.ElectricityFee = entity.MembershipFee;
         contributionDto.GarageId = entity.Garage.Id;
+        contributionDto.ElectricityFeePaymentStatus = entity.ElectricityFeePaymentStatus;
+        contributionDto.MembershipFeePaymentStatus = entity.MembershipFeePaymentStatus;
         await context.SaveChangesAsync();
     }
 }

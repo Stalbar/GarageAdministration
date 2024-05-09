@@ -30,6 +30,7 @@ public class EditGarageViewModel: ViewModelBase
         {
             Width = garage.MapInfo.Width,
             Height = garage.MapInfo.Height,
+            Angle = garage.MapInfo.Angle,
         };
     }
 }

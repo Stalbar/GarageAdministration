@@ -26,7 +26,9 @@ public class GetAllContributions : IGetAllQuery<Contribution>
             c.ElectricityFee,
             new Garage(c.Garage!.Id,
                 new Owner(c.Garage.Owner!.Id, c.Garage.Owner.Name, c.Garage.Owner.Surname, c.Garage.Owner.Patronymic),
-                null, null)
+                null, null),
+            c.MembershipFeePaymentStatus,
+            c.ElectricityFeePaymentStatus
         ));
     }
 }

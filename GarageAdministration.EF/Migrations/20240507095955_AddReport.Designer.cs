@@ -3,6 +3,7 @@ using System;
 using GarageAdministration.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GarageAdministration.EF.Migrations
 {
     [DbContext(typeof(GarageAdministrationDbContext))]
-    partial class GarageAdministrationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240507095955_AddReport")]
+    partial class AddReport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.14");
@@ -26,17 +29,11 @@ namespace GarageAdministration.EF.Migrations
                     b.Property<decimal>("ElectricityFee")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ElectricityFeePaymentStatus")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("GarageId")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("MembershipFee")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("MembershipFeePaymentStatus")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

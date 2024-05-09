@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using GarageAdministration.Domain.Models;
+using GarageAdministration.Infrastracture.Enums;
 using GarageAdministration.WPF.Commons.Stores;
 using GarageAdministration.WPF.Services.Abstractions;
 
@@ -14,6 +15,10 @@ public class GarageFormViewModel: ViewModelBase
     private double _height;
     private double _width;
     private double _angle;
+    private decimal _electricityFee;
+    private PaymentStatus _electricityFeePaymentStatus;
+    private decimal _membershipFee;
+    private PaymentStatus _membershipFeePaymentStatus;
 
     public Owner SelectedOwner
     {
@@ -75,6 +80,47 @@ public class GarageFormViewModel: ViewModelBase
             _angle = value;
             OnPropertyChanged(nameof(Angle));
             MapUpdateCommand.Execute(null);
+        }
+    }
+
+    public decimal ElectricityFee
+    {
+        get => _electricityFee;
+        set
+        {
+            _electricityFee = value;
+            OnPropertyChanged(nameof(ElectricityFee));
+        }
+    }
+    
+    public PaymentStatus ElectricityFeePaymentStatus
+    {
+        get => _electricityFeePaymentStatus;
+        set
+        {
+            if (_electricityFeePaymentStatus == value) return;
+            _electricityFeePaymentStatus = value;
+            OnPropertyChanged(nameof(ElectricityFeePaymentStatus));
+        }
+    }
+
+    public decimal MembershipFee
+    {
+        get => _membershipFee;
+        set
+        {
+            _membershipFee = value;
+            OnPropertyChanged(nameof(MembershipFee));
+        }
+    }
+
+    public PaymentStatus MembershipFeePaymentStatus
+    {
+        get => _membershipFeePaymentStatus;
+        set
+        {
+            _membershipFeePaymentStatus = value;
+            OnPropertyChanged(nameof(MembershipFeePaymentStatus));
         }
     }
 

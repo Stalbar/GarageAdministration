@@ -70,16 +70,19 @@ public class ZoomBehavior : DependencyObject
 
     private static void Zoom_OnMouseWheel(object sender, MouseWheelEventArgs e)
     {
-        var zoomTargetElement = sender as FrameworkElement;
+        if (Keyboard.IsKeyDown(Key.LeftCtrl))
+        {
+            var zoomTargetElement = sender as FrameworkElement;
 
-        Point mouseCanvasPosition = e.GetPosition(zoomTargetElement);
-        double scaleFactor = e.Delta > 0
-            ? ZoomBehavior.GetZoomFactor(zoomTargetElement)
-            : -1 * ZoomBehavior.GetZoomFactor(zoomTargetElement);
+            Point mouseCanvasPosition = e.GetPosition(zoomTargetElement);
+            double scaleFactor = e.Delta > 0
+                ? ZoomBehavior.GetZoomFactor(zoomTargetElement)
+                : -1 * ZoomBehavior.GetZoomFactor(zoomTargetElement);
 
-        ZoomBehavior.ApplyZoomToAttachedElement(mouseCanvasPosition, scaleFactor, zoomTargetElement);
+            ZoomBehavior.ApplyZoomToAttachedElement(mouseCanvasPosition, scaleFactor, zoomTargetElement);
 
-        ZoomBehavior.AdjustScrollViewer(mouseCanvasPosition, scaleFactor, zoomTargetElement);
+            ZoomBehavior.AdjustScrollViewer(mouseCanvasPosition, scaleFactor, zoomTargetElement);
+        }
     }
 
     private static void ApplyZoomToAttachedElement(Point mouseCanvasPosition, double scaleFactor,

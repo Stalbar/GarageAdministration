@@ -20,7 +20,9 @@ public class CreateContributionCommand: ICreateCommand<Contribution>
         {
             MembershipFee = entity.ElectricityFee,
             ElectricityFee = entity.MembershipFee,
-            GarageId = entity.Garage.Id
+            GarageId = entity.Garage.Id,
+            ElectricityFeePaymentStatus = entity.ElectricityFeePaymentStatus,
+            MembershipFeePaymentStatus = entity.MembershipFeePaymentStatus,
         };
         context.Contributions.Add(contributionDto);
         await context.SaveChangesAsync();

@@ -24,7 +24,7 @@ public class NavigationService : ViewModelBase, INavigationService
     
     public void NavigateTo<TViewModel>() where TViewModel : ViewModelBase
     {
-        ViewModelBase viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
+        var viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
         CurrentView = viewModel;
     }
 
