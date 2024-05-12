@@ -7,7 +7,7 @@ using GarageAdministration.WPF.ViewModels.GarageMap;
 
 namespace GarageAdministration.WPF.Commands;
 
-public class NavigateToEditGarageViewCommand: CommandBase
+public class NavigateToEditGarageViewCommand : CommandBase
 {
     private readonly INavigationService _navigation;
     private readonly GarageMapCanvasItemViewModel _garageMapCanvasItemViewModel;
@@ -16,8 +16,12 @@ public class NavigateToEditGarageViewCommand: CommandBase
     private readonly GarageMapInfoStore _garageMapInfoStore;
     private readonly GarageBlockStore _garageBlockStore;
     private readonly ICommand _deleteCommand;
+    private readonly ContributionsStore _contributionsStore;
 
-    public NavigateToEditGarageViewCommand(INavigationService navigation, GarageMapCanvasItemViewModel garageMapCanvasItemViewModel, GaragesStore garagesStore, OwnersStore ownersStore, GarageMapInfoStore garageMapInfoStore, GarageBlockStore garageBlockStore, ICommand deleteCommand)
+    public NavigateToEditGarageViewCommand(INavigationService navigation,
+        GarageMapCanvasItemViewModel garageMapCanvasItemViewModel, GaragesStore garagesStore, OwnersStore ownersStore,
+        GarageMapInfoStore garageMapInfoStore, GarageBlockStore garageBlockStore, ICommand deleteCommand,
+        ContributionsStore contributionsStore)
     {
         _navigation = navigation;
         _garageMapCanvasItemViewModel = garageMapCanvasItemViewModel;
@@ -26,12 +30,14 @@ public class NavigateToEditGarageViewCommand: CommandBase
         _garageMapInfoStore = garageMapInfoStore;
         _garageBlockStore = garageBlockStore;
         _deleteCommand = deleteCommand;
+        _contributionsStore = contributionsStore;
     }
 
     public override void Execute(object? parameter)
     {
         var garage = _garageMapCanvasItemViewModel.Garage;
-        var editGarageViewModel = new EditGarageViewModel(garage, _garagesStore, _garageMapInfoStore, _ownersStore, _navigation, _garageBlockStore, _deleteCommand);
+        var editGarageViewModel = new EditGarageViewModel(garage, _garagesStore, _garageMapInfoStore, _ownersStore,
+            _navigation, _garageBlockStore, _deleteCommand, _contributionsStore);
         _navigation.NavigateTo(editGarageViewModel);
     }
 }

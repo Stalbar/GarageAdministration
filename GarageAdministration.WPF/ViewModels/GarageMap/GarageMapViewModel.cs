@@ -8,7 +8,7 @@ using GarageAdministration.WPF.Services.Abstractions;
 
 namespace GarageAdministration.WPF.ViewModels.GarageMap;
 
-public class GarageMapViewModel: ViewModelBase
+public class GarageMapViewModel : ViewModelBase
 {
     private readonly GarageMapSearchTextStore _garageMapSearchTextStore;
     private string _searchText = "";
@@ -26,12 +26,15 @@ public class GarageMapViewModel: ViewModelBase
             OnPropertyChanged(nameof(SearchText));
         }
     }
-    
-    public GarageMapViewModel(GaragesStore garagesStore, INavigationService navigation, GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore, GarageMapSearchTextStore garageMapSearchTextStore)
+
+    public GarageMapViewModel(GaragesStore garagesStore, INavigationService navigation,
+        GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore,
+        GarageMapSearchTextStore garageMapSearchTextStore, ContributionsStore contributionsStore)
     {
         NavigateToCreateBlockViewCommand = new NavigateToCreateBlockViewCommand(navigation);
         NavigateToCreateGarageViewCommand = new NavigateToCreateGarageViewCommand(navigation);
-        GarageMapCanvasViewModel = new GarageMapCanvasViewModel(garagesStore, navigation, garageMapInfoStore, ownersStore, garageBlockStore, garageMapSearchTextStore);
+        GarageMapCanvasViewModel = new GarageMapCanvasViewModel(garagesStore, navigation, garageMapInfoStore,
+            ownersStore, garageBlockStore, garageMapSearchTextStore, contributionsStore);
         _garageMapSearchTextStore = garageMapSearchTextStore;
     }
 }

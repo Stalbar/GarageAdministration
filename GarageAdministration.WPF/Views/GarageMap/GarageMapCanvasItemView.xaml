@@ -55,7 +55,13 @@
                     </StackPanel.Background>
                     <TextBlock Style="{StaticResource RegularTextBlock}"
                                Text="{Binding Owner}"
-                               Margin="5" />
+                               Margin="5 2.5 5 2.5" />
+                    <TextBlock Style="{StaticResource RegularTextBlock}"
+                               Text="{Binding ElectricityFeeStatus}"
+                               Margin="5 2.5 5 2.5"/>
+                    <TextBlock Style="{StaticResource RegularTextBlock}"
+                               Text="{Binding MembershipFeeStatus}"
+                               Margin="5 2.5 5 2.5"/>
                 </StackPanel>
             </Border>
         </Popup>

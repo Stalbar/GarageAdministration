@@ -21,6 +21,6 @@ public class UpdateMapFromFormCommand: CommandBase
         var angle = _createGarageViewModel.GarageFormViewModel.Angle;
         var newMapInfo = new MapInfo(garage.MapInfo.Id, garage.MapInfo.Top, garage.MapInfo.Left, width, height, angle, 1);
         var map = new Map(1, "");
-        _createGarageViewModel.CreateGarageMapViewModel.CreatedGarage = new Garage(garage.Id, garage.Owner, newMapInfo, map);
+        _createGarageViewModel.CreateGarageMapViewModel.CreatedGarage = new Garage(garage.Id, garage.Owner, newMapInfo, garage.Map);
     }
 }
