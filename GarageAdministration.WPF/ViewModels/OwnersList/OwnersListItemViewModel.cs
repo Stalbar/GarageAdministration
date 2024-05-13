@@ -23,7 +23,9 @@ public class OwnersListItemViewModel: ViewModelBase
     }
     
     public Owner Owner { get; private set; }
-    public string FullName => Owner.Name + " " + Owner.Surname + " " + Owner.Patronymic;
+    public string Name => Owner.Name;
+    public string Surname => Owner.Surname;
+    public string Patronymic => Owner.Patronymic;
 
     public ICommand EditCommand { get; }
     public ICommand DeleteCommand { get; }
@@ -39,6 +41,8 @@ public class OwnersListItemViewModel: ViewModelBase
     public void Update(Owner owner)
     {
         Owner = owner;
-        OnPropertyChanged(nameof(FullName));
+        OnPropertyChanged(nameof(Name));
+        OnPropertyChanged(nameof(Surname));
+        OnPropertyChanged(nameof(Patronymic));
     }
 }
