@@ -17,16 +17,11 @@ public class GetAllContributions : IGetAllQuery<Contribution>
     {
         await using var context = _contextFactory.Create();
         var contributions = await context.Contributions
-            .Include(c => c.Garage)
-            .ThenInclude(g => g.Owner)
             .ToListAsync();
         return contributions.Select(c => new Contribution(
             c.Id,
             c.MembershipFee,
             c.ElectricityFee,
-            new Garage(c.Garage!.Id,
-                new Owner(c.Garage.Owner!.Id, c.Garage.Owner.Name, c.Garage.Owner.Surname, c.Garage.Owner.Patronymic),
-                null, null),
             c.MembershipFeePaymentStatus,
             c.ElectricityFeePaymentStatus
         ));

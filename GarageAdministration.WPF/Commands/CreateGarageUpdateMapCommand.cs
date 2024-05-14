@@ -13,12 +13,14 @@ public class CreateGarageUpdateMapCommand: CommandBase
     private readonly CreateGarageViewModel _createGarageViewModel;
     private readonly GaragesStore _garagesStore;
     private readonly GarageMapInfoStore _garageMapInfoStore;
+    private readonly ContributionsStore _contributionsStore;
 
-    public CreateGarageUpdateMapCommand(GaragesStore garagesStore, CreateGarageViewModel createGarageViewModel, GarageMapInfoStore garageMapInfoStore)
+    public CreateGarageUpdateMapCommand(GaragesStore garagesStore, CreateGarageViewModel createGarageViewModel, GarageMapInfoStore garageMapInfoStore, ContributionsStore contributionsStore)
     {
         _garagesStore = garagesStore;
         _createGarageViewModel = createGarageViewModel;
         _garageMapInfoStore = garageMapInfoStore;
+        _contributionsStore = contributionsStore;
     }
 
     public override void Execute(object? parameter)
@@ -29,6 +31,12 @@ public class CreateGarageUpdateMapCommand: CommandBase
         var mapInfoId = !_garageMapInfoStore.MapInfos.Any() ? 1 : _garageMapInfoStore.MapInfos.Last().Id + 1;   
         var mapInfo = new MapInfo(mapInfoId, mousePos.Y, mousePos.X, _createGarageViewModel.GarageFormViewModel.Width, _createGarageViewModel.GarageFormViewModel.Height, _createGarageViewModel.GarageFormViewModel.Angle, 1);
         var map = new Map(1, "");
-        _createGarageViewModel.CreateGarageMapViewModel.CreatedGarage = new Garage(id, owner, mapInfo, map);
+        var form = _createGarageViewModel.GarageFormViewModel;
+        var contributionId = !_contributionsStore.Contributions.Any()
+            ? 1
+            : _contributionsStore.Contributions.Last().Id + 1;
+        var contribution = new Contribution(contributionId, form.ElectricityFee, form.MembershipFee,
+            form.MembershipFeePaymentStatus, form.ElectricityFeePaymentStatus);
+        _createGarageViewModel.CreateGarageMapViewModel.CreatedGarage = new Garage(id, owner, mapInfo, map, contribution);
     }
 }

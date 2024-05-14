@@ -8,7 +8,33 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <ListView ItemsSource="{Binding OwnersListItemViewModels}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                <fa:IconImage Icon="Search"
+                              Height="20"
+                              Width="20"
+                              Foreground="{StaticResource PlainTextColor3}" />
+                <TextBox Style="{StaticResource SearchTextBox}"
+                         Height="24"
+                         Width="300"
+                         Margin="5,5,0,0" />
+            </StackPanel>
+            <Button Grid.Column="1"
+                    Style="{StaticResource RegularButton}"
+                    Command="{Binding NavigateToCreateOwnerViewCommand}"
+                    Content="Добавить владельца" />
+        </Grid>
+        <ListView Grid.Row="1" ItemsSource="{Binding OwnersListItemViewModels}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Surname}">Фамилия</GridViewColumn>

@@ -18,7 +18,6 @@ public class EditGarageViewModel : ViewModelBase
         OwnersStore ownersStore, INavigationService navigation, GarageBlockStore garageBlockStore,
         ICommand deleteCommand, ContributionsStore contributionsStore)
     {
-        var contribution = contributionsStore.Contributions.First(c => c.Garage.Id == garage.Id);
         GarageId = garage.Id;
         ICommand mapClickCommand = new EditGarageUpdateMapCommand(this, garagesStore, garageMapInfoStore);
         CreateGarageMapViewModel =
@@ -36,10 +35,10 @@ public class EditGarageViewModel : ViewModelBase
             Width = garage.MapInfo.Width,
             Height = garage.MapInfo.Height,
             Angle = garage.MapInfo.Angle,
-            ElectricityFee = contribution.ElectricityFee,
-            ElectricityFeePaymentStatus = contribution.ElectricityFeePaymentStatus,
-            MembershipFee = contribution.MembershipFee,
-            MembershipFeePaymentStatus = contribution.MembershipFeePaymentStatus
+            ElectricityFee = garage.Contribution.ElectricityFee,
+            ElectricityFeePaymentStatus = garage.Contribution.ElectricityFeePaymentStatus,
+            MembershipFee = garage.Contribution.MembershipFee,
+            MembershipFeePaymentStatus = garage.Contribution.MembershipFeePaymentStatus
         };
     }
 }

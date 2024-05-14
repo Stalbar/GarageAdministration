@@ -11,11 +11,11 @@ namespace GarageAdministration.WPF.ViewModels.GarageMap;
 public class GarageMapViewModel : ViewModelBase
 {
     private readonly GarageMapSearchTextStore _garageMapSearchTextStore;
-    private string _searchText = "";
     public GarageMapCanvasViewModel GarageMapCanvasViewModel { get; }
 
     public ICommand NavigateToCreateGarageViewCommand { get; }
     public ICommand NavigateToCreateBlockViewCommand { get; }
+    public ICommand NavigateToCreateMapViewCommand { get; }
 
     public string SearchText
     {
@@ -33,6 +33,7 @@ public class GarageMapViewModel : ViewModelBase
     {
         NavigateToCreateBlockViewCommand = new NavigateToCreateBlockViewCommand(navigation);
         NavigateToCreateGarageViewCommand = new NavigateToCreateGarageViewCommand(navigation);
+        NavigateToCreateMapViewCommand = new NavigateToCreateMapViewCommand(navigation);
         GarageMapCanvasViewModel = new GarageMapCanvasViewModel(garagesStore, navigation, garageMapInfoStore,
             ownersStore, garageBlockStore, garageMapSearchTextStore, contributionsStore);
         _garageMapSearchTextStore = garageMapSearchTextStore;

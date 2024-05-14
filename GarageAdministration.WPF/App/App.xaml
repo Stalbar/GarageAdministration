@@ -18,7 +18,9 @@
              xmlns:createBlock="clr-namespace:GarageAdministration.WPF.ViewModels.CreateBlock"
              xmlns:createBlockView="clr-namespace:GarageAdministration.WPF.Views.CreateBlock"
              xmlns:editBlock="clr-namespace:GarageAdministration.WPF.ViewModels.EditBlock"
-             xmlns:editBlockView="clr-namespace:GarageAdministration.WPF.Views.EditBlock">
+             xmlns:editBlockView="clr-namespace:GarageAdministration.WPF.Views.EditBlock"
+             xmlns:createMap="clr-namespace:GarageAdministration.WPF.ViewModels.CreateMap"
+             xmlns:createMapView="clr-namespace:GarageAdministration.WPF.Views.CreateMap">
     <Application.Resources>
         <ResourceDictionary>
             
@@ -66,6 +68,10 @@
             
             <DataTemplate DataType="{x:Type TypeName=editBlock:EditBlockViewModel}">
                 <editBlockView:EditBlockView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type TypeName=createMap:CreateMapViewModel}">
+                <createMapView:CreateMapView/>
             </DataTemplate>
             
         </ResourceDictionary>

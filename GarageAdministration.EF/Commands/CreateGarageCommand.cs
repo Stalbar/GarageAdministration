@@ -20,7 +20,8 @@ public class CreateGarageCommand: ICreateCommand<Garage>
         {
             MapInfoId = entity.MapInfo.Id,
             OwnerId = entity.Owner.Id,
-            MapId = entity.Map.Id
+            MapId = entity.Map.Id,
+            ContributionId = entity.Contribution.Id
         };
         context.Garages.Add(garageDto);
         await context.SaveChangesAsync();

@@ -35,7 +35,7 @@ public class GarageMapCanvasItemViewModel : ViewModelBase
         ContributionsStore contributionsStore)
     {
         Garage = garage;
-        Contribution = contributionsStore.Contributions.First(c => c.Garage.Id == garage.Id);
+        Contribution = garage.Contribution;
         DeleteCommand = new DeleteGarageCommand(this, garagesStore, navigation);
         IconCommand =
             new NavigateToEditGarageViewCommand(navigation, this, garagesStore, ownersStore, garageMapInfoStore, garageBlockStore, DeleteCommand, contributionsStore);

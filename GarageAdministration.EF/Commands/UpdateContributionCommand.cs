@@ -18,7 +18,6 @@ public class UpdateContributionCommand: IUpdateCommand<Contribution>
         var contributionDto = context.Contributions.FirstOrDefault(c => c.Id == entity.Id)!;
         contributionDto.MembershipFee = entity.ElectricityFee;
         contributionDto.ElectricityFee = entity.MembershipFee;
-        contributionDto.GarageId = entity.Garage.Id;
         contributionDto.ElectricityFeePaymentStatus = entity.ElectricityFeePaymentStatus;
         contributionDto.MembershipFeePaymentStatus = entity.MembershipFeePaymentStatus;
         await context.SaveChangesAsync();

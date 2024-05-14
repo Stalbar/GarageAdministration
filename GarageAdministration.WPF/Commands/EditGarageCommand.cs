@@ -28,12 +28,12 @@ public class EditGarageCommand: AsyncCommandBase
     {
         var garage = _editGarageViewModel.CreateGarageMapViewModel.CreatedGarage;
         var form = _editGarageViewModel.GarageFormViewModel;
-        var oldContribution = _contributionsStore.Contributions.First(c => c.Garage.Id == garage.Id);
-        var contribution = new Contribution(oldContribution.Id, form.ElectricityFee, form.MembershipFee, garage,
+        var oldContribution = garage.Contribution;
+        var contribution = new Contribution(oldContribution.Id, form.ElectricityFee, form.MembershipFee,
             form.MembershipFeePaymentStatus, form.ElectricityFeePaymentStatus);
         await _garageMapInfoStore.Update(garage.MapInfo);
-        await _garagesStore.Update(garage);
         await _contributionsStore.Update(contribution);
+        await _garagesStore.Update(garage);
         _navigation.NavigateTo<GarageMapViewModel>();
     }
 }

@@ -18,7 +18,7 @@ public class CreateGarageViewModel : ViewModelBase
             new CreateGarageCommand(this, garagesStore, garageMapInfoStore, navigation, contributionsStore);
         ICommand cancelCommand = new NavigateToGarageMapViewCommand(navigation);
         ICommand mapUpdateCommand = new UpdateMapFromFormCommand(this);
-        ICommand mapClickCommand = new CreateGarageUpdateMapCommand(garagesStore, this, garageMapInfoStore);
+        ICommand mapClickCommand = new CreateGarageUpdateMapCommand(garagesStore, this, garageMapInfoStore, contributionsStore);
         GarageFormViewModel =
             new GarageFormViewModel(navigation, ownersStore, submitCommand, cancelCommand, mapUpdateCommand, null);
         CreateGarageMapViewModel =

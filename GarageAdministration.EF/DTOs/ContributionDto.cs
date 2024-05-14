@@ -9,6 +9,4 @@ public class ContributionDto
     public PaymentStatus MembershipFeePaymentStatus { get; set; }
     public decimal ElectricityFee { get; set; }
     public PaymentStatus ElectricityFeePaymentStatus { get; set; }
-    public int GarageId { get; set; }
-    public GarageDto? Garage { get; set; }
 }

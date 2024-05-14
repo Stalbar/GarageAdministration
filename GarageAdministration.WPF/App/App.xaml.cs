@@ -18,7 +18,7 @@ public partial class App : Application
     {
         const string connectionString = "Data Source=db.db;";
         _garageAdministrationDbContextFactory = new(new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
-        _serviceProvider = new InjectionContainer().GetServiceProvider();
+        _serviceProvider = InjectionContainer.GetServiceProvider();
     }
 
     protected override void OnStartup(StartupEventArgs e)

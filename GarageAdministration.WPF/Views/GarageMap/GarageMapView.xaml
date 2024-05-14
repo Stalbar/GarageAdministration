@@ -47,6 +47,9 @@
                     Style="{StaticResource RegularButton}"
                     Command="{Binding NavigateToCreateBlockViewCommand}"
                     Content="Добавить блок" />
+                <Button Style="{StaticResource RegularButton}"
+                        Command="{Binding NavigateToCreateMapViewCommand}"
+                        Content="Добавить карту"/>
             </StackPanel>
         </Grid>
     </Grid>

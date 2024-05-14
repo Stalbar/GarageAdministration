@@ -7,12 +7,13 @@ public class Garage
     public Owner Owner { get; }
     
     public Map? Map { get; }
-    
-    public Garage(int id, Owner owner, MapInfo mapInfo, Map map)
+    public Contribution Contribution { get; }
+    public Garage(int id, Owner owner, MapInfo mapInfo, Map map, Contribution contribution)
     {
         Id = id;
         Owner = owner;
         MapInfo = mapInfo;
         Map = map;
+        Contribution = contribution;
     }
 }

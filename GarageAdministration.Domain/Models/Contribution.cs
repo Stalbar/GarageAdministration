@@ -11,14 +11,12 @@ public class Contribution
     public decimal MembershipFee { get; }
     
     public PaymentStatus MembershipFeePaymentStatus { get; }
-    public Garage Garage { get; }
 
-    public Contribution(int id, decimal electricityFee, decimal membershipFee, Garage garage, PaymentStatus membershipFeePaymentStatus, PaymentStatus electricityFeePaymentStatus)
+    public Contribution(int id, decimal electricityFee, decimal membershipFee, PaymentStatus membershipFeePaymentStatus, PaymentStatus electricityFeePaymentStatus)
     {
         Id = id;
         ElectricityFee = electricityFee;
         MembershipFee = membershipFee;
-        Garage = garage;
         MembershipFeePaymentStatus = membershipFeePaymentStatus;
         ElectricityFeePaymentStatus = electricityFeePaymentStatus;
     }

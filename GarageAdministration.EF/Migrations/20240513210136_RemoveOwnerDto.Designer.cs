@@ -3,6 +3,7 @@ using System;
 using GarageAdministration.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,12 +11,37 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GarageAdministration.EF.Migrations
 {
     [DbContext(typeof(GarageAdministrationDbContext))]
-    partial class GarageAdministrationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240513210136_RemoveOwnerDto")]
+    partial class RemoveOwnerDto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.14");
+
+            modelBuilder.Entity("GarageAdministration.Domain.Models.Owner", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Patronymic")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Owners");
+                });
 
             modelBuilder.Entity("GarageAdministration.EF.DTOs.ContributionDto", b =>
                 {
@@ -29,6 +55,9 @@ namespace GarageAdministration.EF.Migrations
                     b.Property<int>("ElectricityFeePaymentStatus")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("GarageId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<decimal>("MembershipFee")
                         .HasColumnType("TEXT");
 
@@ -36,6 +65,8 @@ namespace GarageAdministration.EF.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GarageId");
 
                     b.ToTable("Contributions");
                 });
@@ -62,9 +93,6 @@ namespace GarageAdministration.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ContributionId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("MapId")
                         .HasColumnType("INTEGER");
 
@@ -75,8 +103,6 @@ namespace GarageAdministration.EF.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ContributionId");
 
                     b.HasIndex("MapId");
 
@@ -131,29 +157,6 @@ namespace GarageAdministration.EF.Migrations
                     b.ToTable("MapInfos");
                 });
 
-            modelBuilder.Entity("GarageAdministration.EF.DTOs.OwnerDto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Patronymic")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Owners");
-                });
-
             modelBuilder.Entity("GarageAdministration.EF.DTOs.ReportDto", b =>
                 {
                     b.Property<int>("Id")
@@ -172,6 +175,17 @@ namespace GarageAdministration.EF.Migrations
                     b.ToTable("Reports");
                 });
 
+            modelBuilder.Entity("GarageAdministration.EF.DTOs.ContributionDto", b =>
+                {
+                    b.HasOne("GarageAdministration.EF.DTOs.GarageDto", "Garage")
+                        .WithMany()
+                        .HasForeignKey("GarageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Garage");
+                });
+
             modelBuilder.Entity("GarageAdministration.EF.DTOs.GarageBlockDTO", b =>
                 {
                     b.HasOne("GarageAdministration.EF.DTOs.MapInfoDto", "MapInfo")
@@ -185,12 +199,6 @@ namespace GarageAdministration.EF.Migrations
 
             modelBuilder.Entity("GarageAdministration.EF.DTOs.GarageDto", b =>
                 {
-                    b.HasOne("GarageAdministration.EF.DTOs.ContributionDto", "Contribution")
-                        .WithMany()
-                        .HasForeignKey("ContributionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GarageAdministration.EF.DTOs.MapDto", "Map")
                         .WithMany()
                         .HasForeignKey("MapId")
@@ -203,13 +211,11 @@ namespace GarageAdministration.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GarageAdministration.EF.DTOs.OwnerDto", "Owner")
+                    b.HasOne("GarageAdministration.Domain.Models.Owner", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Contribution");
 
                     b.Navigation("Map");
 

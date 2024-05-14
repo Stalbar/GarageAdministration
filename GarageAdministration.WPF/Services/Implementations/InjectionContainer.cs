@@ -9,6 +9,7 @@ using GarageAdministration.WPF.Commons.ViewModels;
 using GarageAdministration.WPF.Services.Abstractions;
 using GarageAdministration.WPF.ViewModels.CreateBlock;
 using GarageAdministration.WPF.ViewModels.CreateGarage;
+using GarageAdministration.WPF.ViewModels.CreateMap;
 using GarageAdministration.WPF.ViewModels.CreateOwner;
 using GarageAdministration.WPF.ViewModels.GarageMap;
 using GarageAdministration.WPF.ViewModels.MainWindow;
@@ -19,9 +20,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageAdministration.WPF.Services.Implementations;
 
-public class InjectionContainer
+public static class InjectionContainer
 {
-    public ServiceProvider GetServiceProvider()
+    public static ServiceProvider GetServiceProvider()
     {
         IServiceCollection services = new ServiceCollection();
 
@@ -37,6 +38,7 @@ public class InjectionContainer
         services.AddTransient<CreateGarageViewModel>();
         services.AddSingleton<ReportListViewModel>();
         services.AddTransient<CreateBlockViewModel>();
+        services.AddTransient<CreateMapViewModel>();
 
         const string connectionString = "Data Source=db.db;";
         services.AddSingleton<DbContextOptions>(_ => new DbContextOptionsBuilder().UseSqlite(connectionString).Options);

@@ -17,8 +17,7 @@
         <ScrollViewer x:Name="MainScrollViewer"
                       CanContentScroll="False"
                       VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Auto"
-                      PreviewMouseWheel="OnPreviewMouseWheel">
+                      HorizontalScrollBarVisibility="Auto">
             <ItemsControl>
                 <ItemsControl.Resources>
                     <CollectionViewSource x:Key="GaragesCollection"

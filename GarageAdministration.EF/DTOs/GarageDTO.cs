@@ -9,4 +9,7 @@ public class GarageDto
     public OwnerDto? Owner { get; set; }
     public int MapId { get; set; }
     public MapDto? Map { get; set; }
+    
+    public int ContributionId { get; set; }
+    public ContributionDto? Contribution { get; set; }
 }
