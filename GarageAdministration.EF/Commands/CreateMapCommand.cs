@@ -18,7 +18,8 @@ public class CreateMapCommand: ICreateCommand<Map>
         await using var context = _contextFactory.Create();
         var mapDto = new MapDto()
         {
-            PathToImage = entity.PathToImage
+            PathToImage = entity.PathToImage,
+            Name = entity.Name,
         };
         context.Maps.Add(mapDto);
         await context.SaveChangesAsync();

@@ -14,7 +14,7 @@ public class CreateMapViewModel: ViewModelBase
     {
         var cancelCommand = new NavigateToGarageMapViewCommand(navigation);
         var selectFileCommand = new OpenFileDialogCommand(this);
-        var createMapInDatabaseCommand = new CreateMapCommand(mapsStore, navigation);
+        var createMapInDatabaseCommand = new CreateMapCommand(mapsStore, navigation, this);
         var createCommand = new SaveImageToFileSystemCommand(this, createMapInDatabaseCommand);
         SelectedMapViewModel = new SelectedMapViewModel();
         MapFormViewModel = new MapFormViewModel(navigation, createCommand, cancelCommand, selectFileCommand);

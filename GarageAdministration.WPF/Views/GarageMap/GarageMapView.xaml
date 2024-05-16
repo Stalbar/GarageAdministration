@@ -50,6 +50,11 @@
                 <Button Style="{StaticResource RegularButton}"
                         Command="{Binding NavigateToCreateMapViewCommand}"
                         Content="Добавить карту"/>
+                <TextBlock Style="{StaticResource RegularTextBlock}"
+                           Text="Карта"/>
+                <ComboBox ItemsSource="{Binding Maps}"
+                          SelectedValue="{Binding SelectedMap}"
+                          Style="{StaticResource RegularCombobox}"/>
             </StackPanel>
         </Grid>
     </Grid>

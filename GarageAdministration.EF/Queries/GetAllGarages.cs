@@ -28,7 +28,7 @@ public class GetAllGarages : IGetAllQuery<Garage>
                 new Owner(g.Owner!.Id, g.Owner.Name, g.Owner.Surname, g.Owner.Patronymic),
                 new MapInfo(g.MapInfo!.Id, g.MapInfo.Top, g.MapInfo.Left, g.MapInfo.Width, g.MapInfo.Height,
                     g.MapInfo.Angle, g.MapInfo.ZIndex),
-                new Map(g.Map!.Id, g.Map.PathToImage),
+                new Map(g.Map!.Id, g.Map.PathToImage, g.Map.Name),
                 new Contribution(g.Contribution!.Id, g.Contribution.ElectricityFee, g.Contribution.MembershipFee,
                     g.Contribution.MembershipFeePaymentStatus, g.Contribution.ElectricityFeePaymentStatus)
             )

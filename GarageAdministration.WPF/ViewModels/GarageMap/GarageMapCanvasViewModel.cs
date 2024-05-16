@@ -6,7 +6,7 @@ using GarageAdministration.WPF.Services.Abstractions;
 
 namespace GarageAdministration.WPF.ViewModels.GarageMap;
 
-public class GarageMapCanvasViewModel: ViewModelBase
+public class GarageMapCanvasViewModel : ViewModelBase
 {
     private readonly GaragesStore _garagesStore;
     private readonly GarageBlockStore _garageBlockStore;
@@ -17,15 +17,30 @@ public class GarageMapCanvasViewModel: ViewModelBase
     private readonly OwnersStore _ownersStore;
     private readonly GarageMapSearchTextStore _garageMapSearchTextStore;
     private readonly ContributionsStore _contributionsStore;
-    public string BGImage => "map1.png";
+    private readonly SelectedMapStore _selectedMapStore;
+    private string? _backgroundImage;
+
+    public string? BackgroundImage
+    {
+        get => _backgroundImage;
+        set
+        {
+            _backgroundImage = value;
+            OnPropertyChanged(nameof(BackgroundImage));
+        }
+    }
+
     public double Width => System.Windows.SystemParameters.PrimaryScreenWidth;
     public double Height => System.Windows.SystemParameters.PrimaryScreenHeight;
 
     public IEnumerable<GarageMapCanvasItemViewModel> GarageMapCanvasItemViewModels => FilterGarages();
+
     public IEnumerable<GarageMapCanvasBlockItemViewModel> GarageMapCanvasBlockItemViewModels =>
         _garageMapCanvasBlockItemViewModels;
 
-    public GarageMapCanvasViewModel(GaragesStore garagesStore, INavigationService navigation, GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore, GarageMapSearchTextStore garageMapSearchTextStore, ContributionsStore contributionsStore)
+    public GarageMapCanvasViewModel(GaragesStore garagesStore, INavigationService navigation,
+        GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore,
+        GarageMapSearchTextStore garageMapSearchTextStore, ContributionsStore contributionsStore, SelectedMapStore selectedMapStore)
     {
         _garageBlockStore = garageBlockStore;
         _garageMapSearchTextStore = garageMapSearchTextStore;
@@ -34,10 +49,11 @@ public class GarageMapCanvasViewModel: ViewModelBase
         _garageMapInfoStore = garageMapInfoStore;
         _ownersStore = ownersStore;
         _contributionsStore = contributionsStore;
-        
+        _selectedMapStore = selectedMapStore;
+
         _garageMapCanvasItemViewModels = new ObservableCollection<GarageMapCanvasItemViewModel>();
         _garageMapCanvasBlockItemViewModels = new ObservableCollection<GarageMapCanvasBlockItemViewModel>();
-        
+
         _garagesStore.GarageAdded += GaragesStore_GarageAdded;
         _garagesStore.GarageDeleted += GaragesStore_GarageDeleted;
         _garagesStore.GarageUpdated += GaragesStore_GarageUpdated;
@@ -47,11 +63,18 @@ public class GarageMapCanvasViewModel: ViewModelBase
         _garageBlockStore.GarageBlockDeleted += GarageBlockStore_GarageBlockDeleted;
         _garageBlockStore.GarageBlockUpdated += GarageBlockStore_GarageBlockUpdated;
         _garageBlockStore.GarageBlocksLoaded += GarageBlockStore_GarageBlocksLoaded;
-        
+
         _garageMapSearchTextStore.SearchTextChanged += GarageMapSearchTextStoreOnSearchTextChanged;
+        
+        _selectedMapStore.SelectedMapChanged += SelectedMapStoreOnSelectedMapChanged;
         
         GaragesStore_GaragesLoaded();
         GarageBlockStore_GarageBlocksLoaded();
+    }
+
+    private void SelectedMapStoreOnSelectedMapChanged()
+    {
+        BackgroundImage = _selectedMapStore.Map?.PathToImage;
     }
 
     private void GarageMapSearchTextStoreOnSearchTextChanged()
@@ -83,7 +106,7 @@ public class GarageMapCanvasViewModel: ViewModelBase
     {
         var garageBlockViewModel =
             _garageMapCanvasBlockItemViewModels.FirstOrDefault(g => g.GarageBlock.Id == garageBlock.Id);
-        
+
         garageBlockViewModel?.Update(garageBlock);
     }
 
@@ -147,11 +170,13 @@ public class GarageMapCanvasViewModel: ViewModelBase
 
     private void AddGarage(Garage garage)
     {
-        _garageMapCanvasItemViewModels.Add(new GarageMapCanvasItemViewModel(garage, _garagesStore, _navigation, _garageMapInfoStore, _ownersStore, _garageBlockStore, _contributionsStore));
+        _garageMapCanvasItemViewModels.Add(new GarageMapCanvasItemViewModel(garage, _garagesStore, _navigation,
+            _garageMapInfoStore, _ownersStore, _garageBlockStore, _contributionsStore));
     }
 
     private void AddGarageBlock(GarageBlock garageBlock)
     {
-        _garageMapCanvasBlockItemViewModels.Add(new GarageMapCanvasBlockItemViewModel(garageBlock, _garageBlockStore, _navigation, _garagesStore, _garageMapInfoStore));
+        _garageMapCanvasBlockItemViewModels.Add(new GarageMapCanvasBlockItemViewModel(garageBlock, _garageBlockStore,
+            _navigation, _garagesStore, _garageMapInfoStore));
     }
 }

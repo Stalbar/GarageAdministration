@@ -17,6 +17,6 @@ public class GetAllMaps: IGetAllQuery<Map>
     {
         await using var context = _contextFactory.Create();
         var maps = await context.Maps.ToListAsync();
-        return maps.Select(m => new Map(m.Id, m.PathToImage));
+        return maps.Select(m => new Map(m.Id, m.PathToImage, m.Name));
     }
 }

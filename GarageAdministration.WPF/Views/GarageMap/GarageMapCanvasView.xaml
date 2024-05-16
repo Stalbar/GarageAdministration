@@ -39,7 +39,7 @@
                                 behaviors:ZoomBehavior.ZoomFactor="0.1"
                                 behaviors:ZoomBehavior.ScrollViewer="{Binding ElementName=MainScrollViewer}">
                             <Canvas.Background>
-                                <ImageBrush ImageSource="{Binding BGImage, Converter={StaticResource StringToImageConverter}}"/>
+                                <ImageBrush ImageSource="{Binding BackgroundImage, Converter={StaticResource StringToImageConverter}}"/>
                             </Canvas.Background>
                         </Canvas>
                     </ItemsPanelTemplate>

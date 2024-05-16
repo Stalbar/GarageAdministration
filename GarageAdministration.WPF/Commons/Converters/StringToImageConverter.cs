@@ -9,6 +9,10 @@ public class StringToImageConverter: IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
+        if (value == null)
+        {
+            return null;
+        }
         if (value.GetType() != typeof(string))
         {
             throw new InvalidOperationException("Value must be string");

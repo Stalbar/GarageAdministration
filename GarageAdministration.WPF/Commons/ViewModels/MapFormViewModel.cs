@@ -6,7 +6,8 @@ namespace GarageAdministration.WPF.Commons.ViewModels;
 public class MapFormViewModel: ViewModelBase
 {
     private INavigationService _navigation;
-    private string _selectedPath;
+    private string _selectedPath = "";
+    private string _mapName = "";
 
     public INavigationService Navigation
     {
@@ -25,6 +26,16 @@ public class MapFormViewModel: ViewModelBase
         {
             _selectedPath = value;
             OnPropertyChanged(nameof(SelectedPath));
+        }
+    }
+
+    public string MapName
+    {
+        get => _mapName;
+        set
+        {
+            _mapName = value;
+            OnPropertyChanged(nameof(MapName));
         }
     }
     
