@@ -6,6 +6,7 @@ namespace GarageAdministration.WPF.Commons.ViewModels;
 public class MapFormViewModel: ViewModelBase
 {
     private INavigationService _navigation;
+    private string _selectedPath;
 
     public INavigationService Navigation
     {
@@ -16,14 +17,26 @@ public class MapFormViewModel: ViewModelBase
             OnPropertyChanged(nameof(Navigation));
         }
     }
-    
-    public ICommand CreateCommand { get; }
-    public ICommand CancelCommand { get; }
 
-    public MapFormViewModel(INavigationService navigation, ICommand createCommand, ICommand cancelCommand)
+    public string SelectedPath
+    {
+        get => _selectedPath;
+        set
+        {
+            _selectedPath = value;
+            OnPropertyChanged(nameof(SelectedPath));
+        }
+    }
+    
+    public ICommand SubmitCommand { get; }
+    public ICommand CancelCommand { get; }
+    public ICommand SelectFileCommand { get; }
+    
+    public MapFormViewModel(INavigationService navigation, ICommand submitCommand, ICommand cancelCommand, ICommand selectFileCommand)
     {
         Navigation = navigation;
-        CreateCommand = createCommand;
+        SubmitCommand = submitCommand;
         CancelCommand = cancelCommand;
+        SelectFileCommand = selectFileCommand;
     }
 }

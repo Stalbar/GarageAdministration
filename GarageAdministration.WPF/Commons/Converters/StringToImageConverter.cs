@@ -14,9 +14,16 @@ public class StringToImageConverter: IValueConverter
             throw new InvalidOperationException("Value must be string");
         }
 
-        var fileName = (string)value;
-        var fileInfo = new FileInfo(fileName);
-        return new BitmapImage(new Uri(fileInfo.FullName));
+        try
+        {
+            var fileName = (string)value;
+            var fileInfo = new FileInfo(fileName);
+            return new BitmapImage(new Uri(fileInfo.FullName));
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

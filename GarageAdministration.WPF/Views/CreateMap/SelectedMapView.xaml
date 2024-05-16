@@ -3,10 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:GarageAdministration.WPF.Views.CreateMap"
+             xmlns:converters="clr-namespace:GarageAdministration.WPF.Commons.Converters"
+             xmlns:behaviors="clr-namespace:GarageAdministration.WPF.Behaviors"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:StringToImageConverter x:Key="StringToImageConverter"/>
+    </UserControl.Resources>
     <Grid>
-        
+        <ScrollViewer x:Name="MainScrollViewer"
+                      CanContentScroll="False"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto">
+            <ItemsControl>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas Width="{Binding Width}"
+                                Height="{Binding Height}"
+                                behaviors:ZoomBehavior.IsEnabled="True"
+                                behaviors:ZoomBehavior.ZoomFactor="0.1"
+                                behaviors:ZoomBehavior.ScrollViewer="{Binding ElementName=MainScrollViewer}">
+                            <Canvas.Background>
+                                <ImageBrush ImageSource="{Binding BackgroundImage, Converter={StaticResource StringToImageConverter}}"/>
+                            </Canvas.Background>
+                        </Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>
