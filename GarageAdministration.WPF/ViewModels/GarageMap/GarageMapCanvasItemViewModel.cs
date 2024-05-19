@@ -52,5 +52,7 @@ public class GarageMapCanvasItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(Height));
         OnPropertyChanged(nameof(Angle));
         OnPropertyChanged(nameof(Owner));
+        OnPropertyChanged(nameof(ElectricityFeeStatus));
+        OnPropertyChanged(nameof(MembershipFeeStatus));
     }
 }

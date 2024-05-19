@@ -37,11 +37,36 @@
         <ListView Grid.Row="1" ItemsSource="{Binding OwnersListItemViewModels}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Surname}">Фамилия</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Имя</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Patronymic}">Отчество</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Surname}"
+                                    Header="Фамилия"
+                                    x:Name="Col1"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"  
+                                    Header="Имя"
+                                    Width="{Binding ElementName=HelperField, Path=ActualWidth}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Patronymic}"
+                                    Header="Отчество"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding GarageCount}"
+                                    Header="Количество гаражей"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding HasElectricityDebt}"
+                                    Header="Взнос за электричество"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding ElectricityDebt}"
+                                    Header="Суммарный взнос за электричество"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding HasMembershipDebt}"
+                                    Header="Членский взнос"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding MembershipDebt}"
+                                    Header="Суммарный членский взнос"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Grid Grid.Row="1" 
+              Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding ElementName=Col1, Path=ActualWidth}"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1"
+                  x:Name="HelperField"/>
+        </Grid>
     </Grid>
 </UserControl>

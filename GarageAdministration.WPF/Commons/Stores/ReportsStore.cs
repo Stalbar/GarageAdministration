@@ -11,6 +11,7 @@ public class ReportsStore
     private readonly IDeleteCommand _deleteCommand;
     private readonly IGetAllQuery<Report> _getAllQuery;
 
+    public IEnumerable<Report> Reports => _reports;
     public event Action<Report>? ReportAdded;
     public event Action? ReportsLoaded;
     public event Action<int>? ReportDeleted; 

@@ -18,6 +18,7 @@ public class GetAllOwners: IGetAllQuery<Owner>
         await using var context = _contextFactory.Create();
         var owners = await context.Owners
             .Include(o => o.Garages)
+                .ThenInclude(g => g.Contribution)
             .ToListAsync();
         return owners;
     }

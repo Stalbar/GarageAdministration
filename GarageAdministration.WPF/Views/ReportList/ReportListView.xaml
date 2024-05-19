@@ -31,7 +31,38 @@
             </StackPanel>
             <Button Grid.Column="1"
                     Style="{StaticResource RegularButton}"
-                    Content="Создать отчет"/>
+                    Content="Создать отчет"
+                    Command="{Binding CreateReportCommand}"/>
         </Grid>
+        <Border Grid.Row="1"
+                BorderThickness="1"
+                CornerRadius="5"
+                SnapsToDevicePixels="True"
+                BorderBrush="Gray">
+            <Grid>
+                <Grid.OpacityMask>
+                    <VisualBrush Visual="{Binding ElementName=Border}"/>
+                </Grid.OpacityMask>
+                <Border x:Name="Border"
+                        Background="White"
+                        CornerRadius="5"/>
+                <ListView BorderThickness="0"
+                          ItemsSource="{Binding ReportListItemViewModels}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Stretch"/>
+                            <Setter Property="VerticalContentAlignment"
+                                    Value="Center"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <local:ReportListItemView/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

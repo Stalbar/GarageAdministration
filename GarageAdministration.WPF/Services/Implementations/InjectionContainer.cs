@@ -103,6 +103,14 @@ public static class InjectionContainer
             new DeleteContributionCommand(provider.GetRequiredService<GarageAdministrationDbContextFactory>()),
             provider.GetRequiredService<IGetAllQuery<Contribution>>()
         ));
+        
+        services.AddSingleton<ICreateCommand<Report>, CreateReportCommand>();
+        services.AddSingleton<IGetAllQuery<Report>, GetAllReports>();
+        services.AddSingleton<ReportsStore>(provider => new ReportsStore(
+            provider.GetRequiredService<ICreateCommand<Report>>(),
+            new DeleteReportCommand(provider.GetRequiredService<GarageAdministrationDbContextFactory>()),
+            provider.GetRequiredService<IGetAllQuery<Report>>()
+        ));
 
         services.AddSingleton<GarageMapSearchTextStore>();
         services.AddSingleton<SelectedMapStore>();

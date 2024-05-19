@@ -26,7 +26,7 @@ public class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel(INavigationService navService, GaragesStore garagesStore,
         GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore,
-        MapsStore mapsStore, ContributionsStore contributionsStore)
+        MapsStore mapsStore, ContributionsStore contributionsStore, ReportsStore reportsStore)
 
     {
         Navigation = navService;
@@ -39,5 +39,6 @@ public class MainWindowViewModel : ViewModelBase
         new LoadGarageBlocksCommand(garageBlockStore).Execute(null);
         new LoadMapsCommand(mapsStore).Execute(null);
         new LoadContributionsCommand(contributionsStore).Execute(null);
+        new LoadReportsCommand(reportsStore).Execute(null);
     }
 }

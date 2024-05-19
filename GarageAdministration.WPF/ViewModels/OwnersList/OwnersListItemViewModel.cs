@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using GarageAdministration.Domain.Models;
+using GarageAdministration.Infrastracture.Enums;
 using GarageAdministration.WPF.Commands;
 using GarageAdministration.WPF.Commons;
 using GarageAdministration.WPF.Commons.Stores;
@@ -26,7 +27,20 @@ public class OwnersListItemViewModel: ViewModelBase
     public string Name => Owner.Name;
     public string Surname => Owner.Surname;
     public string Patronymic => Owner.Patronymic;
+    public int GarageCount => Owner.Garages.Count;
+    public string HasElectricityDebt =>
+        Owner.Garages.Any(g => g.Contribution.ElectricityFeePaymentStatus == PaymentStatus.NotPaid)
+            ? "Не выплачен"
+            : "Выплачен";
 
+    public string HasMembershipDebt =>
+        Owner.Garages.Any(g => g.Contribution.MembershipFeePaymentStatus == PaymentStatus.NotPaid)
+            ? "Не выплачен"
+            : "Выплачен";
+
+    public decimal ElectricityDebt => Owner.Garages.Sum(g => g.Contribution.ElectricityFee);
+    public decimal MembershipDebt => Owner.Garages.Sum(g => g.Contribution.MembershipFee);
+    
     public ICommand EditCommand { get; }
     public ICommand DeleteCommand { get; }
     
