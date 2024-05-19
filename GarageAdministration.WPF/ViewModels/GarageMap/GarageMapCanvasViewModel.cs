@@ -3,6 +3,7 @@ using GarageAdministration.Domain.Models;
 using GarageAdministration.WPF.Commons.Stores;
 using GarageAdministration.WPF.Commons.ViewModels;
 using GarageAdministration.WPF.Services.Abstractions;
+using GarageAdministration.WPF.Services.Implementations.Filters;
 
 namespace GarageAdministration.WPF.ViewModels.GarageMap;
 
@@ -18,6 +19,7 @@ public class GarageMapCanvasViewModel : ViewModelBase
     private readonly GarageMapSearchTextStore _garageMapSearchTextStore;
     private readonly ContributionsStore _contributionsStore;
     private readonly SelectedMapStore _selectedMapStore;
+    private readonly GarageMapSelectedFilterStore _garageMapSelectedFilterStore;
     private string? _backgroundImage;
 
     public string? BackgroundImage
@@ -40,7 +42,9 @@ public class GarageMapCanvasViewModel : ViewModelBase
 
     public GarageMapCanvasViewModel(GaragesStore garagesStore, INavigationService navigation,
         GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore,
-        GarageMapSearchTextStore garageMapSearchTextStore, ContributionsStore contributionsStore, SelectedMapStore selectedMapStore)
+        GarageMapSearchTextStore garageMapSearchTextStore, ContributionsStore contributionsStore,
+        SelectedMapStore selectedMapStore,
+        GarageMapSelectedFilterStore selectedFilterStore)
     {
         _garageBlockStore = garageBlockStore;
         _garageMapSearchTextStore = garageMapSearchTextStore;
@@ -50,6 +54,7 @@ public class GarageMapCanvasViewModel : ViewModelBase
         _ownersStore = ownersStore;
         _contributionsStore = contributionsStore;
         _selectedMapStore = selectedMapStore;
+        _garageMapSelectedFilterStore = selectedFilterStore;
 
         _garageMapCanvasItemViewModels = new ObservableCollection<GarageMapCanvasItemViewModel>();
         _garageMapCanvasBlockItemViewModels = new ObservableCollection<GarageMapCanvasBlockItemViewModel>();
@@ -65,11 +70,18 @@ public class GarageMapCanvasViewModel : ViewModelBase
         _garageBlockStore.GarageBlocksLoaded += GarageBlockStore_GarageBlocksLoaded;
 
         _garageMapSearchTextStore.SearchTextChanged += GarageMapSearchTextStoreOnSearchTextChanged;
-        
+
         _selectedMapStore.SelectedMapChanged += SelectedMapStoreOnSelectedMapChanged;
-        
+
+        _garageMapSelectedFilterStore.SelectedFilterChanged += GarageMapSelectedFilterStoreOnSelectedFilterChanged;
+
         GaragesStore_GaragesLoaded();
         GarageBlockStore_GarageBlocksLoaded();
+    }
+
+    private void GarageMapSelectedFilterStoreOnSelectedFilterChanged()
+    {
+        OnPropertyChanged(nameof(GarageMapCanvasItemViewModels));
     }
 
     private void SelectedMapStoreOnSelectedMapChanged()
@@ -86,12 +98,10 @@ public class GarageMapCanvasViewModel : ViewModelBase
     private IEnumerable<GarageMapCanvasItemViewModel> FilterGarages()
     {
         var searchText = _garageMapSearchTextStore.SearchText;
-        if (searchText.Equals(""))
-        {
-            return _garageMapCanvasItemViewModels;
-        }
-
-        return _garageMapCanvasItemViewModels.Where(g => g.Owner.ToString().ToLower().Contains(searchText.ToLower()));
+        var searchFiltered = searchText.Equals("") ? _garageMapCanvasItemViewModels :
+            _garageMapCanvasItemViewModels.Where(g => g.Owner.ToString().ToLower().Contains(searchText.ToLower()));
+        var predicateFiltered = _garageMapSelectedFilterStore.Filter.ApplyFilter(searchFiltered);
+        return predicateFiltered;
     }
 
     private void GarageBlockStore_GarageBlocksLoaded()
@@ -143,6 +153,7 @@ public class GarageMapCanvasViewModel : ViewModelBase
         {
             return;
         }
+
         var garageViewModel = _garageMapCanvasItemViewModels.FirstOrDefault(g => g.Garage.Id == garage.Id);
 
         garageViewModel?.Update(garage);
