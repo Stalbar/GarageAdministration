@@ -17,11 +17,12 @@ public class NavigateToEditGarageViewCommand : CommandBase
     private readonly GarageBlockStore _garageBlockStore;
     private readonly ICommand _deleteCommand;
     private readonly ContributionsStore _contributionsStore;
+    private readonly SelectedMapStore _selectedMapStore;
 
     public NavigateToEditGarageViewCommand(INavigationService navigation,
         GarageMapCanvasItemViewModel garageMapCanvasItemViewModel, GaragesStore garagesStore, OwnersStore ownersStore,
         GarageMapInfoStore garageMapInfoStore, GarageBlockStore garageBlockStore, ICommand deleteCommand,
-        ContributionsStore contributionsStore)
+        ContributionsStore contributionsStore, SelectedMapStore selectedMapStore)
     {
         _navigation = navigation;
         _garageMapCanvasItemViewModel = garageMapCanvasItemViewModel;
@@ -31,13 +32,14 @@ public class NavigateToEditGarageViewCommand : CommandBase
         _garageBlockStore = garageBlockStore;
         _deleteCommand = deleteCommand;
         _contributionsStore = contributionsStore;
+        _selectedMapStore = selectedMapStore;
     }
 
     public override void Execute(object? parameter)
     {
         var garage = _garageMapCanvasItemViewModel.Garage;
         var editGarageViewModel = new EditGarageViewModel(garage, _garagesStore, _garageMapInfoStore, _ownersStore,
-            _navigation, _garageBlockStore, _deleteCommand, _contributionsStore);
+            _navigation, _garageBlockStore, _deleteCommand, _contributionsStore, _selectedMapStore);
         _navigation.NavigateTo(editGarageViewModel);
     }
 }

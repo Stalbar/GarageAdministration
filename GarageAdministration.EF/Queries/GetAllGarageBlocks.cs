@@ -19,9 +19,6 @@ public class GetAllGarageBlocks : IGetAllQuery<GarageBlock>
         var garageBlocks = await context.GarageBlock
             .Include(g => g.MapInfo)
             .ToListAsync();
-        return garageBlocks.Select(g => new GarageBlock(
-            g.Id,
-            new MapInfo(g.MapInfo!.Id, g.MapInfo.Top, g.MapInfo.Left, g.MapInfo.Width, g.MapInfo.Height, g.MapInfo.Angle, g.MapInfo.ZIndex)
-        ));
+        return garageBlocks;
     }
 }

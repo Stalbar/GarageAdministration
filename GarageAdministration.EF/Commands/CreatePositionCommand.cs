@@ -1,6 +1,5 @@
 ﻿using GarageAdministration.Domain.Commands;
 using GarageAdministration.Domain.Models;
-using GarageAdministration.EF.DTOs;
 
 namespace GarageAdministration.EF.Commands;
 
@@ -16,7 +15,7 @@ public class CreatePositionCommand: ICreateCommand<MapInfo>
     public async Task Execute(MapInfo entity)
     {
         await using var context = _contextFactory.Create();
-        var mapInfoDto = new MapInfoDto()
+        var mapInfoDto = new MapInfo()
         {
             Top = entity.Top,
             Left = entity.Left,

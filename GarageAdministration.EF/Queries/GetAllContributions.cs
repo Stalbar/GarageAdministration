@@ -18,12 +18,6 @@ public class GetAllContributions : IGetAllQuery<Contribution>
         await using var context = _contextFactory.Create();
         var contributions = await context.Contributions
             .ToListAsync();
-        return contributions.Select(c => new Contribution(
-            c.Id,
-            c.MembershipFee,
-            c.ElectricityFee,
-            c.MembershipFeePaymentStatus,
-            c.ElectricityFeePaymentStatus
-        ));
+        return contributions;
     }
 }

@@ -2,9 +2,10 @@
 
 public class Map
 {
-    public int Id { get; }
-    public string PathToImage { get; }
-    public string Name { get; }
+    public int Id { get; set; }
+    public string PathToImage { get; set; }
+    public string Name { get; set; }
+    public List<Garage> Garages { get; set; } = new List<Garage>();
     public Map(int id, string pathToImage, string name)
     {
         Id = id;
@@ -12,5 +13,9 @@ public class Map
         Name = name;
     }
 
+    public Map()
+    {
+        
+    }
     public override string ToString() => Name;
 }

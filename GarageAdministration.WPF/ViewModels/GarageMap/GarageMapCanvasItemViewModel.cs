@@ -22,23 +22,25 @@ public class GarageMapCanvasItemViewModel : ViewModelBase
     public string Owner => "Владелец: " + Garage.Owner;
 
     public string ElectricityFeeStatus =>
-        "Электричество: " + (Contribution.ElectricityFeePaymentStatus == PaymentStatus.Paid ? "Оплачено" : "Не оплачено");
+        "Электричество: " +
+        (Contribution.ElectricityFeePaymentStatus == PaymentStatus.Paid ? "Оплачено" : "Не оплачено");
 
     public string MembershipFeeStatus =>
         "Взнос: " + (Contribution.MembershipFeePaymentStatus == PaymentStatus.Paid ? "Оплачен" : "Не оплачен");
-    
+
     public ICommand DeleteCommand { get; }
     public ICommand IconCommand { get; }
 
     public GarageMapCanvasItemViewModel(Garage garage, GaragesStore garagesStore, INavigationService navigation,
         GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore,
-        ContributionsStore contributionsStore)
+        ContributionsStore contributionsStore, SelectedMapStore selectedMapStore)
     {
         Garage = garage;
         Contribution = garage.Contribution;
         DeleteCommand = new DeleteGarageCommand(this, garagesStore, navigation);
         IconCommand =
-            new NavigateToEditGarageViewCommand(navigation, this, garagesStore, ownersStore, garageMapInfoStore, garageBlockStore, DeleteCommand, contributionsStore);
+            new NavigateToEditGarageViewCommand(navigation, this, garagesStore, ownersStore, garageMapInfoStore,
+                garageBlockStore, DeleteCommand, contributionsStore, selectedMapStore);
     }
 
     public void Update(Garage garage)

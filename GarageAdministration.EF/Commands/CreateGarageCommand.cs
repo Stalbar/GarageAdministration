@@ -1,6 +1,5 @@
 ﻿using GarageAdministration.Domain.Commands;
 using GarageAdministration.Domain.Models;
-using GarageAdministration.EF.DTOs;
 
 namespace GarageAdministration.EF.Commands;
 
@@ -16,7 +15,7 @@ public class CreateGarageCommand: ICreateCommand<Garage>
     public async Task Execute(Garage entity)
     {
         await using var context = _contextFactory.Create();
-        var garageDto = new GarageDto()
+        var garageDto = new Garage()
         {
             MapInfoId = entity.MapInfo.Id,
             OwnerId = entity.Owner.Id,

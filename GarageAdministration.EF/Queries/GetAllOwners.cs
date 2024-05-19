@@ -16,14 +16,9 @@ public class GetAllOwners: IGetAllQuery<Owner>
     public async Task<IEnumerable<Owner>> Execute()
     {
         await using var context = _contextFactory.Create();
-        var owners = await context.Owners.ToListAsync();
-        return owners.Select(o => 
-            new Owner(
-                o.Id, 
-                o.Name, 
-                o.Surname, 
-                o.Patronymic
-            )
-        );
+        var owners = await context.Owners
+            .Include(o => o.Garages)
+            .ToListAsync();
+        return owners;
     }
 }

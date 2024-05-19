@@ -1,17 +1,17 @@
-﻿using GarageAdministration.EF.DTOs;
+﻿using GarageAdministration.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GarageAdministration.EF;
 
 public class GarageAdministrationDbContext: DbContext
 {
-    public DbSet<GarageDto> Garages { get; set; } = null!;
-    public DbSet<MapInfoDto> MapInfos { get; set; } = null!;
-    public DbSet<OwnerDto> Owners { get; set; } = null!;
-    public DbSet<GarageBlockDTO> GarageBlock { get; set; } = null!;
-    public DbSet<MapDto> Maps { get; set; } = null!;
-    public DbSet<ContributionDto> Contributions { get; set; } = null!;
-    public DbSet<ReportDto> Reports { get; set; } = null!;
+    public DbSet<Garage> Garages { get; set; } = null!;
+    public DbSet<MapInfo> MapInfos { get; set; } = null!;
+    public DbSet<Owner> Owners { get; set; } = null!;
+    public DbSet<GarageBlock> GarageBlock { get; set; } = null!;
+    public DbSet<Map> Maps { get; set; } = null!;
+    public DbSet<Contribution> Contributions { get; set; } = null!;
+    public DbSet<Report> Reports { get; set; } = null!;
     public GarageAdministrationDbContext(DbContextOptions options) : base(options)
     {
         

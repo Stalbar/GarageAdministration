@@ -45,7 +45,7 @@
                                               CommandParameter="{Binding ElementName=TargetCanvas}"/>
                             </Canvas.InputBindings>
                             <Canvas.Background>
-                                <ImageBrush ImageSource="{Binding BGImage, Converter={StaticResource StringToImageConverter}}"></ImageBrush>
+                                <ImageBrush ImageSource="{Binding BackgroundImage, Converter={StaticResource StringToImageConverter}}"></ImageBrush>
                             </Canvas.Background>
                         </Canvas>
                     </ItemsPanelTemplate>

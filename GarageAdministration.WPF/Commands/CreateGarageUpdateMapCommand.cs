@@ -14,13 +14,15 @@ public class CreateGarageUpdateMapCommand: CommandBase
     private readonly GaragesStore _garagesStore;
     private readonly GarageMapInfoStore _garageMapInfoStore;
     private readonly ContributionsStore _contributionsStore;
+    private readonly SelectedMapStore _selectedMapStore;
 
-    public CreateGarageUpdateMapCommand(GaragesStore garagesStore, CreateGarageViewModel createGarageViewModel, GarageMapInfoStore garageMapInfoStore, ContributionsStore contributionsStore)
+    public CreateGarageUpdateMapCommand(GaragesStore garagesStore, CreateGarageViewModel createGarageViewModel, GarageMapInfoStore garageMapInfoStore, ContributionsStore contributionsStore, SelectedMapStore selectedMapStore)
     {
         _garagesStore = garagesStore;
         _createGarageViewModel = createGarageViewModel;
         _garageMapInfoStore = garageMapInfoStore;
         _contributionsStore = contributionsStore;
+        _selectedMapStore = selectedMapStore;
     }
 
     public override void Execute(object? parameter)
@@ -30,7 +32,7 @@ public class CreateGarageUpdateMapCommand: CommandBase
         var owner = _createGarageViewModel.GarageFormViewModel.SelectedOwner;
         var mapInfoId = !_garageMapInfoStore.MapInfos.Any() ? 1 : _garageMapInfoStore.MapInfos.Last().Id + 1;   
         var mapInfo = new MapInfo(mapInfoId, mousePos.Y, mousePos.X, _createGarageViewModel.GarageFormViewModel.Width, _createGarageViewModel.GarageFormViewModel.Height, _createGarageViewModel.GarageFormViewModel.Angle, 1);
-        var map = new Map(1, "", "");
+        var map = _selectedMapStore.Map!;
         var form = _createGarageViewModel.GarageFormViewModel;
         var contributionId = !_contributionsStore.Contributions.Any()
             ? 1

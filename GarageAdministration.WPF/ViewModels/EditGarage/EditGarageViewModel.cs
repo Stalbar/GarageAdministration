@@ -16,19 +16,19 @@ public class EditGarageViewModel : ViewModelBase
 
     public EditGarageViewModel(Garage garage, GaragesStore garagesStore, GarageMapInfoStore garageMapInfoStore,
         OwnersStore ownersStore, INavigationService navigation, GarageBlockStore garageBlockStore,
-        ICommand deleteCommand, ContributionsStore contributionsStore)
+        ICommand deleteCommand, ContributionsStore contributionsStore, SelectedMapStore selectedMapStore)
     {
         GarageId = garage.Id;
         ICommand mapClickCommand = new EditGarageUpdateMapCommand(this, garagesStore, garageMapInfoStore);
         CreateGarageMapViewModel =
-            new CreateGarageMapViewModel(garagesStore, garageBlockStore, navigation, mapClickCommand)
+            new CreateGarageMapViewModel(garagesStore, garageBlockStore, navigation, mapClickCommand, selectedMapStore)
             {
                 IsGarageCreated = true,
                 CreatedGarage = garage,
             };
         ICommand submitCommand = new EditGarageCommand(this, garagesStore, garageMapInfoStore, navigation, contributionsStore);
         ICommand cancelCommand = new NavigateToGarageMapViewCommand(navigation);
-        ICommand updateMapFromFormCommand = new UpdateMapFromEditFormCommand(this);
+        ICommand updateMapFromFormCommand = new UpdateMapFromEditFormCommand(this, selectedMapStore);
         GarageFormViewModel = new GarageFormViewModel(navigation, ownersStore, submitCommand, cancelCommand,
             updateMapFromFormCommand, garage.Owner, deleteCommand: deleteCommand)
         {

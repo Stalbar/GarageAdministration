@@ -2,10 +2,11 @@
 
 public class Owner
 {
-    public int Id { get; }
-    public string Name { get; }
-    public string Surname { get; }
-    public string Patronymic { get; }
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public string Patronymic { get; set; }
+    public List<Garage> Garages { get; set; } = new List<Garage>();
 
     public Owner(int id, string name, string surname, string patronymic)
     {
@@ -15,5 +16,10 @@ public class Owner
         Patronymic = patronymic;
     }
 
+    public Owner()
+    {
+        
+    }
+    
     public override string ToString() => $"{Surname} {Name} {Patronymic}";
 }

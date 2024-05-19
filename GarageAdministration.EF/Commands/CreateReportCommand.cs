@@ -1,6 +1,5 @@
 ﻿using GarageAdministration.Domain.Commands;
 using GarageAdministration.Domain.Models;
-using GarageAdministration.EF.DTOs;
 
 namespace GarageAdministration.EF.Commands;
 
@@ -16,7 +15,7 @@ public class CreateReportCommand: ICreateCommand<Report>
     public async Task Execute(Report entity)
     {
         await using var context = _contextFactory.Create();
-        var reportDto = new ReportDto()
+        var reportDto = new Report()
         {
             CreationDate = entity.CreationDate,
             PathToFile = entity.PathToFile,

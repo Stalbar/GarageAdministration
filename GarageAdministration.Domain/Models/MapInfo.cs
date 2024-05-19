@@ -2,14 +2,13 @@
 
 public class MapInfo
 {
-    public int Id { get; }
-    public double Top { get; }
-    public double Left { get; }
-    public double Width { get; }
-    public double Height { get; }
-    
-    public double Angle { get; }
-    public double ZIndex { get; }
+    public int Id { get; set; }
+    public double Top { get; set; }
+    public double Left { get; set; }
+    public double Width { get; set; }
+    public double Height { get; set; }
+    public double Angle { get; set; }
+    public double ZIndex { get; set; }
     
     public MapInfo(int id, double top, double left, double width, double height, double angle, double zIndex)
     {
@@ -20,5 +19,10 @@ public class MapInfo
         Height = height;
         Angle = angle;
         ZIndex = zIndex;
+    }
+
+    public MapInfo()
+    {
+        
     }
 }

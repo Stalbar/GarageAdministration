@@ -4,13 +4,11 @@ namespace GarageAdministration.Domain.Models;
 
 public class Contribution
 {
-    public int Id { get; }
-    public decimal ElectricityFee { get; }
-    
-    public PaymentStatus ElectricityFeePaymentStatus { get; }
-    public decimal MembershipFee { get; }
-    
-    public PaymentStatus MembershipFeePaymentStatus { get; }
+    public int Id { get; set; }
+    public decimal ElectricityFee { get; set; }
+    public PaymentStatus ElectricityFeePaymentStatus { get; set; }
+    public decimal MembershipFee { get; set; }
+    public PaymentStatus MembershipFeePaymentStatus { get; set; }
 
     public Contribution(int id, decimal electricityFee, decimal membershipFee, PaymentStatus membershipFeePaymentStatus, PaymentStatus electricityFeePaymentStatus)
     {
@@ -19,5 +17,10 @@ public class Contribution
         MembershipFee = membershipFee;
         MembershipFeePaymentStatus = membershipFeePaymentStatus;
         ElectricityFeePaymentStatus = electricityFeePaymentStatus;
+    }
+
+    public Contribution()
+    {
+        
     }
 }

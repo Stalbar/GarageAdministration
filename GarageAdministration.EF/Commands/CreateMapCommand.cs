@@ -1,6 +1,6 @@
 ﻿using GarageAdministration.Domain.Commands;
 using GarageAdministration.Domain.Models;
-using GarageAdministration.EF.DTOs;
+
 
 namespace GarageAdministration.EF.Commands;
 
@@ -16,7 +16,7 @@ public class CreateMapCommand: ICreateCommand<Map>
     public async Task Execute(Map entity)
     {
         await using var context = _contextFactory.Create();
-        var mapDto = new MapDto()
+        var mapDto = new Map()
         {
             PathToImage = entity.PathToImage,
             Name = entity.Name,

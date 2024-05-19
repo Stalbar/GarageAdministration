@@ -17,6 +17,6 @@ public class GetAllReports: IGetAllQuery<Report>
     {
         await using var context = _contextFactory.Create();
         var reports = await context.Reports.ToListAsync();
-        return reports.Select(r => new Report(r.Id, r.PathToFile, r.CreationDate));
+        return reports;
     }
 }

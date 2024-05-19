@@ -1,6 +1,5 @@
 ﻿using GarageAdministration.Domain.Commands;
 using GarageAdministration.Domain.Models;
-using GarageAdministration.EF.DTOs;
 
 namespace GarageAdministration.EF.Commands;
 
@@ -16,7 +15,7 @@ public class CreateContributionCommand: ICreateCommand<Contribution>
     public async Task Execute(Contribution entity)
     {
         await using var context = _contextFactory.Create();
-        var contributionDto = new ContributionDto()
+        var contributionDto = new Contribution()
         {
             MembershipFee = entity.ElectricityFee,
             ElectricityFee = entity.MembershipFee,

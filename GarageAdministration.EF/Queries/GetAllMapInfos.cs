@@ -17,6 +17,6 @@ public class GetAllMapInfos: IGetAllQuery<MapInfo>
     {
         await using var context = _contextFactory.Create();
         var mapInfos = await context.MapInfos.ToListAsync();
-        return mapInfos.Select(m => new MapInfo(m.Id, m.Top, m.Left, m.Width, m.Height, m.Angle, m.ZIndex));
+        return mapInfos;
     }
 }

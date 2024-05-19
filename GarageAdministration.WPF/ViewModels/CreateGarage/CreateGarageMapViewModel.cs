@@ -14,10 +14,21 @@ public class CreateGarageMapViewModel : ViewModelBase
     private readonly ObservableCollection<CreateGarageMapItemViewModel> _createGarageMapItemViewModels;
     private readonly ObservableCollection<CreateGarageBlockItemViewModel> _createGarageBlockItemViewModels;
     private readonly INavigationService _navigation;
+    private readonly SelectedMapStore _selectedMapStore;
     private bool _isGarageCreated;
     private Garage _createdGarage;
+    private string? _backgroundImage;
     
-    public string BGImage => "map1.png";
+
+    public string? BackgroundImage
+    {
+        get => _backgroundImage;
+        set
+        {
+            _backgroundImage = value;
+            OnPropertyChanged(nameof(BackgroundImage)) ;
+        }
+    }
     public double Width => System.Windows.SystemParameters.PrimaryScreenWidth;
     public double Height => System.Windows.SystemParameters.PrimaryScreenHeight;
 
@@ -59,7 +70,7 @@ public class CreateGarageMapViewModel : ViewModelBase
     public ICommand MapClickCommand { get; }
 
     public CreateGarageMapViewModel(GaragesStore garagesStore, GarageBlockStore garageBlockStore, INavigationService navigation,
-        ICommand mapClickCommand)
+        ICommand mapClickCommand, SelectedMapStore selectedMapStore)
     {
         _isGarageCreated = false;
         
@@ -67,6 +78,7 @@ public class CreateGarageMapViewModel : ViewModelBase
         _navigation = navigation;
         MapClickCommand = mapClickCommand;
         _garageBlockStore = garageBlockStore;
+        _selectedMapStore = selectedMapStore;
         
         _createGarageMapItemViewModels = new ObservableCollection<CreateGarageMapItemViewModel>();
         _createGarageBlockItemViewModels = new ObservableCollection<CreateGarageBlockItemViewModel>();
@@ -80,6 +92,8 @@ public class CreateGarageMapViewModel : ViewModelBase
         _garageBlockStore.GarageBlockDeleted += GarageBlockStoreOnGarageBlockDeleted;
         _garageBlockStore.GarageBlockUpdated += GarageBlockStoreOnGarageBlockUpdated;
         _garageBlockStore.GarageBlocksLoaded += GarageBlockStoreOnGarageBlocksLoaded;
+
+        BackgroundImage = selectedMapStore.Map!.PathToImage;
         
         GaragesStore_GaragesLoaded();
         GarageBlockStoreOnGarageBlocksLoaded();
@@ -120,12 +134,19 @@ public class CreateGarageMapViewModel : ViewModelBase
         _createGarageMapItemViewModels.Clear();
         foreach (var garage in _garagesStore.Garages)
         {
-            AddGarage(garage, System.Windows.Media.Brushes.Red);
+            if (garage.Map!.Id == _selectedMapStore.Map?.Id)
+            {
+                AddGarage(garage, System.Windows.Media.Brushes.Red);
+            }
         }
     }
 
     private void GaragesStore_GarageUpdated(Garage garage)
     {
+        if (garage.Map!.Id != _selectedMapStore.Map?.Id)
+        {
+            return;
+        }
         var garageViewModel = _createGarageMapItemViewModels.FirstOrDefault(g => g.Garage.Id == garage.Id);
 
         garageViewModel?.Update(garage);
@@ -143,7 +164,10 @@ public class CreateGarageMapViewModel : ViewModelBase
 
     private void GaragesStore_GarageAdded(Garage garage)
     {
-        AddGarage(garage, System.Windows.Media.Brushes.Red);
+        if (garage.Map!.Id == _selectedMapStore.Map?.Id)
+        {
+            AddGarage(garage, System.Windows.Media.Brushes.Red);
+        }
     }
 
     public override void Dispose()

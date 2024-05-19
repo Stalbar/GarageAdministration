@@ -1,6 +1,6 @@
 ﻿using GarageAdministration.Domain.Commands;
 using GarageAdministration.Domain.Models;
-using GarageAdministration.EF.DTOs;
+
 
 namespace GarageAdministration.EF.Commands;
 
@@ -16,7 +16,7 @@ public class CreateOwnerCommand: ICreateCommand<Owner>
     public async Task Execute(Owner entity)
     {
         await using var context = _contextFactory.Create();
-        OwnerDto ownerDto = new OwnerDto()
+        var ownerDto = new Owner()
         {
             Name = entity.Name,
             Surname = entity.Surname,

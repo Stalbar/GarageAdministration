@@ -75,6 +75,7 @@ public class GarageMapCanvasViewModel : ViewModelBase
     private void SelectedMapStoreOnSelectedMapChanged()
     {
         BackgroundImage = _selectedMapStore.Map?.PathToImage;
+        GaragesStore_GaragesLoaded();
     }
 
     private void GarageMapSearchTextStoreOnSearchTextChanged()
@@ -129,12 +130,19 @@ public class GarageMapCanvasViewModel : ViewModelBase
         _garageMapCanvasItemViewModels.Clear();
         foreach (var garage in _garagesStore.Garages)
         {
-            AddGarage(garage);
+            if (garage.Map!.Id == _selectedMapStore.Map?.Id)
+            {
+                AddGarage(garage);
+            }
         }
     }
 
     private void GaragesStore_GarageUpdated(Garage garage)
     {
+        if (garage.Map!.Id != _selectedMapStore.Map?.Id)
+        {
+            return;
+        }
         var garageViewModel = _garageMapCanvasItemViewModels.FirstOrDefault(g => g.Garage.Id == garage.Id);
 
         garageViewModel?.Update(garage);
@@ -152,7 +160,10 @@ public class GarageMapCanvasViewModel : ViewModelBase
 
     private void GaragesStore_GarageAdded(Garage garage)
     {
-        AddGarage(garage);
+        if (garage.Map!.Id == _selectedMapStore.Map?.Id)
+        {
+            AddGarage(garage);
+        }
     }
 
     public override void Dispose()
@@ -171,7 +182,7 @@ public class GarageMapCanvasViewModel : ViewModelBase
     private void AddGarage(Garage garage)
     {
         _garageMapCanvasItemViewModels.Add(new GarageMapCanvasItemViewModel(garage, _garagesStore, _navigation,
-            _garageMapInfoStore, _ownersStore, _garageBlockStore, _contributionsStore));
+            _garageMapInfoStore, _ownersStore, _garageBlockStore, _contributionsStore, _selectedMapStore));
     }
 
     private void AddGarageBlock(GarageBlock garageBlock)
