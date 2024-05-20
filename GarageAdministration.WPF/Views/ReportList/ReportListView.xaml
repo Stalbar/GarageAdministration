@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:GarageAdministration.WPF.Views.ReportList"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="800" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -15,6 +15,7 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="220"/>
                 <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0"
@@ -29,7 +30,20 @@
                          Width="300"
                          Margin="5,5,0,0"/>
             </StackPanel>
-            <Button Grid.Column="1"
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        Margin="0 0 10 0">
+                <TextBlock Style="{StaticResource RegularTextBlock}"
+                           Text="Отчет"
+                           Margin="0 0 10 0"/>
+                <ComboBox ItemsSource="{Binding Reports}"
+                          SelectedValue="{Binding SelectedReport}"
+                          Style="{StaticResource RegularCombobox}"
+                          Width="220"
+                          Height="20"
+                          VerticalAlignment="Top"/>
+            </StackPanel>
+            <Button Grid.Column="2"
                     Style="{StaticResource RegularButton}"
                     Content="Создать отчет"
                     Command="{Binding CreateReportCommand}"/>

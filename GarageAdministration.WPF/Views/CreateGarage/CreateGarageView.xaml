@@ -9,8 +9,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="0.75*"/>
+            <ColumnDefinition Width="0.25*"/>
         </Grid.ColumnDefinitions>
         <local:CreateGarageMapView Grid.Column="0"
                                    DataContext="{Binding CreateGarageMapViewModel}"/>

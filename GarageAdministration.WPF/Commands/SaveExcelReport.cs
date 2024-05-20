@@ -11,16 +11,18 @@ public class SaveExcelReport: AsyncCommandBase
 {
     private readonly GaragesStore _garagesStore;
     private readonly ReportsStore _reportsStore;
+    private readonly SelectedReportStore _selectedReportStore;
 
-    public SaveExcelReport(GaragesStore garagesStore, ReportsStore reportsStore)
+    public SaveExcelReport(GaragesStore garagesStore, ReportsStore reportsStore, SelectedReportStore selectedReportStore)
     {
         _garagesStore = garagesStore;
         _reportsStore = reportsStore;
+        _selectedReportStore = selectedReportStore;
     }
 
     protected override async Task ExecuteAsync(object? parameter)
     {
-        IReport report = new GarageReport(_garagesStore);
+        var report = _selectedReportStore.Report!;
         var bytes = report.Generate();
         var time = DateTime.Now;
         var fileName = report + $" {time.Day}-{time.Month}-{time.Year} {time.Hour}.{time.Minute}.{time.Second}" + ".xlsx";

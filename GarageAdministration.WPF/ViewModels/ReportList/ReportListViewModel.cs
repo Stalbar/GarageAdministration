@@ -5,6 +5,8 @@ using GarageAdministration.EF.Migrations;
 using GarageAdministration.WPF.Commands;
 using GarageAdministration.WPF.Commons.Stores;
 using GarageAdministration.WPF.Commons.ViewModels;
+using GarageAdministration.WPF.Services.Abstractions;
+using GarageAdministration.WPF.Services.Implementations.Reports;
 
 namespace GarageAdministration.WPF.ViewModels.ReportList;
 
@@ -12,12 +14,44 @@ public class ReportListViewModel: ViewModelBase
 {
     private readonly ObservableCollection<ReportListItemViewModel> _reportListItemViewModels;
     private readonly ReportsStore _reportsStore;
+    private readonly SelectedReportStore _selectedReportStore;
+    private List<IReport> _reports;
+
+    public IReport? SelectedReport
+    {
+        get => _selectedReportStore.Report;
+        set
+        {
+            _selectedReportStore.Report = value;
+            OnPropertyChanged(nameof(SelectedReport));
+        }
+    }
+
+    public IEnumerable<IReport> Reports
+    {
+        get => _reports;
+        set
+        {
+            _reports = value.ToList();
+            OnPropertyChanged(nameof(Reports));
+        }
+    }
+    
     public IEnumerable<ReportListItemViewModel> ReportListItemViewModels => _reportListItemViewModels;
     public ICommand CreateReportCommand { get; }
 
-    public ReportListViewModel(GaragesStore garagesStore, ReportsStore reportsStore)
+    public ReportListViewModel(GaragesStore garagesStore, ReportsStore reportsStore, SelectedReportStore selectedReportStore,
+        OwnersStore ownersStore)
     {
-        CreateReportCommand = new SaveExcelReport(garagesStore, reportsStore);
+        Reports = new IReport[]
+        {
+            new GarageReport(garagesStore),
+            new OwnersReport(ownersStore),
+        };
+        _selectedReportStore = selectedReportStore;
+        _selectedReportStore.SelectedReportChanged += SelectedReportStoreOnSelectedReportChanged;
+        _selectedReportStore.Report = Reports.First();
+        CreateReportCommand = new SaveExcelReport(garagesStore, reportsStore, selectedReportStore);
         _reportListItemViewModels = new ObservableCollection<ReportListItemViewModel>();
         _reportsStore = reportsStore;
         _reportsStore.ReportAdded += ReportsStoreOnReportAdded;
@@ -25,6 +59,11 @@ public class ReportListViewModel: ViewModelBase
         _reportsStore.ReportsLoaded += ReportsStoreOnReportsLoaded;
         
         ReportsStoreOnReportsLoaded();
+    }
+
+    private void SelectedReportStoreOnSelectedReportChanged()
+    {
+        OnPropertyChanged(nameof(SelectedReport));
     }
 
     private void ReportsStoreOnReportsLoaded()

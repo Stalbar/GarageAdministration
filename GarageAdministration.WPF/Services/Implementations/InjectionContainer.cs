@@ -115,6 +115,7 @@ public static class InjectionContainer
         services.AddSingleton<GarageMapSearchTextStore>();
         services.AddSingleton<SelectedMapStore>();
         services.AddSingleton<GarageMapSelectedFilterStore>();
+        services.AddSingleton<SelectedReportStore>();
         
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton<Func<Type, ViewModelBase>>(provider =>

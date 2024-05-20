@@ -2,6 +2,7 @@
 using GarageAdministration.WPF.Commons.Stores;
 using GarageAdministration.WPF.Services.Abstractions;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 namespace GarageAdministration.WPF.Services.Implementations.Reports;
 
@@ -21,6 +22,8 @@ public class GarageReport: IReport
         FillHeader(sheet);
 
         FillData(sheet);  
+        
+        StyleReport(sheet);
         
         return package.GetAsByteArray();
     }
@@ -57,8 +60,24 @@ public class GarageReport: IReport
             sheet.Cells[row, column + 8].Value = garage.Contribution.MembershipFeePaymentStatus == PaymentStatus.Paid
                 ? "Оплачено"
                 : "не оплачено";
+            row++;
         }
-        sheet.Cells[1, 1, row, column].AutoFitColumns();
+    }
+
+    private void StyleReport(ExcelWorksheet sheet)
+    {
+        var length = _garagesStore.Garages.Count();
+        sheet.Column(6).Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+        sheet.Column(8).Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+        sheet.Cells["A1:I1"].Style.Font.Bold = true;
+        sheet.Cells[1, 1, length + 1, 9].AutoFitColumns();
+        for (var i = 1; i <= length + 1; i++)
+        {
+            for (var j = 1; j <= 9; j++)
+            {
+                sheet.Cells[i, j].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+            }
+        }
     }
 
     public override string ToString() => "Отчет по гаражам";
