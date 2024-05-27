@@ -7,9 +7,9 @@ namespace GarageAdministration.WPF.Commons.ViewModels;
 public class OwnerFormViewModel: ViewModelBase
 {
     private INavigationService _navigation;
-    private string _name;
-    private string _surname;
-    private string _patronymic;
+    private string? _name;
+    private string? _surname;
+    private string? _patronymic;
 
     public INavigationService Navigation
     {
@@ -21,7 +21,7 @@ public class OwnerFormViewModel: ViewModelBase
         }
     }
 
-    public string Name
+    public string? Name
     {
         get => _name;
         set
@@ -31,7 +31,7 @@ public class OwnerFormViewModel: ViewModelBase
         }
     }
 
-    public string Surname
+    public string? Surname
     {
         get => _surname;
         set
@@ -41,7 +41,7 @@ public class OwnerFormViewModel: ViewModelBase
         }
     }
 
-    public string Patronymic
+    public string? Patronymic
     {
         get => _patronymic;
         set
