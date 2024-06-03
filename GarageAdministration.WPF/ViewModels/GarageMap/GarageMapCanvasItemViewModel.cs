@@ -11,8 +11,6 @@ namespace GarageAdministration.WPF.ViewModels.GarageMap;
 public class GarageMapCanvasItemViewModel : ViewModelBase
 {
     public Garage Garage { get; private set; }
-    public Contribution Contribution { get; private set; }
-
     public double Top => Garage.MapInfo.Top;
     public double Left => Garage.MapInfo.Left;
     public double Width => Garage.MapInfo.Width;
@@ -23,10 +21,10 @@ public class GarageMapCanvasItemViewModel : ViewModelBase
 
     public string ElectricityFeeStatus =>
         "Электричество: " +
-        (Contribution.ElectricityFeePaymentStatus == PaymentStatus.Paid ? "Оплачено" : "Не оплачено");
+        (Garage.Contribution.ElectricityFeePaymentStatus == PaymentStatus.Paid ? "Оплачено" : "Не оплачено");
 
     public string MembershipFeeStatus =>
-        "Взнос: " + (Contribution.MembershipFeePaymentStatus == PaymentStatus.Paid ? "Оплачен" : "Не оплачен");
+        "Взнос: " + (Garage.Contribution.MembershipFeePaymentStatus == PaymentStatus.Paid ? "Оплачен" : "Не оплачен");
 
     public ICommand DeleteCommand { get; }
     public ICommand IconCommand { get; }
@@ -36,7 +34,6 @@ public class GarageMapCanvasItemViewModel : ViewModelBase
         ContributionsStore contributionsStore, SelectedMapStore selectedMapStore)
     {
         Garage = garage;
-        Contribution = garage.Contribution;
         DeleteCommand = new DeleteGarageCommand(this, garagesStore, navigation);
         IconCommand =
             new NavigateToEditGarageViewCommand(navigation, this, garagesStore, ownersStore, garageMapInfoStore,

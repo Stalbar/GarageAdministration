@@ -67,8 +67,11 @@ public class GarageMapViewModel : ViewModelBase
         {
             _selectedMapStore.Map = value;
             OnPropertyChanged(nameof(SelectedMap));
+            OnPropertyChanged(nameof(CanAddGarage));
         }
     }
+
+    public bool CanAddGarage => SelectedMap is not null;
 
     public GarageMapViewModel(GaragesStore garagesStore, INavigationService navigation,
         GarageMapInfoStore garageMapInfoStore, OwnersStore ownersStore, GarageBlockStore garageBlockStore,

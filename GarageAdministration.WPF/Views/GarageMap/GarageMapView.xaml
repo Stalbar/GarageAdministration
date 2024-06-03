@@ -48,7 +48,8 @@
                 <Button
                     Style="{StaticResource RegularButton}"
                     Command="{Binding NavigateToCreateGarageViewCommand}"
-                    Content="Добавить гараж" />
+                    Content="Добавить гараж" 
+                    IsEnabled="{Binding CanAddGarage}"/>
                 <Button
                     Visibility="Collapsed"
                     Style="{StaticResource RegularButton}"

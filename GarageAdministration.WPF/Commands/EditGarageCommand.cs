@@ -1,9 +1,11 @@
 ﻿using GarageAdministration.Domain.Models;
 using GarageAdministration.WPF.Commons;
 using GarageAdministration.WPF.Commons.Stores;
+using GarageAdministration.WPF.Commons.ViewModels;
 using GarageAdministration.WPF.Services.Abstractions;
 using GarageAdministration.WPF.ViewModels.EditGarage;
 using GarageAdministration.WPF.ViewModels.GarageMap;
+using Xceed.Wpf.Toolkit;
 
 namespace GarageAdministration.WPF.Commands;
 
@@ -31,9 +33,33 @@ public class EditGarageCommand: AsyncCommandBase
         var oldContribution = garage.Contribution;
         var contribution = new Contribution(oldContribution.Id, form.ElectricityFee, form.MembershipFee,
             form.MembershipFeePaymentStatus, form.ElectricityFeePaymentStatus);
+        garage = new Garage(garage.Id, garage.Owner, garage.MapInfo, garage.Map, contribution);
         await _garageMapInfoStore.Update(garage.MapInfo);
         await _contributionsStore.Update(contribution);
         await _garagesStore.Update(garage);
         _navigation.NavigateTo<GarageMapViewModel>();
+    }
+
+    private bool ValidateForm(GarageFormViewModel form)
+    {
+        if (form.ElectricityFee < 0)
+        {
+            MessageBox.Show("Неправльная сумма в поле Взнос за электричество");
+            return false;
+        }
+
+        if (form.MembershipFee < 0)
+        {
+            MessageBox.Show("Неправильная сумма в поле Членский взнос");
+            return false;
+        }
+
+        if (form.SelectedOwner is null)
+        {
+            MessageBox.Show("Заполните поле владелец");
+            return false;
+        }
+
+        return true;
     }
 }

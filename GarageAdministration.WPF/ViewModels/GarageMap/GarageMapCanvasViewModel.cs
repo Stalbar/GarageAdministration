@@ -3,7 +3,6 @@ using GarageAdministration.Domain.Models;
 using GarageAdministration.WPF.Commons.Stores;
 using GarageAdministration.WPF.Commons.ViewModels;
 using GarageAdministration.WPF.Services.Abstractions;
-using GarageAdministration.WPF.Services.Implementations.Filters;
 
 namespace GarageAdministration.WPF.ViewModels.GarageMap;
 
@@ -64,11 +63,6 @@ public class GarageMapCanvasViewModel : ViewModelBase
         _garagesStore.GarageUpdated += GaragesStore_GarageUpdated;
         _garagesStore.GaragesLoaded += GaragesStore_GaragesLoaded;
 
-        _garageBlockStore.GarageBlockAdded += GarageBlockStore_GarageBlockAdded;
-        _garageBlockStore.GarageBlockDeleted += GarageBlockStore_GarageBlockDeleted;
-        _garageBlockStore.GarageBlockUpdated += GarageBlockStore_GarageBlockUpdated;
-        _garageBlockStore.GarageBlocksLoaded += GarageBlockStore_GarageBlocksLoaded;
-
         _garageMapSearchTextStore.SearchTextChanged += GarageMapSearchTextStoreOnSearchTextChanged;
 
         _selectedMapStore.SelectedMapChanged += SelectedMapStoreOnSelectedMapChanged;
@@ -76,7 +70,6 @@ public class GarageMapCanvasViewModel : ViewModelBase
         _garageMapSelectedFilterStore.SelectedFilterChanged += GarageMapSelectedFilterStoreOnSelectedFilterChanged;
 
         GaragesStore_GaragesLoaded();
-        GarageBlockStore_GarageBlocksLoaded();
     }
 
     private void GarageMapSelectedFilterStoreOnSelectedFilterChanged()
@@ -103,38 +96,7 @@ public class GarageMapCanvasViewModel : ViewModelBase
         var predicateFiltered = _garageMapSelectedFilterStore.Filter.ApplyFilter(searchFiltered);
         return predicateFiltered;
     }
-
-    private void GarageBlockStore_GarageBlocksLoaded()
-    {
-        _garageMapCanvasBlockItemViewModels.Clear();
-        foreach (var garageBlock in _garageBlockStore.GarageBlocks)
-        {
-            AddGarageBlock(garageBlock);
-        }
-    }
-
-    private void GarageBlockStore_GarageBlockUpdated(GarageBlock garageBlock)
-    {
-        var garageBlockViewModel =
-            _garageMapCanvasBlockItemViewModels.FirstOrDefault(g => g.GarageBlock.Id == garageBlock.Id);
-
-        garageBlockViewModel?.Update(garageBlock);
-    }
-
-    private void GarageBlockStore_GarageBlockDeleted(int id)
-    {
-        var garageBlockViewModel = _garageMapCanvasBlockItemViewModels.FirstOrDefault(g => g.GarageBlock.Id == id);
-        if (garageBlockViewModel != null)
-        {
-            _garageMapCanvasBlockItemViewModels.Remove(garageBlockViewModel);
-        }
-    }
-
-    private void GarageBlockStore_GarageBlockAdded(GarageBlock garageBlock)
-    {
-        AddGarageBlock(garageBlock);
-    }
-
+    
     private void GaragesStore_GaragesLoaded()
     {
         _garageMapCanvasItemViewModels.Clear();
@@ -145,6 +107,7 @@ public class GarageMapCanvasViewModel : ViewModelBase
                 AddGarage(garage);
             }
         }
+        OnPropertyChanged(nameof(GarageMapCanvasItemViewModels));
     }
 
     private void GaragesStore_GarageUpdated(Garage garage)
@@ -177,28 +140,9 @@ public class GarageMapCanvasViewModel : ViewModelBase
         }
     }
 
-    public override void Dispose()
-    {
-        _garagesStore.GarageAdded -= GaragesStore_GarageAdded;
-        _garagesStore.GarageDeleted -= GaragesStore_GarageDeleted;
-        _garagesStore.GarageUpdated -= GaragesStore_GarageUpdated;
-        _garagesStore.GaragesLoaded -= GaragesStore_GaragesLoaded;
-
-        _garageBlockStore.GarageBlockAdded -= GarageBlockStore_GarageBlockAdded;
-        _garageBlockStore.GarageBlockDeleted -= GarageBlockStore_GarageBlockDeleted;
-        _garageBlockStore.GarageBlockUpdated -= GarageBlockStore_GarageBlockUpdated;
-        _garageBlockStore.GarageBlocksLoaded -= GarageBlockStore_GarageBlocksLoaded;
-    }
-
     private void AddGarage(Garage garage)
     {
         _garageMapCanvasItemViewModels.Add(new GarageMapCanvasItemViewModel(garage, _garagesStore, _navigation,
             _garageMapInfoStore, _ownersStore, _garageBlockStore, _contributionsStore, _selectedMapStore));
-    }
-
-    private void AddGarageBlock(GarageBlock garageBlock)
-    {
-        _garageMapCanvasBlockItemViewModels.Add(new GarageMapCanvasBlockItemViewModel(garageBlock, _garageBlockStore,
-            _navigation, _garagesStore, _garageMapInfoStore));
     }
 }

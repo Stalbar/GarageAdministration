@@ -16,10 +16,15 @@ public class UpdateMapFromFormCommand: CommandBase
     public override void Execute(object? parameter)
     {
         var garage = _createGarageViewModel.CreateGarageMapViewModel.CreatedGarage;
+        var owner = _createGarageViewModel.GarageFormViewModel.SelectedOwner;
+        if (garage is null)
+        {
+            return;
+        }
         var width = _createGarageViewModel.GarageFormViewModel.Width;
         var height = _createGarageViewModel.GarageFormViewModel.Height;
         var angle = _createGarageViewModel.GarageFormViewModel.Angle;
         var newMapInfo = new MapInfo(garage.MapInfo.Id, garage.MapInfo.Top, garage.MapInfo.Left, width, height, angle, 1);
-        _createGarageViewModel.CreateGarageMapViewModel.CreatedGarage = new Garage(garage.Id, garage.Owner, newMapInfo, garage.Map, garage.Contribution);
+        _createGarageViewModel.CreateGarageMapViewModel.CreatedGarage = new Garage(garage.Id, owner, newMapInfo, garage.Map, garage.Contribution);
     }
 }

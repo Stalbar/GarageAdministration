@@ -19,6 +19,7 @@ public class UpdateGarageCommand: IUpdateCommand<Garage>
         garageDto.MapInfoId = entity.MapInfo.Id;
         garageDto.OwnerId = entity.Owner.Id;
         garageDto.MapId = entity.Map.Id;
+        garageDto.ContributionId = entity.Contribution.Id;
         await context.SaveChangesAsync();
     }
 }

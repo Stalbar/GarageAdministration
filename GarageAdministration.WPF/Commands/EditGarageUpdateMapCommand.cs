@@ -28,7 +28,6 @@ public class EditGarageUpdateMapCommand: CommandBase
         var garage = _garagesStore.Garages.First(g => g.Id == _editGarageViewModel.GarageId);
         var mapInfo = new MapInfo(garage.MapInfo.Id, mousePos.Y, mousePos.X,
             _editGarageViewModel.GarageFormViewModel.Width, _editGarageViewModel.GarageFormViewModel.Height, 0, 1);
-        var map = new Map(1, "", "");
-        _editGarageViewModel.CreateGarageMapViewModel.CreatedGarage = new Garage(garage.Id, garage.Owner, mapInfo, map, garage.Contribution);
+        _editGarageViewModel.CreateGarageMapViewModel.CreatedGarage = new Garage(garage.Id, garage.Owner, mapInfo, garage.Map, garage.Contribution);
     }
 }
