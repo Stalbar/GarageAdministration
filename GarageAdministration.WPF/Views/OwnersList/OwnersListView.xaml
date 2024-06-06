@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GarageAdministration.WPF.Views.OwnersList"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -34,12 +35,19 @@
                     Command="{Binding NavigateToCreateOwnerViewCommand}"
                     Content="Добавить владельца" />
         </Grid>
-        <ListView Grid.Row="1" ItemsSource="{Binding OwnersListItemViewModels}">
+        <ListView Grid.Row="1" ItemsSource="{Binding OwnersListItemViewModels}"
+                  SizeChanged="FrameworkElement_OnSizeChanged"
+                  x:Name="OwnersGridView">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding ClickCommand}"
+                                           CommandParameter="{Binding ElementName=OwnersGridView, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Surname}"
-                                    Header="Фамилия"
-                                    x:Name="Col1"/>
+                                    Header="Фамилия"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"  
                                     Header="Имя"
                                     Width="{Binding ElementName=HelperField, Path=ActualWidth}"/>
@@ -58,15 +66,5 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Grid Grid.Row="1" 
-              Visibility="Hidden">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{Binding ElementName=Col1, Path=ActualWidth}"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="10"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1"
-                  x:Name="HelperField"/>
-        </Grid>
     </Grid>
 </UserControl>

@@ -18,7 +18,8 @@ public class EditOwnerViewModel: ViewModelBase
         OwnerId = owner.Id;
         ICommand cancelCommand = new NavigateToOwnersListCommand(navigation);
         ICommand submitCommand = new EditOwnerCommand(this, ownersStore, navigation);
-        OwnerFormViewModel = new OwnerFormViewModel(navigation, submitCommand, cancelCommand)
+        ICommand deleteCommand = new DeleteOwnerCommand(ownersStore, navigation, owner);
+        OwnerFormViewModel = new OwnerFormViewModel(navigation, submitCommand, cancelCommand, deleteCommand)
         {
             Name = owner.Name,
             Surname = owner.Surname,

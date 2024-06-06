@@ -24,5 +24,6 @@ public class CreateOwnerCommand: ICreateCommand<Owner>
         };
         context.Owners.Add(ownerDto);
         await context.SaveChangesAsync();
+        entity.Id = ownerDto.Id;
     }
 }

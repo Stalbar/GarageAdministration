@@ -40,16 +40,10 @@ public class OwnersListItemViewModel: ViewModelBase
 
     public decimal ElectricityDebt => Owner.Garages.Sum(g => g.Contribution.ElectricityFee);
     public decimal MembershipDebt => Owner.Garages.Sum(g => g.Contribution.MembershipFee);
-    
-    public ICommand EditCommand { get; }
-    public ICommand DeleteCommand { get; }
-    
     public OwnersListItemViewModel(Owner owner, OwnersStore ownersStore, INavigationService navigationService)
     {
         Owner = owner;
         _navigation = navigationService;
-        EditCommand = new NavigateToEditOwnerViewCommand(ownersStore, this, _navigation);
-        DeleteCommand = new DeleteOwnerCommand(this, ownersStore, _navigation);
     }
 
     public void Update(Owner owner)

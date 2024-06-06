@@ -28,12 +28,14 @@ public class OwnersListViewModel: ViewModelBase
     public IEnumerable<OwnersListItemViewModel> OwnersListItemViewModels => _ownersListItemViewModels;
     
     public ICommand NavigateToCreateOwnerViewCommand { get; }
+    public ICommand ClickCommand { get; }
 
     public OwnersListViewModel(OwnersStore ownersStore, INavigationService navigation)
     {
         _ownersStore = ownersStore;
         Navigation = navigation;
         NavigateToCreateOwnerViewCommand = new NavigateToCreateOwnerViewCommand(Navigation);
+        ClickCommand = new NavigateToEditOwnerViewCommand(ownersStore, navigation);
         _ownersListItemViewModels = new ObservableCollection<OwnersListItemViewModel>();
         _ownersStore.OwnerAdded += OwnersStore_OwnerAdded;
         _ownersStore.OwnerDeleted += OwnersStore_OwnerDeleted;

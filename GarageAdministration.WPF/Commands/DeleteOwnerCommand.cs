@@ -8,22 +8,20 @@ namespace GarageAdministration.WPF.Commands;
 
 public class DeleteOwnerCommand: AsyncCommandBase
 {
-    private readonly OwnersListItemViewModel _ownersListItemViewModel;
+    private readonly Owner _owner;
     private readonly OwnersStore _ownersStore;
     private readonly INavigationService _navigation;
 
-    public DeleteOwnerCommand(OwnersListItemViewModel ownersListItemViewModel, OwnersStore ownersStore, INavigationService navigation)
+    public DeleteOwnerCommand(OwnersStore ownersStore, INavigationService navigation, Owner owner)
     {
-        _ownersListItemViewModel = ownersListItemViewModel;
         _ownersStore = ownersStore;
         _navigation = navigation;
+        _owner = owner;
     }
 
     protected override async Task ExecuteAsync(object? parameter)
     {
-        Owner owner = _ownersListItemViewModel.Owner;
-
-        await _ownersStore.Delete(owner.Id);
+        await _ownersStore.Delete(_owner.Id);
         
         _navigation.NavigateTo<OwnersListViewModel>();
     }
